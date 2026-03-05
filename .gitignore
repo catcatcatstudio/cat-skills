@@ -1,4 +1,11 @@
 .DS_Store
 node_modules/
+
+# Internal — dev setup, not public
 CLAUDE.md
 POST_LAUNCH.md
+
+# Skill build artifacts — WIP notes, build plans, project state
+skills/*/notebook/
+skills/*/build_plan/
+skills/*/PROJECT_STATE.md
