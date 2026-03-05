@@ -1,0 +1,5 @@
+{
+  "name": "cleanse",
+  "description": "Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise",
+  "version": "1.0.0"
+}
