@@ -31,6 +31,14 @@ Skills are symlinked from `~/.claude/skills/` into this monorepo:
 ~/.claude/skills/cleanse   → studio/skills/cat-skills/skills/cleanse
 ```
 
+## Adding a New Skill
+
+1. Create `skills/<name>/SKILL.md` — work directly in this repo
+2. Symlink for local testing: `ln -s ~/catcatcat/studio/skills/cat-skills/skills/<name> ~/.claude/skills/<name>`
+3. Commit and push when ready
+
+After pulling a new skill from the other person, create the symlink — `git pull` gets the files but doesn't set up symlinks.
+
 ## Platform Paths
 
 Verified as of March 2026. Update here AND in the README if a path changes.
