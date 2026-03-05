@@ -1,60 +1,25 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "catcatcat",
   "owner": {
     "name": "catcatcat"
   },
   "metadata": {
-    "description": "AI agent skills by catcatcat",
+    "description": "AI agent skills by catcatcat — architect, notebook, extract, cleanse",
     "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "notebook",
-      "source": "./skills/notebook",
-      "description": "Project notes system for preventing AI context loss and reasoning loops",
+      "name": "catcatcat",
+      "source": "./",
+      "description": "AI agent skills — architect, notebook, extract, cleanse",
       "version": "2.0.0",
       "author": { "name": "catcatcat" },
-      "homepage": "https://catcatcat.ai",
+      "homepage": "https://github.com/catcatcatai/cat-skills",
       "repository": "https://github.com/catcatcatai/cat-skills",
       "license": "MIT",
-      "keywords": ["notes", "context-persistence", "project-management", "ai-memory", "save"],
+      "keywords": ["architect", "notebook", "extract", "cleanse", "agent-skills", "claude-code-plugin"],
       "category": "development"
-    },
-    {
-      "name": "architect",
-      "source": "./skills/architect",
-      "description": "Staged build methodology for architecting and building software projects from scratch",
-      "version": "1.0.0",
-      "author": { "name": "catcatcat" },
-      "homepage": "https://catcatcat.ai",
-      "repository": "https://github.com/catcatcatai/cat-skills",
-      "license": "MIT",
-      "keywords": ["architecture", "project-planning", "build-methodology", "scaffolding", "testing"],
-      "category": "development"
-    },
-    {
-      "name": "extract",
-      "source": "./skills/extract",
-      "description": "Extract knowledge, frameworks, and methodologies from any URL or content",
-      "version": "1.0.0",
-      "author": { "name": "catcatcat" },
-      "homepage": "https://catcatcat.ai",
-      "repository": "https://github.com/catcatcatai/cat-skills",
-      "license": "MIT",
-      "keywords": ["knowledge-extraction", "youtube", "articles", "learning", "research"],
-      "category": "research"
-    },
-    {
-      "name": "cleanse",
-      "source": "./skills/cleanse",
-      "description": "Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise",
-      "version": "1.0.0",
-      "author": { "name": "catcatcat" },
-      "homepage": "https://catcatcat.ai",
-      "repository": "https://github.com/catcatcatai/cat-skills",
-      "license": "MIT",
-      "keywords": ["config-optimization", "claude-md", "memory", "signal-to-noise", "maintenance"],
-      "category": "maintenance"
     }
   ]
 }
