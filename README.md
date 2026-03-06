@@ -76,7 +76,7 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 
 ### `/extract` — Knowledge Extraction
 
-Pulls transferable knowledge from any URL or content — YouTube videos, articles, X threads, PDFs.
+Pulls transferable knowledge from any URL or content — YouTube videos, podcasts, articles, X threads, PDFs.
 
 Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
 
