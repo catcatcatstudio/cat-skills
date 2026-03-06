@@ -8,25 +8,22 @@ Built by [catcatcat](https://catcatcat.ai).
 
 ## Install
 
-### Agent Skills (recommended)
-
 ```bash
 npx skills add catcatcatai/cat-skills
 ```
 
-### Claude Code
+Also available as a [Claude Code plugin](https://claude.ai/code/plugins) — search "catcatcat" in the marketplace.
+
+<details>
+<summary>Manual install & other tools</summary>
+
+**Claude Code (git clone):**
 
 ```bash
-# All projects (personal)
 git clone https://github.com/catcatcatai/cat-skills ~/.claude/skills/cat-skills
-
-# Single project
-git clone https://github.com/catcatcatai/cat-skills .claude/skills/cat-skills
 ```
 
-### Other tools
-
-Copy the contents of any `SKILL.md` into your tool's rules file:
+**Everything else** — copy any `SKILL.md` into your tool's rules file:
 
 | Tool | Path |
 |------|------|
@@ -41,6 +38,8 @@ Copy the contents of any `SKILL.md` into your tool's rules file:
 | Amazon Q | `.amazonq/rules/<skill>.md` |
 
 Notebook has a standalone [`INSTRUCTIONS.md`](./skills/notebook/INSTRUCTIONS.md) optimized for non-Claude tools.
+
+</details>
 
 ---
 
