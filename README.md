@@ -14,8 +14,6 @@ Built by [catcatcat](https://catcatcat.ai).
 npx skills add catcatcatai/cat-skills
 ```
 
-Works with any agent that supports the [Agent Skills](https://github.com/anthropics/skills) format.
-
 ### Claude Code
 
 ```bash
