@@ -16,35 +16,8 @@ npx skills add catcatcatai/cat-skills
 
 ```
 /plugin marketplace add catcatcatai/cat-skills
-/plugin install catcatcat@catcatcatai-cat-skills
+/plugin install catcatcat@catcatcat
 ```
-
-<details>
-<summary>Manual install & other tools</summary>
-
-**Claude Code (git clone):**
-
-```bash
-git clone https://github.com/catcatcatai/cat-skills ~/.claude/skills/cat-skills
-```
-
-**Everything else** — copy any `SKILL.md` into your tool's rules file:
-
-| Tool | Path |
-|------|------|
-| Cursor | `.cursor/rules/<skill>.mdc` |
-| Windsurf | `.windsurf/rules/<skill>.md` |
-| Copilot | `.github/copilot-instructions.md` |
-| Gemini CLI | `GEMINI.md` |
-| Codex / OpenCode | `AGENTS.md` |
-| Aider | `CONVENTIONS.md` (load with `--read`) |
-| Cline | `.clinerules/<skill>.md` |
-| Roo Code | `.roo/rules/<skill>.md` |
-| Amazon Q | `.amazonq/rules/<skill>.md` |
-
-Notebook has a standalone [`INSTRUCTIONS.md`](./skills/notebook/INSTRUCTIONS.md) optimized for non-Claude tools.
-
-</details>
 
 ---
 
