@@ -15,7 +15,8 @@ npx skills add catcatcatai/cat-skills
 **Claude Code plugin:**
 
 ```
-/plugin install catcatcat@claude-code-marketplace
+/plugin marketplace add catcatcatai/cat-skills
+/plugin install catcatcat@catcatcatai-cat-skills
 ```
 
 <details>
