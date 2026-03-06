@@ -112,13 +112,17 @@ TWEET_DATA=$(curl -s "https://api.twitter.com/2/tweets/${TWEET_ID}?tweet.fields=
 CONV_ID=$(echo "$TWEET_DATA" | jq -r '.data.conversation_id')
 AUTHOR_ID=$(echo "$TWEET_DATA" | jq -r '.data.author_id')
 
-# Fetch full thread — full archive search, no time window restrictions
-THREAD=$(curl -s "https://api.twitter.com/2/tweets/search/all?query=conversation_id:${CONV_ID} from:${AUTHOR_ID}&tweet.fields=text,created_at&max_results=100&sort_order=recency" \
+# Fetch thread (search/recent — last 7 days only)
+THREAD=$(curl -s "https://api.twitter.com/2/tweets/search/recent?query=conversation_id:${CONV_ID}&tweet.fields=text,created_at,author_id&max_results=100&sort_order=recency" \
   -H "Authorization: Bearer $X_BEARER_TOKEN")
 
-# Reverse to chronological order
-THREAD_TWEETS=$(echo "$THREAD" | jq -r '[.data[]] | reverse | .[].text')
+# Filter to author only, reverse to chronological
+THREAD_TWEETS=$(echo "$THREAD" | jq -r --arg aid "$AUTHOR_ID" \
+  '[.data[] | select(.author_id == $aid)] | reverse | .[].text')
 ```
+
+If the thread is older than 7 days (search returns empty): ask the user to paste the thread text.
+"This thread is older than 7 days — X's search API can't reach it. Paste the thread text and I'll extract from that."
 
 Reconstruct thread as sequential blockquotes before extracting.
 
@@ -169,15 +173,6 @@ Low density + short content may not be worth extracting at all — say so.
 ## Extraction Framework
 
 Use whichever categories are present. Skip empty ones.
-
-**Priority tiers** (allocate depth accordingly):
-
-1. **Core** — Mental Models & Frameworks, Systematic Methods & Processes, Specific Techniques & Tactics
-   → These are why someone extracts. They should get the most depth.
-2. **Supporting** — Key Numbers & Benchmarks, Use Cases & Applications, Principles & Heuristics
-   → Evidence and grounding for the core insights.
-3. **Contextual** — Contrarian Insights, Predictions, Tools & Resources
-   → Include when present but don't stretch to fill.
 
 ### Mental Models & Frameworks
 Ways of thinking. Decision heuristics. How experts frame situations differently.
