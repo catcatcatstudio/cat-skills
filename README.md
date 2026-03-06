@@ -90,6 +90,14 @@ Two approval gates: report → draft → apply.
 
 **Source:** [`skills/cleanse/SKILL.md`](./skills/cleanse/SKILL.md)
 
+### `/elevate` — Expert Elevation
+
+Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor. Identifies the domain, adopts a top-tier practitioner's perspective, and produces ranked proposals to elevate whatever you're working on.
+
+Works across all domains: UI/UX, copywriting, architecture, code, strategy, branding.
+
+**Source:** [`skills/elevate/SKILL.md`](./skills/elevate/SKILL.md)
+
 ---
 
 ## Recommended pairings

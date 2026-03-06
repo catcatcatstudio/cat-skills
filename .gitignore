@@ -9,3 +9,10 @@ POST_LAUNCH.md
 skills/*/notebook/
 skills/*/build_plan/
 skills/*/PROJECT_STATE.md
+
+# skill-creator workspace artifacts
+*-workspace/
+*.skill
+
+# WIP skills
+skills/voice/
