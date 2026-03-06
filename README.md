@@ -12,7 +12,11 @@ Built by [catcatcat](https://catcatcat.ai).
 npx skills add catcatcatai/cat-skills
 ```
 
-Also available as a [Claude Code plugin](https://claude.ai/code/plugins) — search "catcatcat" in the marketplace.
+**Claude Code plugin:**
+
+```
+/plugin install catcatcat@claude-code-marketplace
+```
 
 <details>
 <summary>Manual install & other tools</summary>
