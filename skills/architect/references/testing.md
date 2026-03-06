@@ -2,6 +2,8 @@
 
 Testing is the agent's responsibility, not the human's. Research deeply, identify every meaningful failure mode, write tests that would satisfy a senior engineer in code review.
 
+**Test YOUR code, not your dependencies.** If you're wrapping a well-tested library (Prisma, Drizzle, SQLAlchemy, Stripe SDK), test your business logic and integration points — not the library's own operations. Don't test that Prisma can insert a row. Test that your service method calls Prisma correctly and handles the result the way your app needs. The detailed examples below are for when you're building the abstraction itself, not wrapping someone else's.
+
 ## The Agent's Testing Obligations
 
 For every stage:
