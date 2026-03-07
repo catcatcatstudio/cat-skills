@@ -1,5 +1,6 @@
 ---
 name: elevate
+status: published
 description: >
   Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor.
   Identifies the domain, adopts top-tier expert perspective, understands the PURPOSE behind the work,

@@ -1,5 +1,6 @@
 ---
 name: notebook
+status: published
 description: >
   Project notes system for preventing AI context loss and reasoning loops.
   Initialize notes, save notes mid-flow, recover context, migrate messy notes,

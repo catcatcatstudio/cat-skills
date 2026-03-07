@@ -1,5 +1,6 @@
 ---
 name: cleanse
+status: published
 description: >
   Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise.
   Use when: "cleanse", "clean my claude md", "optimize my config", "audit my setup",

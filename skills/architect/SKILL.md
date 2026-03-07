@@ -1,5 +1,6 @@
 ---
 name: architect
+status: published
 description: >
   Staged build methodology for architecting and building software projects. Drives the full
   lifecycle: technical spike, design notes, build planning, and stage-by-stage execution with

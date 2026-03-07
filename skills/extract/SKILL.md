@@ -1,5 +1,6 @@
 ---
 name: extract
+status: published
 description: >
   Extract knowledge, frameworks, and methodologies from any URL or content.
   Use when: (1) user says "/extract", "extract this", "extract from",
