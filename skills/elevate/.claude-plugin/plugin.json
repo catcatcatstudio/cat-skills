@@ -1,0 +1,7 @@
+{
+  "name": "elevate",
+  "version": "2.0.0",
+  "description": "Expert elevation — shifts the model from executor to critical advisor",
+  "author": { "name": "catcatcat" },
+  "license": "MIT"
+}

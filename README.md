@@ -16,7 +16,11 @@ npx skills add catcatcatai/cat-skills
 
 ```
 /plugin marketplace add catcatcatai/cat-skills
-/plugin install catcatcat@catcatcat
+/plugin install architect@catcatcat
+/plugin install notebook@catcatcat
+/plugin install extract@catcatcat
+/plugin install cleanse@catcatcat
+/plugin install elevate@catcatcat
 ```
 
 ---

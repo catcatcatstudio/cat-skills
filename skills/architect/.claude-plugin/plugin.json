@@ -1,0 +1,7 @@
+{
+  "name": "architect",
+  "version": "2.0.0",
+  "description": "Staged build methodology for software projects — spike, design, plan, build",
+  "author": { "name": "catcatcat" },
+  "license": "MIT"
+}

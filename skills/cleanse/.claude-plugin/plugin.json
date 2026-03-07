@@ -1,0 +1,7 @@
+{
+  "name": "cleanse",
+  "version": "2.0.0",
+  "description": "Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise",
+  "author": { "name": "catcatcat" },
+  "license": "MIT"
+}

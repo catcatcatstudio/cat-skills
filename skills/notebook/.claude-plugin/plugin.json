@@ -1,0 +1,7 @@
+{
+  "name": "notebook",
+  "version": "2.0.0",
+  "description": "Project notes system — prevents AI context loss and reasoning loops",
+  "author": { "name": "catcatcat" },
+  "license": "MIT"
+}

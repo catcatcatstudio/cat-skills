@@ -5,20 +5,39 @@
     "name": "catcatcat"
   },
   "metadata": {
-    "description": "AI agent skills — architect, notebook, extract, cleanse, elevate",
+    "description": "AI agent skills by catcatcat",
     "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "catcatcat",
-      "source": "./",
-      "description": "AI agent skills — architect, notebook, extract, cleanse, elevate",
-      "version": "2.0.0",
-      "author": { "name": "catcatcat" },
-      "homepage": "https://catcatcat.ai",
-      "repository": "https://github.com/catcatcatai/cat-skills",
-      "license": "MIT",
-      "keywords": ["architect", "notebook", "extract", "cleanse", "elevate", "agent-skills", "claude-code-plugin"]
+      "name": "architect",
+      "source": "./skills/architect",
+      "description": "Staged build methodology for software projects — spike, design, plan, build",
+      "version": "2.0.0"
+    },
+    {
+      "name": "cleanse",
+      "source": "./skills/cleanse",
+      "description": "Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise",
+      "version": "2.0.0"
+    },
+    {
+      "name": "elevate",
+      "source": "./skills/elevate",
+      "description": "Expert elevation — shifts the model from executor to critical advisor",
+      "version": "2.0.0"
+    },
+    {
+      "name": "extract",
+      "source": "./skills/extract",
+      "description": "Extract knowledge and frameworks from any URL — YouTube, articles, podcasts, X threads",
+      "version": "2.0.0"
+    },
+    {
+      "name": "notebook",
+      "source": "./skills/notebook",
+      "description": "Project notes system — prevents AI context loss and reasoning loops",
+      "version": "2.0.0"
     }
   ]
 }
