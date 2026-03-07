@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "cat-skills",
+      "name": "catcatcat",
       "source": "./",
       "description": "AI agent skills — architect, notebook, extract, cleanse, elevate",
       "version": "2.0.0",
