@@ -1,25 +1,24 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "catcatcat",
+  "name": "cat-skills",
   "owner": {
     "name": "catcatcat"
   },
   "metadata": {
-    "description": "AI agent skills by catcatcat — architect, notebook, extract, cleanse, elevate",
+    "description": "AI agent skills — architect, notebook, extract, cleanse, elevate",
     "version": "2.0.0"
   },
   "plugins": [
     {
-      "name": "catcatcat",
+      "name": "cat-skills",
       "source": "./",
-      "description": "AI agent skills — architect, notebook, extract, cleanse, elevate. Structured project builds, persistent notes, knowledge extraction, config optimization, and expert-level elevation.",
+      "description": "AI agent skills — architect, notebook, extract, cleanse, elevate",
       "version": "2.0.0",
       "author": { "name": "catcatcat" },
       "homepage": "https://catcatcat.ai",
       "repository": "https://github.com/catcatcatai/cat-skills",
       "license": "MIT",
-      "keywords": ["architect", "notebook", "extract", "cleanse", "elevate", "agent-skills", "claude-code-plugin"],
-      "category": "development"
+      "keywords": ["architect", "notebook", "extract", "cleanse", "elevate", "agent-skills", "claude-code-plugin"]
     }
   ]
 }
