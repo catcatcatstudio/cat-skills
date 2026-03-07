@@ -1,7 +1,13 @@
 {
   "name": "architect",
-  "version": "2.0.0",
   "description": "Staged build methodology for software projects — spike, design, plan, build",
-  "author": { "name": "catcatcat" },
-  "license": "MIT"
+  "version": "2.0.0",
+  "author": {
+    "name": "catcatcat",
+    "url": "https://catcatcat.ai"
+  },
+  "homepage": "https://github.com/catcatcatai/cat-skills",
+  "repository": "https://github.com/catcatcatai/cat-skills",
+  "license": "MIT",
+  "keywords": ["architect", "project-planning", "build-methodology", "skills"]
 }
