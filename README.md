@@ -9,13 +9,13 @@ Built by [catcatcat](https://catcatcat.ai).
 ## Install
 
 ```bash
-npx skills add catcatcatai/cat-skills
+npx skills add catcatcatstudio/cat-skills
 ```
 
 **Claude Code plugin:**
 
 ```
-/plugin marketplace add catcatcatai/cat-skills
+/plugin marketplace add catcatcatstudio/cat-skills
 /plugin install architect@catcatcat
 /plugin install notebook@catcatcat
 /plugin install extract@catcatcat

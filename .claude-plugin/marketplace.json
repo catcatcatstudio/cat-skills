@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "catcatcat",
   "owner": {
-    "name": "catcatcatai"
+    "name": "catcatcatstudio"
   },
   "metadata": {
     "description": "AI agent skills by catcatcat",

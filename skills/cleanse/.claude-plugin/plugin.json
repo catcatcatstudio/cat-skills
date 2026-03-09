@@ -6,8 +6,8 @@
     "name": "catcatcat",
     "url": "https://catcatcat.ai"
   },
-  "homepage": "https://github.com/catcatcatai/cat-skills",
-  "repository": "https://github.com/catcatcatai/cat-skills",
+  "homepage": "https://github.com/catcatcatstudio/cat-skills",
+  "repository": "https://github.com/catcatcatstudio/cat-skills",
   "license": "MIT",
   "keywords": ["claude-md", "config", "optimization", "skills"]
 }
