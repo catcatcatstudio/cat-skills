@@ -18,15 +18,6 @@ arguments:
 
 # /extract — Knowledge Extraction Skill
 
-## When NOT to use this skill
-
-- User wants a summary, digest, or TL;DR → use summarize instead
-- Content is news, announcements, or product launches with no methodology → decline and explain
-- User wants real-time data, prices, or live information → use web_search instead
-- Content is purely promotional/marketing with no transferable insight → say so, don't extract
-
----
-
 ## Quick Reference
 
 | Source | Method |
@@ -48,39 +39,9 @@ Output always starts with **Source:** [title] — [URL] then knowledge by catego
 
 **YouTube video** (youtube.com or youtu.be):
 
-```bash
-TMPDIR=$(mktemp -d)
+Run `scripts/fetch_youtube.sh <url>` — tries subtitle extraction first, falls back to Groq audio transcription. Outputs transcript to stdout.
 
-# Step 1: try subtitle extraction — use SRT conversion to handle auto-caption dedup
-yt-dlp --write-auto-sub --sub-lang "en" --skip-download --convert-subs srt -o "${TMPDIR}/sub" "<url>" 2>/dev/null
-TRANSCRIPT=$(cat ${TMPDIR}/sub*.srt 2>/dev/null | grep -v "^[0-9]" | grep -v "^\-\->" | grep -v "^$" | sed 's/<[^>]*>//g' | tr '\n' ' ')
-
-# Step 2: if no subtitles, transcribe via Groq
-if [ -z "$TRANSCRIPT" ]; then
-  if [ -z "$GROQ_API_KEY" ]; then
-    echo "ERROR: No subtitles found and GROQ_API_KEY is not set. Cannot transcribe."
-    rm -rf "$TMPDIR"
-    exit 1
-  fi
-  yt-dlp -x --audio-format mp3 --audio-quality 9 -o "${TMPDIR}/audio.%(ext)s" "<url>" 2>/dev/null
-
-  # Check file size — Groq limit: 25MB free tier, 100MB dev tier
-  FILESIZE=$(stat -f%z "${TMPDIR}/audio.mp3" 2>/dev/null || stat -c%s "${TMPDIR}/audio.mp3" 2>/dev/null)
-  if [ "$FILESIZE" -gt 100000000 ]; then
-    echo "ERROR: Audio too large for Groq ($(($FILESIZE/1048576))MB, limit 100MB). Try a shorter video."
-    rm -rf "$TMPDIR"
-    exit 1
-  fi
-
-  TRANSCRIPT=$(curl -s https://api.groq.com/openai/v1/audio/transcriptions \
-    -H "Authorization: Bearer $GROQ_API_KEY" \
-    -F "file=@${TMPDIR}/audio.mp3" \
-    -F "model=whisper-large-v3-turbo" | jq -r '.text')
-fi
-rm -rf "$TMPDIR"
-```
-
-If both paths fail: tell the user exactly what failed and stop.
+If it fails: tell the user exactly what failed and stop.
 
 ---
 
@@ -95,32 +56,10 @@ yt-dlp handles most audio URLs natively. Use the same Groq transcription path as
 X blocks all unauthenticated access. Requires X_BEARER_TOKEN in environment.
 X API uses pay-per-use credits — each call costs credits from your balance.
 
+Run `scripts/fetch_twitter.sh <url>` — fetches the thread via X API v2, filters to author tweets, outputs in chronological order.
+
 If X_BEARER_TOKEN is not set: ask the user to paste the thread text directly.
 "X requires a paid API for access. Paste the thread text and I'll extract from that."
-
-```bash
-if [ -z "$X_BEARER_TOKEN" ]; then
-  echo "X_BEARER_TOKEN is not set. Ask user to paste thread text."
-  exit 1
-fi
-
-TWEET_ID=$(echo "<url>" | grep -oE '[0-9]{15,}' | tail -1)
-
-# Fetch root tweet with conversation context
-TWEET_DATA=$(curl -s "https://api.twitter.com/2/tweets/${TWEET_ID}?tweet.fields=conversation_id,author_id,text,created_at&expansions=author_id&user.fields=name,username" \
-  -H "Authorization: Bearer $X_BEARER_TOKEN")
-
-CONV_ID=$(echo "$TWEET_DATA" | jq -r '.data.conversation_id')
-AUTHOR_ID=$(echo "$TWEET_DATA" | jq -r '.data.author_id')
-
-# Fetch thread (search/recent — last 7 days only)
-THREAD=$(curl -s "https://api.twitter.com/2/tweets/search/recent?query=conversation_id:${CONV_ID}&tweet.fields=text,created_at,author_id&max_results=100&sort_order=recency" \
-  -H "Authorization: Bearer $X_BEARER_TOKEN")
-
-# Filter to author only, reverse to chronological
-THREAD_TWEETS=$(echo "$THREAD" | jq -r --arg aid "$AUTHOR_ID" \
-  '[.data[] | select(.author_id == $aid)] | reverse | .[].text')
-```
 
 If the thread is older than 7 days (search returns empty): ask the user to paste the thread text.
 "This thread is older than 7 days — X's search API can't reach it. Paste the thread text and I'll extract from that."
@@ -226,8 +165,7 @@ Then categories as markdown headers (###). Bullet points for discrete insights, 
 
 By default, print the extraction to the conversation.
 
-If the user says "save this" or "write this", write to:
-`~/brain/extractions/YYYY-MM-DD-<slugified-title>.md`
+If the user says "save this" or "write this", ask where to save. Default to `./YYYY-MM-DD-<slugified-title>.md` in the current working directory.
 
 ---
 
