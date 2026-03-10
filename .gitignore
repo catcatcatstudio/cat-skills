@@ -7,8 +7,12 @@ POST_LAUNCH.md
 
 # Skill build artifacts — WIP notes, build plans, project state
 skills/*/notebook/
+skills/*/_notebook/
 skills/*/build_plan/
 skills/*/PROJECT_STATE.md
+
+# Repo-level notebook
+_notebook/
 
 # skill-creator workspace artifacts
 *-workspace/

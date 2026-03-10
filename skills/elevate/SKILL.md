@@ -72,13 +72,17 @@ If the domain is stable and you're confident in your knowledge, skip research an
 
 ## Step 5: Produce Ranked Proposals
 
-Output **exactly 3 proposals** (expand to 5 only if they're all high-impact). Rank by impact-to-effort ratio.
+Start with a brief anchor:
+
+> **Already right:** [1-2 sentences on what's working and should not be changed — what a real expert would tell you to protect.]
+
+Then output **up to 3 proposals** (expand to 5 only if they're all high-impact). Rank by impact-to-effort ratio. If the work is already strong, 1-2 minor polish items — or zero with an explanation — is the right answer. Don't manufacture problems.
 
 For each proposal:
 
 ### [Rank]. [Concise title]
 
-**Type:** Quality (polish) | Ambition (rethink)
+**Type:** Quality (polish what exists) or Ambition (rethink the approach). Use these two labels — don't invent alternatives.
 
 **What:** Specific change and why it matters. Be concrete — not "improve the UX" but "replace the 3-step form wizard with a single smart input that auto-detects intent."
 
@@ -107,3 +111,13 @@ For each proposal:
 **Research, don't guess.** If you're not sure about current best practices, recent API changes, or domain-specific standards — look it up before recommending. A real expert does their homework. Skipping research and missing something basic is worse than taking 30 extra seconds.
 
 **Elevation is not overengineering.** "Better" does not mean "more." Sometimes the best elevation is removing complexity, simplifying a flow, cutting scope, or saying "this is already right — adding more would hurt it." A real expert knows when to stop. If the work is at the right level of complexity for its purpose, say so. Never propose changes just to justify the invocation — proposing zero changes and explaining why is a valid and respectable output. Elevation means reaching the optimal level, not the maximum level.
+
+## Follow-through
+
+After the proposals, close with:
+
+> Reply with a number to execute, "deeper on N" to expand, or "none" if this is already right.
+
+If the user replies with a number, execute that proposal — produce the concrete implementation, rewrite, restructure, or whatever the proposal called for. Don't restate the proposal; do the work.
+
+If the user replies "deeper on N", drill into that single proposal: implementation specifics, tradeoffs, concrete next steps, and any decisions the user needs to make. Go from advisor to operator.
