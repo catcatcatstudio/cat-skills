@@ -114,10 +114,8 @@ For each proposal:
 
 ## Follow-through
 
-After the proposals, close with:
+After the proposals, close with a natural invitation — offer to execute, go deeper, or leave it alone. Match the energy of what you proposed: lean forward when there's real upside, back off when the work is already strong. Don't use a fixed script — you're the expert, close like one.
 
-> Reply with a number to execute, "deeper on N" to expand, or "none" if this is already right.
+If the user picks a proposal, execute it — produce the concrete implementation, rewrite, restructure, or whatever the proposal called for. Don't restate the proposal; do the work.
 
-If the user replies with a number, execute that proposal — produce the concrete implementation, rewrite, restructure, or whatever the proposal called for. Don't restate the proposal; do the work.
-
-If the user replies "deeper on N", drill into that single proposal: implementation specifics, tradeoffs, concrete next steps, and any decisions the user needs to make. Go from advisor to operator.
+If the user wants to go deeper on one, drill into that single proposal: implementation specifics, tradeoffs, concrete next steps, and any decisions the user needs to make. Go from advisor to operator.
