@@ -13,6 +13,16 @@ argument-hint: "[save [content] | recover | migrate [path] | save resolved: desc
 
 Project trail system. Initialize, save, recover, migrate, and manage project notes.
 
+## Why this exists
+
+You are stateless. Every conversation ends and your context dies. The next agent that opens this project starts from zero — re-reads code, re-discovers constraints, re-makes mistakes you already made. The human becomes a context shuttle between amnesiac agents.
+
+Notebook makes the *project* remember so you don't have to. When you save a note, you're not journaling — you're leaving a breadcrumb for a future version of yourself that has no idea what happened here. Every failure you record is a loop you prevent. Every constraint you document is a dead end the next session skips. Every decision you capture is an argument that never gets re-litigated.
+
+The index and lessons files are designed to be fast to scan — a future agent can recover full project context in seconds instead of minutes of re-exploration. This is the difference between an agent that compounds knowledge across sessions and one that starts over every time.
+
+**Save aggressively.** The cost of a note you didn't need is near zero. The cost of a note you didn't write is another wasted session.
+
 ## When NOT to use this skill
 
 - No active project context (no git repo, no project root) — say so, don't create a floating notebook
@@ -37,37 +47,45 @@ Project trail system. Initialize, save, recover, migrate, and manage project not
 
 ## /notebook — Init & Status
 
-### If notebook/ doesn't exist (new project):
+### If _notebook/ doesn't exist (new project):
 
 1. Locate project root — walk up from cwd looking for: `PROJECT_STATE.md`, `CLAUDE.md`, `.git/`, `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod`
 2. If no project root found: tell the user "No project root detected — create a project first."
 3. Create:
    ```
-   notebook/
+   _notebook/
+   ├── README.md
    ├── _index.md
    └── lessons.md
    ```
-4. Initialize `_index.md`:
+4. Initialize `README.md`:
+   ```markdown
+   # Project Notebook
+
+   This directory contains project memory for AI agents.
+   Read `_index.md` first for full project context, then `lessons.md` for known pitfalls.
+   ```
+5. Initialize `_index.md`:
    ```markdown
    # Notes Index
 
    Project trail — read this first on context recovery.
    ```
-5. Initialize `lessons.md`:
+6. Initialize `lessons.md`:
    ```markdown
    # Lessons
 
    What not to do. Read this every session.
    ```
-6. Add `notebook/` to `.gitignore` (process notes are AI working memory, not public docs)
-7. Confirm:
+7. Add `_notebook/` to `.gitignore` (process notes are AI working memory, not public docs)
+8. Confirm:
    ```
-   Notebook initialized at {project_root}/notebook/
-   notebook/ added to .gitignore — remove to track in git.
+   Notebook initialized at {project_root}/_notebook/
+   _notebook/ added to .gitignore — remove to track in git.
    ```
-8. **Retroactive save** — scan the current conversation for any decisions, failures, constraints, or learnings that have already occurred. Save each one as a note immediately. If the notebook is being initialized mid-session, there is almost certainly unsaved context. Do not wait to be asked.
+9. **Retroactive save** — scan the current conversation for any decisions, failures, constraints, or learnings that have already occurred. Save each one as a note immediately. If the notebook is being initialized mid-session, there is almost certainly unsaved context. Do not wait to be asked.
 
-### If notebook/ already exists (status):
+### If _notebook/ already exists (status):
 
 1. Read `_index.md`
 2. Read `lessons.md`
@@ -88,7 +106,15 @@ No root found → "No project root detected. Run `/notebook` from within a proje
 
 ### Step 2: Ensure Infrastructure
 
-If `notebook/` doesn't exist, create it with `_index.md` and `lessons.md` silently.
+If `_notebook/` doesn't exist, create it with `README.md`, `_index.md`, and `lessons.md` silently.
+
+Initialize `README.md`:
+```markdown
+# Project Notebook
+
+This directory contains project memory for AI agents.
+Read `_index.md` first for full project context, then `lessons.md` for known pitfalls.
+```
 
 Initialize `_index.md`:
 ```markdown
@@ -104,7 +130,7 @@ Initialize `lessons.md`:
 What not to do. Read this every session.
 ```
 
-Add `notebook/` to `.gitignore` if not already present.
+Add `_notebook/` to `.gitignore` if not already present.
 
 ### Step 3: Next Note Number
 
@@ -135,7 +161,7 @@ Default: `learning`.
 
 ### Step 6: Write the Note
 
-File: `notebook/NNNN-type-short-title.md`
+File: `_notebook/NNNN-type-short-title.md`
 
 **Quick format (default):**
 
@@ -216,7 +242,7 @@ Only if the note materially changes project state (blocking constraint, architec
 
 Single line confirmation:
 ```
-Saved: notebook/NNNN-type-short-title.md
+Saved: _notebook/NNNN-type-short-title.md
 ```
 
 Nothing else.
@@ -242,12 +268,12 @@ Convert existing messy notes into notebook format. One-time onboarding for proje
 1. Scan the target folder (cwd or specified path) for markdown and text files
 2. Read each file
 3. Classify each: decision, learning, constraint, failure, investigation, or pivot
-4. Write each as a properly numbered notebook note in `notebook/`
+4. Write each as a properly numbered notebook note in `_notebook/`
 5. Build `_index.md` from scratch with rich one-line summaries
 6. Extract lessons from anything that looks like a failure, constraint, or learning → populate `lessons.md`
 7. Leave originals untouched. User deletes them when satisfied.
 
-If `notebook/` already has notes, continue numbering from the highest existing. Migrate never overwrites existing notes.
+If `_notebook/` already has notes, continue numbering from the highest existing. Migrate never overwrites existing notes.
 
 After migration, report: how many files found, how many converted, how many lessons extracted. Show the generated index.
 
@@ -281,8 +307,8 @@ When reading `lessons.md` during context recovery, check if any lessons are outd
 
 On any new session or `/notebook recover`, read in this order:
 
-1. `_index.md` — what is this project, what happened
-2. `lessons.md` — what not to do
+1. `_notebook/_index.md` — what is this project, what happened
+2. `_notebook/lessons.md` — what not to do
 3. ⚑-flagged notes — critical details the index can't capture
 4. Last 3 notes — recent context
 5. `PROJECT_STATE.md` — current snapshot (if exists)
@@ -300,3 +326,4 @@ On any new session or `/notebook recover`, read in this order:
 7. **⚑ sparingly.** Only for things every future session must read.
 8. **Notes are append-only.** New moment = new note. Update existing only to mark superseded.
 9. **Lessons are distilled.** One line, pure signal. If you need context, open the note.
+10. **Check your notes when stuck.** When you hit a failure, unexpected behavior, or a "didn't we try this before?" moment — read `_notebook/lessons.md` before debugging from scratch. This is the reflex that prevents loops.
