@@ -227,10 +227,10 @@ The full note has context and details. The lesson is the takeaway — one line a
 **For type `resolved`:** write the note as usual, then find the matching lesson in `lessons.md` and strike it:
 
 ```
-- ~~Prisma doesn't work with edge runtime~~ → Resolved in 0047
+- ~~Prisma doesn't work with edge runtime~~ *(resolved: fixed in Prisma 6.0 — see 0047)*
 ```
 
-How to match: use the content of the `/notebook save resolved:` argument to find the most relevant lesson line. Match on key terms (library names, error descriptions, the constraint being resolved). If no clear match is found, write the note but warn: `Note saved but no matching lesson found to resolve.`
+How to match: use the content of the `/notebook save resolved:` argument to find the most relevant lesson line. Match on key terms (library names, error descriptions, the constraint being resolved). If multiple lessons could match, resolve the best one and state which lesson was resolved in the confirmation output. If no match at all, write the note but warn: `Note saved but no matching lesson found to resolve.`
 
 Strikethrough preserves history — a model sees what *used to be* a problem and knows to skip it. The note reference lets anyone find the resolution details.
 
@@ -251,10 +251,10 @@ Nothing else.
 
 ## /notebook recover
 
-1. Read full `_index.md`
-2. Read full `lessons.md`
-3. Open all ⚑-flagged notes
-4. Open the last 3 notes
+1. Read full `_notebook/_index.md`
+2. Read full `_notebook/lessons.md`
+3. Open all ⚑-flagged notes in `_notebook/`
+4. Open the last 3 notes in `_notebook/`
 5. Read `PROJECT_STATE.md` if it exists
 6. Summarize: what the project is, key decisions, active constraints, known pitfalls, current state
 7. Ask: "What's changed since this was last updated?"
@@ -265,13 +265,14 @@ Nothing else.
 
 Convert existing messy notes into notebook format. One-time onboarding for projects with pre-existing notes.
 
-1. Scan the target folder (cwd or specified path) for markdown and text files
-2. Read each file
-3. Classify each: decision, learning, constraint, failure, investigation, or pivot
-4. Write each as a properly numbered notebook note in `_notebook/`
-5. Build `_index.md` from scratch with rich one-line summaries
-6. Extract lessons from anything that looks like a failure, constraint, or learning → populate `lessons.md`
-7. Leave originals untouched. User deletes them when satisfied.
+1. Ensure `_notebook/` infrastructure exists (same as save Step 2 — create `README.md`, `_index.md`, `lessons.md`, add to `.gitignore` if needed)
+2. Scan the target folder (cwd or specified path) for markdown and text files
+3. Read each file
+4. Classify each: decision, learning, constraint, failure, investigation, or pivot
+5. Write each as a properly numbered notebook note in `_notebook/`
+6. Build `_index.md` from scratch with rich one-line summaries
+7. Extract lessons from anything that looks like a failure, constraint, or learning → populate `lessons.md`
+8. Leave originals untouched. User deletes them when satisfied.
 
 If `_notebook/` already has notes, continue numbering from the highest existing. Migrate never overwrites existing notes.
 
@@ -285,8 +286,8 @@ To mark a lesson as resolved use: `/notebook save resolved: <exact phrase or les
 
 **Matching rules:**
 - Prefer exact phrase match from lessons.md
-- If ambiguous or no match found, list the open lessons and ask the user to confirm which one
-- Never silently skip — always confirm what was resolved
+- If multiple lessons could match, resolve the best one and state which lesson was resolved in the output
+- If no match at all, write the note but warn: `Note saved but no matching lesson found to resolve.`
 
 Mark resolved lessons with strikethrough in `lessons.md`:
 ```markdown
@@ -326,4 +327,4 @@ On any new session or `/notebook recover`, read in this order:
 7. **⚑ sparingly.** Only for things every future session must read.
 8. **Notes are append-only.** New moment = new note. Update existing only to mark superseded.
 9. **Lessons are distilled.** One line, pure signal. If you need context, open the note.
-10. **Check your notes when stuck.** When you hit a failure, unexpected behavior, or a "didn't we try this before?" moment — read `_notebook/lessons.md` before debugging from scratch. This is the reflex that prevents loops.
+10. **Check your notes when stuck.** Before attempting a workaround or debugging an unexpected failure, read `_notebook/lessons.md` first. The answer may already be there. This is the reflex that prevents loops.
