@@ -10,6 +10,7 @@ skills/*/notebook/
 skills/*/_notebook/
 skills/*/build_plan/
 skills/*/PROJECT_STATE.md
+skills/*/eval/
 
 # Repo-level notebook
 _notebook/
