@@ -15,13 +15,24 @@ if [[ ! -f "$HANDOFF_FILE" ]]; then
   exit 0
 fi
 
-echo "=== Pre-compaction context (recent messages) ==="
-echo ""
+cat << 'HEADER'
+=== MEMENTO: Pre-compaction conversation trace ===
+The following is a compressed log of the conversation immediately before auto-compaction.
+USER lines = what the user said. CLAUDE lines = what you said or did.
+[ToolName: target] = tool calls you made. Use these to understand what you were working on.
+
+HEADER
 cat "$HANDOFF_FILE"
-echo ""
-echo "=== End pre-compaction context ==="
-echo ""
-echo "You were auto-compacted. The above are the last messages before compaction. State what you understand the current task to be before proceeding."
+cat << 'FOOTER'
+
+=== End conversation trace ===
+
+IMPORTANT: You were just auto-compacted. The above trace shows what was happening.
+1. State what you understand the current task to be (one sentence).
+2. State what you were in the middle of doing (one sentence).
+3. Then continue the work — do not ask the user to repeat themselves.
+If _notebook/_index.md exists, read it silently for additional context.
+FOOTER
 
 # Clean up — one-shot use
 rm -f "$HANDOFF_FILE"
