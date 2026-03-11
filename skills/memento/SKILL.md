@@ -9,11 +9,29 @@ description: >
   saving a single note (use /notebook save), or replacing notebook.
 user_invocable: true
 trigger: /memento
+argument-hint: "[auto [on|off]]"
 ---
 
 # Memento
 
 Save what matters, then produce a handoff for the next chat.
+
+## Commands
+
+| Command | Action |
+|---------|--------|
+| `/memento` | Notebook triage + generate handoff |
+| `/memento auto` | Show whether auto-compaction safety net is on or off |
+| `/memento auto on` | Enable auto mode (preserves context across compaction) |
+| `/memento auto off` | Disable auto mode |
+
+### /memento auto
+
+The auto-compaction safety net is controlled by a flag file at `~/.claude/.memento-auto`.
+
+- **`/memento auto`** — check if `~/.claude/.memento-auto` exists. Report: `Memento auto: on` or `Memento auto: off`. One line, nothing else.
+- **`/memento auto on`** — create `~/.claude/.memento-auto` (touch). Report: `Memento auto: on`. If hooks aren't configured yet, show the setup block from the Auto-Compaction section below.
+- **`/memento auto off`** — remove `~/.claude/.memento-auto`. Report: `Memento auto: off`.
 
 ## What this does
 
@@ -92,6 +110,50 @@ Print the orientation block directly. Then one line — dry, brief, Memento-flav
 - `The next you starts from zero. This is what you left yourself.`
 
 Pick one or riff on the tone. No explanation, no instructions beyond the line.
+
+## Auto-Compaction Safety Net
+
+Memento includes hook scripts that automatically preserve context when auto-compaction fires — no manual /memento needed.
+
+**How it works:**
+1. `PreCompact` → `scripts/pre-compact.sh` reads the transcript, extracts last 5 user messages + last assistant response, writes to `.memento-handoff`
+2. Compaction runs (most context lost)
+3. `SessionStart(compact)` → `scripts/post-compact.sh` reads `.memento-handoff`, injects it into the post-compaction context with a recovery directive
+
+**Setup** — add to `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/skills/memento/scripts/pre-compact.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/skills/memento/scripts/post-compact.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Toggle with `/memento auto on` and `/memento auto off`. The hooks stay in settings permanently — the flag file controls whether they do anything.
+
+Add `.memento-handoff` to your global gitignore (`~/.gitignore_global`) — it's a temp file that gets cleaned up after injection.
 
 ## Rules
 
