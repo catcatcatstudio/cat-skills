@@ -21,6 +21,8 @@ npx skills add catcatcatstudio/cat-skills
 /plugin install extract@catcatcat
 /plugin install cleanse@catcatcat
 /plugin install elevate@catcatcat
+/plugin install memento@catcatcat
+/plugin install liquid-cat-physics@catcatcat
 ```
 
 ---
@@ -77,11 +79,39 @@ Works across all domains: UI/UX, copywriting, architecture, code, strategy, bran
 
 **Source:** [`skills/elevate/SKILL.md`](./skills/elevate/SKILL.md)
 
+### `/memento` — Context Handoff
+
+Saves unsaved session knowledge to notebook, then produces a compact orientation block for fresh chats. Also includes an auto-compaction safety net — hooks that preserve and re-inject conversation context when Claude Code's context window fills up.
+
+| Command | What it does |
+|---------|-------------|
+| `/memento` | Notebook triage + generate handoff |
+| `/memento auto on` | Enable auto-compaction safety net |
+| `/memento auto off` | Disable auto mode |
+
+**Source:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
+
+### `/liquid-cat-physics` — Autonomous Deep-Work Loop
+
+Turns Claude into its own project manager. Reads project state, decides what to do through an expert lens, gates every action through a confidence check, executes one focused unit of work, persists everything, and loops every 10 minutes.
+
+| Command | What it does |
+|---------|-------------|
+| `/liquid-cat-physics` | Start the loop (default 10m interval) |
+| `/liquid-cat-physics status` | Show current state |
+| `/liquid-cat-physics stop` | Pause the loop |
+
+Includes a three-tier confidence gate (GREEN/YELLOW/RED), a two-strike anti-thrashing rule, automatic checkpoints, and an embedded expert lens. Enables memento auto by default.
+
+**Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
+
 ---
 
 ## Recommended pairings
 
-**`architect` + `notebook`** — Architect writes to `notebook/` format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top. They share the same storage format but work independently.
+**`architect` + `notebook`** — Architect writes to notebook format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top. They share the same storage format but work independently.
+
+**`liquid-cat-physics` + `memento`** — LCP handles persistence across sessions (PROJECT_STATE.md, notebook). Memento handles persistence across compactions (conversation trace). Together: a perpetual autonomous loop with no context loss at any boundary.
 
 ---
 
