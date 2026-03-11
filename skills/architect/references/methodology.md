@@ -190,4 +190,67 @@ Writing all stage docs upfront means later docs are based on assumptions about e
 |------|--------|--------|-------|
 | **Light** | 1-2 components, < 500 lines | Phase 0 (quick) → 1-2 stage docs → Execute | Skip formal design notes |
 | **Standard** | 3-8 stages, multi-component | All phases | Full methodology |
-| **Heavy** | 8+ stages, multiple subsystems | All phases + milestones | Group stages into milestones of 3-4. Review plan at milestone boundaries. |
+| **Heavy** | 8+ stages, multiple subsystems | All phases + milestones | See Milestones below |
+
+## Milestones (Heavy Tier)
+
+Heavy projects (8+ stages) need intermediate checkpoints. Without them, you're 6 stages deep before realizing the build order needs restructuring. Milestones create forced breathing room.
+
+### What a Milestone Is
+
+A named group of 3-4 stages that delivers a coherent slice of the system. Not a calendar date — a functional boundary.
+
+Good milestone boundaries:
+- "Core data layer works end-to-end" (stages 1-3)
+- "Auth and permissions functional" (stages 4-6)
+- "All integrations connected" (stages 7-9)
+- "Polish and ship" (stages 10-11)
+
+Bad milestone boundaries:
+- Arbitrary groups of 4 ("stages 1-4, stages 5-8") with no functional coherence
+- Single-stage milestones (that's just a stage)
+- Milestones that cross subsystem boundaries for no reason
+
+### Defining Milestones
+
+During Phase 1.5, after sequencing stages, group them into milestones. Add to `_build-order.md`:
+
+```
+## Milestone 1: [Name] — [What's true when this is done]
+  Stage 1:  Foundation & Setup         → Depends on: nothing
+  Stage 2:  Data Layer                 → Depends on: Stage 1
+  Stage 3:  Core Service Layer         → Depends on: Stage 2
+
+## Milestone 2: [Name] — [What's true when this is done]
+  Stage 4:  [Feature A]               → Depends on: Stage 3
+  Stage 5:  [Feature B]               → Depends on: Stage 3
+  Stage 6:  Integration               → Depends on: Stage 4, 5
+```
+
+### Milestone Gate Check
+
+After completing the last stage in a milestone, before writing the next milestone's stage docs:
+
+1. **Review what exists.** Does the system actually do what this milestone promised?
+2. **Reassess the build order.** Do the remaining milestones still make sense given what you've learned? Stages shift, dependencies change, scope evolves. This is the moment to restructure.
+3. **Update `_build-order.md`** if anything changed. Add stages, remove stages, regroup milestones.
+4. **Update `PROJECT_STATE.md`** with milestone completion.
+5. **Ask the user:** "Milestone [N] complete — [what's true now]. The remaining plan is [summary]. Still look right, or should we adjust?"
+
+Only proceed to the next milestone after the user confirms.
+
+### Milestone Tracking in PROJECT_STATE.md
+
+Add a `## Milestones` section:
+
+```markdown
+## Milestones
+- [x] M1: Core Data Layer — stages 1-3 — completed [date]
+- [ ] M2: Auth & Permissions — stages 4-6 — in progress (stage 5)
+- [ ] M3: Integrations — stages 7-9
+- [ ] M4: Polish & Ship — stages 10-11
+```
+
+### When to Escalate to Heavy
+
+If a Standard project grows past 8 stages mid-build, stop before the next stage. Retroactively group completed stages into Milestone 1, group remaining stages into milestones, update `_build-order.md`, and confirm with the user. This is the tier escalation mentioned in the SKILL.md — milestones are the mechanism.

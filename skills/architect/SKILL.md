@@ -55,7 +55,7 @@ Full methodology: `references/methodology.md` · Testing obligations: `reference
 |------|--------|-------------|-------|
 | **Light** | Single feature, 1-2 files, < 500 lines | Phase 0 (quick) → Phase 2 (1-2 stages) → Execute | Skip formal design notes. |
 | **Standard** | Multi-component system, 3-8 stages | All phases | Full methodology. |
-| **Heavy** | 8+ stages, multiple subsystems, external integrations | All phases + milestone grouping | Group into milestones of 3-4 stages each. |
+| **Heavy** | 8+ stages, multiple subsystems, external integrations | All phases + milestones | Group stages into milestones of 3-4. Milestone gate check between each. See `references/methodology.md § Milestones`. |
 
 If unsure: "This feels like a [tier] project — [X] major components. Does that match your sense of scope?"
 
@@ -228,6 +228,11 @@ tier: [light | standard | heavy]
 | Constraint | Validated? | Result |
 |------------|-----------|--------|
 | [description] | yes/no | [what we found] |
+
+## Milestones (Heavy tier only)
+- [x] M1: [name] — stages 1-3 — completed [date]
+- [ ] M2: [name] — stages 4-6 — in progress
+- [ ] M3: [name] — stages 7-9
 
 ## Completed
 - [x] Phase 0: [constraint validated]
