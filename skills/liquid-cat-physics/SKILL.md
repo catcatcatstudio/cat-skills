@@ -147,7 +147,9 @@ This is the only interactive phase. Front-load all friction here so the loop run
 
 8. **Initialize working memory.** Create `### Working Memory` in Loop State with initial codebase observations from the deep-read: key file map, architecture notes, dev server commands, environment details.
 
-9. **Once ready:** Populate initial `project_goals:` summary in Loop State, set `current_focus`, populate `up_next` with 3-5 tasks and confidence ratings, then create the cron and proceed to ORIENT.
+9. **Enable memento auto.** Run `touch ~/.claude/.memento-auto`. This ensures compaction recovery — when the context window fills and auto-compacts, the memento hook preserves recent conversation trace and re-injects it post-compaction. No toggle, no prompt. Autonomous loops need this unconditionally.
+
+10. **Once ready:** Populate initial `project_goals:` summary in Loop State, set `current_focus`, populate `up_next` with 3-5 tasks and confidence ratings, then create the cron and proceed to ORIENT.
 
 ---
 
