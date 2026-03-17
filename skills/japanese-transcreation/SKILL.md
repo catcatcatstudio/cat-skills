@@ -111,8 +111,3 @@ When English mixing is requested, keep it consistent within groups. Either all s
 Things that typically stay in English regardless:
 - Brand and product names (Claude, SeenThis, catcatcat)
 - Industry-standard technical terms (API, AI, ROI)
-
-## Reference
-
-- **[references/linguistics.md](references/linguistics.md)** — Deep linguistic foundations: contrastive rhetoric, discourse cohesion, register in commercial copy, translationese markers
-- **[references/process.md](references/process.md)** — Detailed workflow with examples
