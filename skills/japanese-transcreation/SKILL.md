@@ -19,6 +19,14 @@ The default failure mode: staying anchored to the English — preserving its sen
 
 The fix is not rules about Japanese. It's breaking the anchor: understand the intent, discard the English, write Japanese from scratch.
 
+## Know the Source Style
+
+The English source is often written in a lyrical, staccato copywriting style — short punchy fragments, abstract evocative phrasing, sentences that hit and move on. Example: "Some gave up. Some ask it simple things. The speed of technology is only moving faster. Becoming more powerful, more intelligent."
+
+This style is the hardest to translate because the instinct is to mirror it: short fragment → short fragment → short fragment. But Japanese doesn't work that way. Japanese builds meaning through clause chains (〜て、〜し、〜ながら、〜が) — where English uses 5 punchy sentences, natural Japanese uses 1-2 flowing sentences with connectors. If your output has as many periods as the English source, you've preserved English rhythm instead of writing Japanese.
+
+The other trap: abstract English words. When the source says "no theory," it doesn't mean 理論 (academic theory) — it means "not a lecture, you'll be doing real work." When it says "real things," it doesn't mean 本物 — it means "actual work tasks, not exercises." Always ask what the English word *means in this context*, not what it translates to in a dictionary.
+
 ## Routing
 
 Not all content needs the same treatment.
