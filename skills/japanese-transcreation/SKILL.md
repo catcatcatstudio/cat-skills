@@ -37,15 +37,15 @@ Be consistent within groups — all translated or all English, not mixed.
 
 Read the entire page/document before touching any piece. Know what the page is trying to do (pitch? onboarding? product description?) and what job each content block performs — is it evoking a feeling, setting a scene, presenting information, inviting action, or instructing? This determines register: ください fits instructions, not scene-setting.
 
-### 2. Abstract to job + key facts
+### 2. Abstract to job + key facts — and show it
 
 For each prose block, forget the English. Write down the **job** of the block and the **key facts** it needs to convey. Not a simpler version of the English — the actual purpose.
 
-If your abstract reads like simplified English, you haven't abstracted far enough. See `references/abstraction-example.md` for a concrete example of too-literal vs real abstraction.
+**Output the abstraction visibly before writing any Japanese.** This is not an internal thinking step — show it to the user. If the abstraction contains English source words (e.g. "theory," "takeaways," "deliverables"), it's too literal — rewrite it in terms of what the block *does*, not what it *says*.
 
-This is the most important step. Without it, English words and sentence patterns stay in working memory and leak into the Japanese. For every word you're about to write, ask: "Am I reaching for this because of the English, or because it's what a Japanese writer would say here?"
+See `references/abstraction-example.md` for a concrete good/bad example.
 
-### 3. Write Japanese from the abstraction
+### 3. Write Japanese from the abstraction only
 
 The English source is gone. You're a Japanese copywriter who was briefed on what to say, not shown an English draft.
 
