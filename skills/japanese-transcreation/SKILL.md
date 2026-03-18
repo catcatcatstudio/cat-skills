@@ -67,6 +67,8 @@ The English source is gone. You're a Japanese copywriter who was briefed on what
 
 Read the full output as a whole. Does it sound written or translated? Trust your judgment here — if something feels off, it probably is.
 
+Never use em dashes (—) in Japanese output. They don't exist in Japanese typography. Restructure the sentence instead.
+
 ## English Mixing
 
 By default, translate everything. English mixing is opt-in — only when the user requests it.
