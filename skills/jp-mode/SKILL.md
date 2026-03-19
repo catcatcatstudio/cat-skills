@@ -1,5 +1,5 @@
 ---
-name: japanese-transcreation
+name: jp-mode
 status: published
 description: >
   This skill should be used when translating or localizing English content into Japanese,
