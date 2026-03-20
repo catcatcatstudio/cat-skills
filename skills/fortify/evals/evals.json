@@ -1,0 +1,62 @@
+{
+  "skill_name": "fortify",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I just built this Next.js task board app and I have zero tests. Can you set up testing and write tests for the critical stuff?",
+      "expected_output": "Detects stack, installs ecosystem, audits with P0-P3 labels, writes tests weighted toward error paths, runs them, and does mutation testing on critical code",
+      "files": [],
+      "context_dir": "test-fixtures/nextjs-app",
+      "expectations": [
+        "Correctly identifies the stack as Next.js 15, React 19, TypeScript, Prisma, Zod",
+        "Output contains explicit P0, P1, P2 priority labels with blast-radius reasoning",
+        "Installs test runner and produces working test configuration",
+        "Writes tests for the API route covering both GET and POST",
+        "Error/edge-case tests outnumber happy-path tests for P0 code (count them — more sad-path than happy-path assertions)",
+        "Tests are actually executed (transcript shows test runner output or explicit statement about running tests)",
+        "Mutation testing is performed: at least one intentional code break is introduced and verified that tests catch it",
+        "Report includes error-path vs happy-path ratio",
+        "Report includes a Remaining Gaps section with specific items",
+        "Report includes How to Run section with actual commands"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/fortify",
+      "expected_output": "Bare invocation on Python project: detects stack, installs pytest ecosystem, audits with priorities, writes error-heavy tests, runs them, mutation tests critical paths",
+      "files": [],
+      "context_dir": "test-fixtures/fastapi-app",
+      "expectations": [
+        "Correctly identifies the stack as Python, FastAPI, SQLAlchemy, Pydantic",
+        "Output contains explicit P0, P1, P2 priority labels",
+        "Installs pytest and creates working configuration (conftest.py or pyproject.toml pytest section)",
+        "Writes tests for product CRUD routes including validation (price > 0, SKU format)",
+        "Error/edge-case tests outnumber happy-path tests for P0 code",
+        "External API integration (price_checker.py) is tested with proper mocking",
+        "Tests are actually executed (transcript shows pytest output or explicit run attempt)",
+        "Mutation testing is performed on at least one critical function",
+        "Researches common FastAPI/SQLAlchemy pitfalls before writing tests",
+        "Report includes verification results (tests passing, mutations caught)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "this project has some tests but they don't even run and coverage is shit. can you fix it and add proper tests?",
+      "expected_output": "Detects broken Express/TS setup, fixes config, preserves jest, writes error-heavy auth tests, runs them, mutation tests auth logic",
+      "files": [],
+      "context_dir": "test-fixtures/express-api",
+      "expectations": [
+        "Detects that existing jest config is broken (no TS transform) and fixes it",
+        "Does NOT replace jest with a different framework (respects existing choice)",
+        "Installs missing dependencies (supertest, ts-jest or equivalent)",
+        "Output contains explicit P0, P1, P2 priority labels",
+        "Error/edge-case tests outnumber happy-path tests for auth code",
+        "Writes auth middleware tests covering: valid token, expired token, missing token, invalid token",
+        "Tests are actually executed after fixing the config (transcript shows jest output or explicit run attempt)",
+        "Mutation testing is performed: intentionally breaks auth logic and verifies tests catch it",
+        "Report acknowledges existing tests were broken and itemizes what was fixed",
+        "Report includes mutation testing results table"
+      ]
+    }
+  ]
+}
