@@ -77,12 +77,14 @@ The index and lessons files are designed to be fast to scan — a future agent c
 
    What not to do. Read this every session.
    ```
-7. Add `_notebook/` to `.gitignore` (process notes are AI working memory, not public docs)
+7. **Gitignore based on repo visibility:**
+   - Detect visibility: run `gh repo view --json visibility -q '.visibility'` from the project root
+   - If `PUBLIC` → add `_notebook/` to `.gitignore`
+   - If `PRIVATE` or `INTERNAL` → do NOT gitignore (notes are safe to track)
+   - If the command fails (no remote, no `gh` CLI, not a GitHub repo) → **gitignore** (safe default — assume public until proven private)
 8. Confirm:
-   ```
-   Notebook initialized at {project_root}/_notebook/
-   _notebook/ added to .gitignore — remove to track in git.
-   ```
+   - If gitignored: `Notebook initialized at {project_root}/_notebook/ — gitignored (public repo).`
+   - If tracked: `Notebook initialized at {project_root}/_notebook/ — tracked in git (private repo).`
 9. **Retroactive save** — scan the current conversation for any decisions, failures, constraints, or learnings that have already occurred. Save each one as a note immediately. If the notebook is being initialized mid-session, there is almost certainly unsaved context. Do not wait to be asked.
 
 ### If _notebook/ already exists (status):
@@ -91,6 +93,7 @@ The index and lessons files are designed to be fast to scan — a future agent c
 2. Read `lessons.md`
 3. Report: number of notes, number of lessons, last note date, count of ⚑-flagged notes
 4. Show the last 5 index entries
+5. **Visibility check:** if `_notebook/` is gitignored but repo is private (or vice versa), mention it once — e.g. `_notebook/ is gitignored but this is a private repo — you can remove it from .gitignore to track notes in git.` Don't modify `.gitignore` automatically for existing projects.
 
 ---
 
@@ -130,7 +133,7 @@ Initialize `lessons.md`:
 What not to do. Read this every session.
 ```
 
-Add `_notebook/` to `.gitignore` if not already present.
+**Gitignore based on repo visibility:** run `gh repo view --json visibility -q '.visibility'` from the project root. If `PUBLIC` or the command fails → add `_notebook/` to `.gitignore`. If `PRIVATE` or `INTERNAL` → skip gitignore.
 
 ### Step 3: Next Note Number
 
@@ -265,7 +268,7 @@ Nothing else.
 
 Convert existing messy notes into notebook format. One-time onboarding for projects with pre-existing notes.
 
-1. Ensure `_notebook/` infrastructure exists (same as save Step 2 — create `README.md`, `_index.md`, `lessons.md`, add to `.gitignore` if needed)
+1. Ensure `_notebook/` infrastructure exists (same as save Step 2 — create `README.md`, `_index.md`, `lessons.md`, apply visibility-based gitignore logic)
 2. Scan the target folder (cwd or specified path) for markdown and text files
 3. Read each file
 4. Classify each: decision, learning, constraint, failure, investigation, or pivot
