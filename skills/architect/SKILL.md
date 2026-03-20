@@ -106,6 +106,10 @@ For each domain:
 
 Do not dump 10 questions at once. Each note is a collaborative artifact.
 
+### Pre-Build Intelligence
+
+If `_docs/recon-summary.md` exists in the project root, read it before writing any design notes — it contains domain research (pitfalls, architecture decisions, user expectations) that should inform your design. Read the detail files (`_docs/architecture-notes.md`, `_docs/pitfalls.md`) as relevant per domain.
+
 ### Domain Discovery
 
 Start with `00-project-overview.md`, then identify domains:
