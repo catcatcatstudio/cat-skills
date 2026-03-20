@@ -93,6 +93,52 @@ project/
 
 ---
 
+## 4b. Domain Sections (include what applies)
+
+Include only the sections relevant to this stage. Skip what doesn't apply.
+
+### Database Changes (if this stage adds or modifies tables)
+
+- Full migration SQL or ORM migration code (not descriptions — actual migration files)
+- New tables, columns, indexes, constraints
+- Migration strategy for existing data if applicable
+
+### Data Models (if this stage introduces new entities)
+
+- Full model definitions with types, validation, and relationships
+- Note which models are new vs. modified
+
+### API Endpoints (if this stage adds or modifies routes)
+
+| Method | Path | Auth | Request Body | Response | Errors |
+|--------|------|------|-------------|----------|--------|
+| [method] | [path] | [requirement] | [schema] | [schema] | [error cases] |
+
+### External Service Contracts (if this stage calls any external API or third-party service)
+
+For each external call:
+- **Trigger:** What causes this call to happen
+- **Payload:** Exact shape of what's sent
+- **Expected response:** What comes back on success
+- **Failure handling:** What happens on timeout, 4xx, 5xx, rate limit, malformed response
+- **Retry policy:** If applicable
+
+### Background Jobs (if this stage introduces async/queued work)
+
+For each job:
+- Task name and queue
+- What triggers it
+- Inputs and expected behavior
+- Retry policy and dead letter handling
+
+### Frontend Components (if this stage includes UI work)
+
+For each component:
+- Component name, props interface, internal state
+- Key interactions and state transitions
+
+---
+
 ## 5. Test Strategy & Implementation
 
 ### 5a. Test Research
@@ -201,3 +247,7 @@ project/
 6. **Debugging is preemptive.** Section 7 lists what's likely to go wrong based on the technology and patterns used. Research common failure modes for the specific libraries and approaches in this stage.
 
 7. **Acceptance is demonstrable.** Section 8 criteria can be verified by running commands or observing behavior. Not "it should work" — "run this command, see this output."
+
+8. **No hardcoded values.** Never use placeholder strings, hardcoded IDs, fake API keys, or dummy URLs that are "meant to be replaced later." If a stage needs a config value, it goes in environment variables with a real description. If a value isn't known yet, it's a stub with a TODO — and that TODO blocks acceptance criteria until resolved. This is a production system from stage 1.
+
+9. **Domain sections are conditional.** Section 4b lists domain-specific sections (database changes, data models, API endpoints, external service contracts, background jobs, frontend components). Before writing a stage doc, evaluate which apply based on what the stage introduces. Include those, drop the rest. A pure business-logic stage has zero domain sections. A stage that adds API endpoints calling Stripe has two (API Endpoints + External Service Contracts). Never include all six by default.

@@ -183,6 +183,7 @@ Writing all stage docs upfront means later docs are based on assumptions about e
 | Improvising during build | Drift from plan, miss pieces | Build what the doc says |
 | Not updating plans when reality changes | Plan diverges from code | Stop, update, re-execute |
 | Fixing code without updating stage doc | Stage doc is now wrong, resume breaks | Always keep doc and code in sync |
+| Hardcoded values and placeholders | "Replace later" never happens, breaks in prod | Env vars with real descriptions; unknown values are TODOs that block acceptance |
 
 ## Scaling Tiers
 
