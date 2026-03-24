@@ -15,6 +15,9 @@ skills/*/eval/
 # Repo-level notebook
 _notebook/
 
+# Internal docs — reference material, not public
+skills/_docs/
+
 # Dev skills (not yet published)
 
 # skill-creator workspace artifacts

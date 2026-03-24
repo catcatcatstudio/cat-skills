@@ -38,6 +38,12 @@
       "source": "./skills/notebook",
       "description": "Project notes system — prevents AI context loss and reasoning loops",
       "version": "2.0.0"
+    },
+    {
+      "name": "no-stubs",
+      "source": "./skills/no-stubs",
+      "description": "Scan codebase for stub implementations, fake code, and dead wiring — triage and fix",
+      "version": "1.0.0"
     }
   ]
 }
