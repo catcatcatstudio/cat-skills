@@ -17,12 +17,16 @@ npx skills add catcatcatstudio/cat-skills
 ```
 /plugin marketplace add catcatcatstudio/cat-skills
 /plugin install architect@catcatcat
-/plugin install notebook@catcatcat
-/plugin install extract@catcatcat
 /plugin install cleanse@catcatcat
 /plugin install elevate@catcatcat
-/plugin install memento@catcatcat
+/plugin install extract@catcatcat
+/plugin install jp-mode@catcatcat
 /plugin install liquid-cat-physics@catcatcat
+/plugin install memento@catcatcat
+/plugin install no-stubs@catcatcat
+/plugin install notebook@catcatcat
+/plugin install recon@catcatcat
+/plugin install xray@catcatcat
 ```
 
 ---
@@ -67,7 +71,7 @@ Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, method
 
 Analyzes and optimizes CLAUDE.md, memory files, and agent config. Every surviving line must earn its place by actually changing model behavior.
 
-Two approval gates: report → draft → apply.
+Two approval gates: report, draft, apply.
 
 **Source:** [`skills/cleanse/SKILL.md`](./skills/cleanse/SKILL.md)
 
@@ -104,6 +108,48 @@ Turns Claude into its own project manager. Reads project state, decides what to 
 Includes a three-tier confidence gate (GREEN/YELLOW/RED), a two-strike anti-thrashing rule, automatic checkpoints, and an embedded expert lens. Enables memento auto by default.
 
 **Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
+
+### `/no-stubs` — Stub Detection & Removal
+
+Scans a codebase for stub implementations, fake code, and dead wiring — functions that pretend to work (hardcoded returns, TODO placeholders, unconnected modules, auth that always passes). Triages by blast radius, then implements the real thing or cleanly removes the dead code.
+
+| Command | What it does |
+|---------|-------------|
+| `/no-stubs scan` | Detect and report only |
+| `/no-stubs fix` | Fix all found stubs |
+| `/no-stubs` | Full scan + fix |
+
+**Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
+
+### `/recon` — Pre-Build Intelligence
+
+Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
+
+**Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
+
+### `/jp-mode` — Japanese Transcreation
+
+Enforces natural Japanese writing patterns for web pages, landing pages, proposals, marketing copy, and UI text. Prevents common LLM translation failures — writes like a Japanese copywriter, not a translation engine.
+
+Triggers automatically on: "translate to Japanese", "Japanese version", "JP copy", "localize to Japanese".
+
+**Source:** [`skills/jp-mode/SKILL.md`](./skills/jp-mode/SKILL.md)
+
+### `/xray` — X/Twitter Content Intelligence
+
+Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
+
+| Command | What it does |
+|---------|-------------|
+| `scout` | Reply opportunities scored by recency, engagement, and competition |
+| `pulse <lane>` | What's hot in a topic lane right now |
+| `track` | Top posts from accounts you study |
+| `mirror` | Your own accounts' performance |
+| `prospect` | Founders who just launched (client opportunities) |
+
+Includes setup interview, 8 lane presets, full-archive search, and cost tracking.
+
+**Source:** [`skills/xray/`](./skills/xray/) · [README](./skills/xray/README.md)
 
 ---
 

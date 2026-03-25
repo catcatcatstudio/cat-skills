@@ -1,0 +1,13 @@
+{
+  "name": "liquid-cat-physics",
+  "description": "Autonomous deep-work agent loop — reads state, decides, executes, persists, loops",
+  "version": "2.0.0",
+  "author": {
+    "name": "catcatcat",
+    "url": "https://catcatcat.ai"
+  },
+  "homepage": "https://github.com/catcatcatstudio/cat-skills",
+  "repository": "https://github.com/catcatcatstudio/cat-skills",
+  "license": "MIT",
+  "keywords": ["autonomous", "agent", "loop", "deep-work", "project-management"]
+}

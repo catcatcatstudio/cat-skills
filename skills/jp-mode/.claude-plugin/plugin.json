@@ -1,0 +1,13 @@
+{
+  "name": "jp-mode",
+  "description": "Japanese transcreation — enforces natural writing patterns, prevents common LLM translation failures",
+  "version": "1.0.0",
+  "author": {
+    "name": "catcatcat",
+    "url": "https://catcatcat.ai"
+  },
+  "homepage": "https://github.com/catcatcatstudio/cat-skills",
+  "repository": "https://github.com/catcatcatstudio/cat-skills",
+  "license": "MIT",
+  "keywords": ["japanese", "translation", "localization", "transcreation", "i18n"]
+}
