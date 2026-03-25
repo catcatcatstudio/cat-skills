@@ -34,6 +34,12 @@
       "version": "2.0.0"
     },
     {
+      "name": "fortify",
+      "source": "./skills/fortify",
+      "description": "Testing infrastructure, coverage, and verified test quality — detects stack, writes tests, runs mutation testing",
+      "version": "1.0.0"
+    },
+    {
       "name": "jp-mode",
       "source": "./skills/jp-mode",
       "description": "Japanese transcreation — enforces natural writing patterns, prevents common LLM translation failures",

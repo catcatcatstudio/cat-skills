@@ -1,0 +1,13 @@
+{
+  "name": "fortify",
+  "description": "Testing infrastructure, coverage, and verified test quality — detects stack, writes tests, runs mutation testing",
+  "version": "1.0.0",
+  "author": {
+    "name": "catcatcat",
+    "url": "https://catcatcat.ai"
+  },
+  "homepage": "https://github.com/catcatcatstudio/cat-skills",
+  "repository": "https://github.com/catcatcatstudio/cat-skills",
+  "license": "MIT",
+  "keywords": ["testing", "coverage", "mutation-testing", "quality", "infrastructure"]
+}

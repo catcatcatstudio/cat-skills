@@ -20,6 +20,7 @@ npx skills add catcatcatstudio/cat-skills
 /plugin install cleanse@catcatcat
 /plugin install elevate@catcatcat
 /plugin install extract@catcatcat
+/plugin install fortify@catcatcat
 /plugin install jp-mode@catcatcat
 /plugin install liquid-cat-physics@catcatcat
 /plugin install memento@catcatcat
@@ -66,6 +67,18 @@ Pulls transferable knowledge from any URL or content — YouTube videos, podcast
 Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
 
 **Source:** [`skills/extract/SKILL.md`](./skills/extract/SKILL.md)
+
+### `/fortify` — Testing Infrastructure
+
+Detects your stack, installs the complete testing ecosystem, audits code for untested critical paths, writes thorough tests weighted toward error paths, then runs them and verifies they catch real bugs through mutation testing.
+
+| Command | What it does |
+|---------|-------------|
+| `/fortify setup` | Install testing infra only |
+| `/fortify check` | Audit coverage, find gaps |
+| `/fortify` | Full setup + write + verify |
+
+**Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
 
 ### `/cleanse` — Config Optimization
 
