@@ -1,0 +1,36 @@
+{
+  "_readme": "This is your xray config. Run any xray command to start the setup interview, or edit this file directly and rename it to config.json.",
+
+  "accounts": {
+    "own": [],
+    "engage": [],
+    "track": []
+  },
+
+  "lanes": {},
+
+  "prospect": {
+    "queries": [
+      "\"just launched\" (website OR landing page OR app) -is:retweet",
+      "(\"Product Hunt\" OR \"launched on\") (website OR SaaS OR app) -is:retweet",
+      "#buildinpublic (launched OR live OR shipped) (site OR app OR product) -is:retweet",
+      "\"need a redesign\" OR \"redesign my\" OR \"looking for designer\" -is:retweet"
+    ],
+    "note": "Find founders who just launched — redesign opportunities"
+  },
+
+  "defaults": {
+    "scout_since": "3h",
+    "scout_limit": 10,
+    "pulse_since": "24h",
+    "pulse_sort": "likes",
+    "pulse_limit": 15,
+    "track_count": 5,
+    "mirror_count": 10
+  },
+
+  "paths": {
+    "research": "~/xray-research",
+    "drafts": "~/xray-drafts"
+  }
+}

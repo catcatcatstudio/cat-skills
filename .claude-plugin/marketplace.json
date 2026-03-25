@@ -44,6 +44,18 @@
       "source": "./skills/no-stubs",
       "description": "Scan codebase for stub implementations, fake code, and dead wiring — triage and fix",
       "version": "1.0.0"
+    },
+    {
+      "name": "recon",
+      "source": "./skills/recon",
+      "description": "Pre-build intelligence and domain research — surveys best practices, pitfalls, and architecture before you build",
+      "version": "1.0.0"
+    },
+    {
+      "name": "xray",
+      "source": "./skills/xray",
+      "description": "X/Twitter content intelligence — graph-based scout, pulse, track, mirror, prospect",
+      "version": "3.0.0"
     }
   ]
 }
