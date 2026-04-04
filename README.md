@@ -62,9 +62,22 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 
 ### `/extract` — Knowledge Extraction
 
-Pulls transferable knowledge from any URL or content — YouTube videos, podcasts, articles, X threads, PDFs.
+Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
+
+Full pipeline: download → transcribe (Whisper/Groq) → frame extraction → visual assessment → knowledge synthesis.
 
 Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
+
+| Source | Method |
+|--------|--------|
+| YouTube | Subtitles → Groq → local Whisper |
+| Instagram / TikTok / X video | yt-dlp + cookies → Whisper → frame extraction |
+| Podcast / audio | yt-dlp → Groq / Whisper |
+| X/Twitter thread | X API v2 |
+| Web article | defuddle → WebFetch fallback |
+| Local file / PDF | Direct read |
+
+**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/extract/SKILL.md#setup--dependencies).
 
 **Source:** [`skills/extract/SKILL.md`](./skills/extract/SKILL.md)
 

@@ -7,7 +7,7 @@ description: >
   (2) user shares a URL or file and wants the key insights pulled out,
   (3) user wants to learn from a video, article, or podcast without reading/watching the whole thing.
   NOT for: summarization, news digests, or content that doesn't contain transferable knowledge.
-  Requires: yt-dlp (for YouTube/audio). GROQ_API_KEY (for audio transcription fallback). X_BEARER_TOKEN (for X/Twitter threads).
+  Requires: yt-dlp (for YouTube/video/audio), whisper or GROQ_API_KEY (for transcription), ffmpeg (for frame/audio extraction). Optional: X_BEARER_TOKEN (X/Twitter threads), defuddle (cleaner article extraction), browser cookies (Instagram/TikTok/X video access).
 user_invocable: true
 trigger: /extract
 arguments:
@@ -22,14 +22,21 @@ arguments:
 
 | Source | Method |
 |--------|--------|
-| YouTube | yt-dlp subtitles → Groq audio fallback |
-| Podcast / direct audio | yt-dlp download → Groq transcription |
+| YouTube | yt-dlp subtitles → Groq audio fallback → local Whisper fallback |
+| Instagram / TikTok / X video | yt-dlp (cookie-authenticated) → local Whisper → frame extraction |
+| Podcast / direct audio | yt-dlp download → Groq transcription → local Whisper fallback |
 | X/Twitter thread | X API v2 (X_BEARER_TOKEN required) |
-| Web article | WebFetch tool |
+| Web article | defuddle (preferred) or WebFetch |
 | Local file / PDF | Read tool |
 | Paywalled content | Extract what's accessible, note the wall |
 
 Output always starts with **Source:** [title] — [URL] then knowledge by category.
+
+### Auth & Tools
+
+- **yt-dlp cookies:** Global config at `~/.config/yt-dlp/config` points to Brave browser cookies. Authenticated access to Instagram, X, TikTok — no extra flags needed.
+- **Local Whisper:** `whisper` CLI (openai-whisper). Use as fallback when Groq is unavailable or for quick local transcription. Base model is fast enough for most content.
+- **defuddle:** `defuddle parse <url> --md` — cleaner article extraction than WebFetch, strips nav/ads/clutter.
 
 ---
 
@@ -45,9 +52,37 @@ If it fails: tell the user exactly what failed and stop.
 
 ---
 
+**Instagram / TikTok / X video** (instagram.com, tiktok.com, x.com with video):
+
+yt-dlp is configured with Brave cookies — authenticated access, no extra flags needed.
+
+```bash
+# 1. Metadata first (always start here)
+yt-dlp --print title --print description --print duration --print uploader --skip-download "<url>"
+
+# 2. Download to tmp
+yt-dlp -o "/tmp/extract-%(id)s.%(ext)s" "<url>"
+
+# 3. Transcribe audio with local Whisper
+ffmpeg -i /tmp/extract-<id>.mp4 -vn -acodec pcm_s16le -ar 16000 -ac 1 /tmp/extract-<id>-audio.wav
+whisper /tmp/extract-<id>-audio.wav --model base --language en --output_format txt --output_dir /tmp/
+
+# 4. Extract key frames (one every ~10 seconds)
+mkdir -p /tmp/extract-frames
+ffmpeg -i /tmp/extract-<id>.mp4 -vf "fps=1/10" -q:v 2 /tmp/extract-frames/<id>-%02d.jpg
+
+# 5. Read frames visually — look for on-screen text, diagrams, handwritten notes, visual content
+# 6. Synthesize: transcript + visuals + caption
+# 7. Trash all temp files when done
+```
+
+For visual content (cinematography, design, art): frame extraction is critical — the visuals ARE the knowledge. For talking-head content: transcript carries most of the value, frames are supplementary.
+
+---
+
 **Podcast / direct audio** (MP3/M4A URL, SoundCloud, podcast episode):
 
-yt-dlp handles most audio URLs natively. Use the same Groq transcription path as the YouTube fallback (requires GROQ_API_KEY). For RSS feeds: extract the episode `<enclosure>` URL first, then treat as direct audio.
+yt-dlp handles most audio URLs natively. Use Groq transcription (requires GROQ_API_KEY) or local Whisper as fallback. For RSS feeds: extract the episode `<enclosure>` URL first, then treat as direct audio.
 
 ---
 
@@ -68,10 +103,12 @@ Reconstruct thread as sequential blockquotes before extracting.
 
 ---
 
-**Web article** (any HTTP/HTTPS URL, not YouTube or X):
-Use WebFetch: "Return the complete text content of this page. Preserve all details, quotes, examples, and structure. Do not summarize."
+**Web article** (any HTTP/HTTPS URL, not YouTube, X, or social):
+Prefer defuddle: `defuddle parse <url> --md` — strips clutter, returns clean markdown.
 
-If WebFetch returns garbage (login wall, JS-only rendering): ask the user to paste the article text.
+Fallback to WebFetch if defuddle fails or isn't installed.
+
+If both return garbage (login wall, JS-only rendering): ask the user to paste the article text.
 
 **Paywalled content:** Note it clearly at the top:
 > Warning: Paywalled — only the free preview was accessible. Extraction is based on partial content.
@@ -176,3 +213,53 @@ If the user says "save this" or "write this", ask where to save. Default to `./Y
 - **Tutorial/how-to**: Full process. Do not skip steps.
 - **Non-English**: Extract in English. Keep original terms in parentheses when needed.
 - **2hr+ content**: Do not compress. Match depth to density tier.
+
+---
+
+## Setup & Dependencies
+
+### Required
+
+| Tool | Install | What it does |
+|------|---------|-------------|
+| yt-dlp | `pip install yt-dlp` or `brew install yt-dlp` | Downloads video/audio from YouTube, Instagram, TikTok, X, and 1000+ sites |
+| ffmpeg | `brew install ffmpeg` or [ffmpeg.org](https://ffmpeg.org) | Extracts audio tracks and video frames |
+
+### Transcription (at least one required for video/audio)
+
+| Tool | Install | What it does |
+|------|---------|-------------|
+| whisper | `pip install openai-whisper` | Local audio transcription — free, no API key, runs on CPU |
+| GROQ_API_KEY | [console.groq.com](https://console.groq.com) | Cloud transcription via Groq — faster for long content |
+
+Whisper `base` model is fast and good enough for most content. Use `small` or `medium` for noisy audio or accents. Groq is tried first when available, Whisper is the local fallback.
+
+### Optional
+
+| Tool | Install | What it does |
+|------|---------|-------------|
+| defuddle | `npm install -g defuddle` | Cleaner article extraction — strips nav, ads, clutter. Falls back to WebFetch |
+| X_BEARER_TOKEN | [developer.x.com](https://developer.x.com) | X/Twitter thread fetching via API (pay-per-use) |
+
+### Social media video access (Instagram, TikTok, X)
+
+These platforms block anonymous downloads. To access them, yt-dlp needs cookies from a browser where you're logged in.
+
+**One-time setup:**
+
+```bash
+# 1. Create config directory
+mkdir -p ~/.config/yt-dlp
+
+# 2. Export cookies from your browser (replace 'brave' with chrome, firefox, etc.)
+yt-dlp --cookies-from-browser brave --cookies ~/.config/yt-dlp/cookies.txt --skip-download "https://www.instagram.com/reel/ANYTHING/"
+
+# 3. Set global config so yt-dlp always uses the cookies
+echo "--cookies $HOME/.config/yt-dlp/cookies.txt" > ~/.config/yt-dlp/config
+```
+
+Supported browsers: `brave`, `chrome`, `firefox`, `edge`, `safari`, `opera`, `vivaldi`.
+
+You must be logged into the platforms you want to access in that browser. Cookies expire — if downloads start failing after a few weeks/months, re-run step 2.
+
+**Without cookies:** YouTube, podcasts, articles, PDFs, and public content all work fine. Only authenticated platform videos (Instagram reels, TikTok, X videos) require cookies.
