@@ -26,7 +26,7 @@ The index and lessons files are designed to be fast to scan — a future agent c
 ## When NOT to use this skill
 
 - No active project context (no git repo, no project root) — say so, don't create a floating notebook
-- User wants to summarize or extract knowledge from content — use `/extract` instead
+- User wants to summarize or extract knowledge from content — use `/eat` instead
 - Notes already exist and user just wants to read them — read directly with Read tool, skip the skill
 
 ---

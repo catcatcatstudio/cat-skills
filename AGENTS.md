@@ -9,7 +9,7 @@ AI agent skills by catcatcat. Each skill is a self-contained instruction set in 
 | architect | `/architect` | Staged build methodology — spike, design, plan, build |
 | cleanse | `/cleanse` | Analyze and optimize CLAUDE.md and agent config |
 | elevate | `/elevate` | Expert elevation — shifts model from executor to critical advisor |
-| extract | `/extract` | Knowledge extraction from URLs — YouTube, articles, podcasts, X threads |
+| eat | `/eat` | Knowledge extraction from URLs — YouTube, articles, podcasts, X threads |
 | fortify | `/fortify` | Testing infrastructure, coverage, and mutation testing |
 | jp-mode | (auto) | Japanese transcreation — natural writing, prevents LLM translation failures |
 | liquid-cat-physics | `/liquid-cat-physics` | Autonomous deep-work loop — decides, executes, persists, loops |

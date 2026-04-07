@@ -19,7 +19,7 @@ npx skills add catcatcatstudio/cat-skills
 /plugin install architect@catcatcat
 /plugin install cleanse@catcatcat
 /plugin install elevate@catcatcat
-/plugin install extract@catcatcat
+/plugin install eat@catcatcat
 /plugin install fortify@catcatcat
 /plugin install jp-mode@catcatcat
 /plugin install liquid-cat-physics@catcatcat
@@ -60,7 +60,7 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 
 **Source:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
 
-### `/extract` — Knowledge Extraction
+### `/eat` — Knowledge Extraction
 
 Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
 
@@ -77,9 +77,9 @@ Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, method
 | Web article | defuddle → WebFetch fallback |
 | Local file / PDF | Direct read |
 
-**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/extract/SKILL.md#setup--dependencies).
+**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/eat/SKILL.md#setup--dependencies).
 
-**Source:** [`skills/extract/SKILL.md`](./skills/extract/SKILL.md)
+**Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
 ### `/fortify` — Testing Infrastructure
 

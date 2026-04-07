@@ -1,5 +1,5 @@
 {
-  "name": "extract",
+  "name": "eat",
   "description": "Extract knowledge and frameworks from any URL — YouTube, articles, podcasts, X threads",
   "version": "2.0.0",
   "author": {
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/catcatcatstudio/cat-skills",
   "repository": "https://github.com/catcatcatstudio/cat-skills",
   "license": "MIT",
-  "keywords": ["extract", "knowledge", "youtube", "research", "skills"]
+  "keywords": ["eat", "extract", "knowledge", "youtube", "research", "skills"]
 }

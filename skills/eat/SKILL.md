@@ -1,22 +1,22 @@
 ---
-name: extract
+name: eat
 status: published
 description: >
   Extract knowledge, frameworks, and methodologies from any URL or content.
-  Use when: (1) user says "/extract", "extract this", "extract from",
+  Use when: (1) user says "/eat", "eat this", "eat from",
   (2) user shares a URL or file and wants the key insights pulled out,
   (3) user wants to learn from a video, article, or podcast without reading/watching the whole thing.
   NOT for: summarization, news digests, or content that doesn't contain transferable knowledge.
   Requires: yt-dlp (for YouTube/video/audio), whisper or GROQ_API_KEY (for transcription), ffmpeg (for frame/audio extraction). Optional: X_BEARER_TOKEN (X/Twitter threads), defuddle (cleaner article extraction), browser cookies (Instagram/TikTok/X video access).
 user_invocable: true
-trigger: /extract
+trigger: /eat
 arguments:
   - name: source
     description: URL (YouTube, article, X/Twitter thread, podcast) or file path to extract from
     required: true
 ---
 
-# /extract — Knowledge Extraction Skill
+# /eat — Knowledge Extraction Skill
 
 ## Quick Reference
 

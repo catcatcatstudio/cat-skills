@@ -12,7 +12,7 @@ description: >
   for advice before building, (4) user mentions a stack or category they haven't worked with before,
   (5) mid-build when hitting an area of genuine uncertainty about the domain.
   NOT for: debugging a specific bug (just debug it), researching a single library's API (just read docs),
-  extracting knowledge from a specific URL (that's /extract), post-build optimization (that's /fortify).
+  extracting knowledge from a specific URL (that's /eat), post-build optimization (that's /fortify).
 ---
 
 # /recon — Pre-Build Intelligence
@@ -234,7 +234,7 @@ If the user wants to dig deeper on a point, research that specific area further 
 
 **Sources are mandatory.** Every claim in the detail files should be traceable. If you can't source it, label it as inference from the expert lens rather than discovered fact.
 
-**Don't duplicate other skills.** This is landscape research, not knowledge extraction from a specific URL (/extract), not project architecture (/architect), not testing strategy (/fortify). Recon surveys the territory. Other skills work within it.
+**Don't duplicate other skills.** This is landscape research, not knowledge extraction from a specific URL (/eat), not project architecture (/architect), not testing strategy (/fortify). Recon surveys the territory. Other skills work within it.
 
 **Time-sensitivity awareness.** Include the research date in every file header. Flag findings that may have a short shelf life. Framework ecosystems move fast — a "best practice" from 18 months ago may be an anti-pattern now.
 
