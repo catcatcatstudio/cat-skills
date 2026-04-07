@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check marketplace.json is valid JSON
+        run: python3 -c "import json; json.load(open('.claude-plugin/marketplace.json'))"
+
+      - name: Check all plugin.json files are valid JSON
+        run: |
+          find skills -name "plugin.json" | while read f; do
+            echo "Validating $f"
+            python3 -c "import json; json.load(open('$f'))" || exit 1
+          done
+
+      - name: Check published skills have SKILL.md
+        run: |
+          for dir in skills/*/; do
+            skill=$(basename "$dir")
+            # Skip internal dirs
+            [[ "$skill" == _* ]] && continue
+            if [ ! -f "$dir/SKILL.md" ]; then
+              echo "ERROR: $dir is missing SKILL.md"
+              exit 1
+            fi
+          done
+
+      - name: Check SKILL.md frontmatter has required fields
+        run: |
+          for f in skills/*/SKILL.md; do
+            echo "Checking $f"
+            # Check for name field
+            if ! head -20 "$f" | grep -q "^name:"; then
+              echo "ERROR: $f missing 'name' in frontmatter"
+              exit 1
+            fi
+            # Check for status field
+            if ! head -20 "$f" | grep -q "^status:"; then
+              echo "ERROR: $f missing 'status' in frontmatter"
+              exit 1
+            fi
+          done
+
+      - name: Check marketplace.json references valid skill dirs
+        run: |
+          python3 -c "
+          import json, os, sys
+          data = json.load(open('.claude-plugin/marketplace.json'))
+          errors = []
+          for plugin in data.get('plugins', []):
+              source = plugin.get('source', '')
+              if not os.path.isdir(source.lstrip('./')):
+                  errors.append(f\"Plugin '{plugin['name']}' references missing dir: {source}\")
+          if errors:
+              print('\n'.join(errors))
+              sys.exit(1)
+          print(f'All {len(data[\"plugins\"])} marketplace entries valid')
+          "

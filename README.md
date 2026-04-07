@@ -1,40 +1,54 @@
+English | [日本語](README.ja.md)
+
 # cat-skills
+
+[![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AI agent skills for Claude Code, Cursor, Codex, and 40+ coding agents.
 
+Skills are self-contained instruction sets that give AI agents specialized capabilities — knowledge extraction, staged builds, autonomous work loops, testing infrastructure, and more. Each skill works independently. No dependencies between them.
+
 Built by [catcatcat](https://catcatcat.ai).
 
----
+## Quick Start
 
-## Install
+1. Install all skills:
+   ```bash
+   npx skills add catcatcatstudio/cat-skills
+   ```
+2. Use any skill by typing its command (e.g. `/notebook`, `/architect`, `/eat`)
 
-```bash
-npx skills add catcatcatstudio/cat-skills
-```
-
-**Claude Code plugin:**
+**Or install individually via Claude Code plugin:**
 
 ```
 /plugin marketplace add catcatcatstudio/cat-skills
-/plugin install architect@catcatcat
-/plugin install cleanse@catcatcat
-/plugin install elevate@catcatcat
-/plugin install eat@catcatcat
-/plugin install fortify@catcatcat
-/plugin install jp-mode@catcatcat
-/plugin install liquid-cat-physics@catcatcat
-/plugin install memento@catcatcat
-/plugin install no-stubs@catcatcat
 /plugin install notebook@catcatcat
-/plugin install recon@catcatcat
-/plugin install xray@catcatcat
 ```
+
+## What's Inside
+
+| Skill | Command | What it does |
+|-------|---------|-------------|
+| [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
+| [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
+| [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
+| [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
+| [Cleanse](#cleanse--config-optimization) | `/cleanse` | Optimize CLAUDE.md and agent config for signal-to-noise |
+| [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
+| [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
+| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with confidence gating |
+| [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
+| [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — best practices, pitfalls, architecture |
+| [JP Mode](#jp-mode--japanese-transcreation) | *(auto)* | Japanese transcreation — writes like a copywriter, not a translator |
+| [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
 
 ---
 
 ## Skills
 
-### `/notebook` — Project Notes
+### Notebook — Project Notes
 
 Prevents context loss and reasoning loops. Maintains a trail of decisions, failures, and lessons learned.
 
@@ -47,7 +61,7 @@ Prevents context loss and reasoning loops. Maintains a trail of decisions, failu
 
 **Source:** [`skills/notebook/SKILL.md`](./skills/notebook/SKILL.md)
 
-### `/architect` — Staged Build
+### Architect — Staged Build
 
 Drives software projects through a structured lifecycle: spike, design, plan, build. Prevents the #1 AI coding failure — losing context on a big plan and missing pieces.
 
@@ -60,7 +74,7 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 
 **Source:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
 
-### `/eat` — Knowledge Extraction
+### Eat — Knowledge Extraction
 
 Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
 
@@ -81,7 +95,7 @@ Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, method
 
 **Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
-### `/fortify` — Testing Infrastructure
+### Fortify — Testing Infrastructure
 
 Detects your stack, installs the complete testing ecosystem, audits code for untested critical paths, writes thorough tests weighted toward error paths, then runs them and verifies they catch real bugs through mutation testing.
 
@@ -93,7 +107,7 @@ Detects your stack, installs the complete testing ecosystem, audits code for unt
 
 **Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
 
-### `/cleanse` — Config Optimization
+### Cleanse — Config Optimization
 
 Analyzes and optimizes CLAUDE.md, memory files, and agent config. Every surviving line must earn its place by actually changing model behavior.
 
@@ -101,7 +115,7 @@ Two approval gates: report, draft, apply.
 
 **Source:** [`skills/cleanse/SKILL.md`](./skills/cleanse/SKILL.md)
 
-### `/elevate` — Expert Elevation
+### Elevate — Expert Elevation
 
 Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor. Identifies the domain, adopts a top-tier practitioner's perspective, and produces ranked proposals to elevate whatever you're working on.
 
@@ -109,7 +123,7 @@ Works across all domains: UI/UX, copywriting, architecture, code, strategy, bran
 
 **Source:** [`skills/elevate/SKILL.md`](./skills/elevate/SKILL.md)
 
-### `/memento` — Context Handoff
+### Memento — Context Handoff
 
 Saves unsaved session knowledge to notebook, then produces a compact orientation block for fresh chats. Also includes an auto-compaction safety net — hooks that preserve and re-inject conversation context when Claude Code's context window fills up.
 
@@ -121,7 +135,7 @@ Saves unsaved session knowledge to notebook, then produces a compact orientation
 
 **Source:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
 
-### `/liquid-cat-physics` — Autonomous Deep-Work Loop
+### Liquid Cat Physics — Autonomous Deep-Work Loop
 
 Turns Claude into its own project manager. Reads project state, decides what to do through an expert lens, gates every action through a confidence check, executes one focused unit of work, persists everything, and loops every 10 minutes.
 
@@ -135,7 +149,7 @@ Includes a three-tier confidence gate (GREEN/YELLOW/RED), a two-strike anti-thra
 
 **Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
 
-### `/no-stubs` — Stub Detection & Removal
+### No-Stubs — Stub Detection & Removal
 
 Scans a codebase for stub implementations, fake code, and dead wiring — functions that pretend to work (hardcoded returns, TODO placeholders, unconnected modules, auth that always passes). Triages by blast radius, then implements the real thing or cleanly removes the dead code.
 
@@ -147,13 +161,13 @@ Scans a codebase for stub implementations, fake code, and dead wiring — functi
 
 **Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
 
-### `/recon` — Pre-Build Intelligence
+### Recon — Pre-Build Intelligence
 
 Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
 
 **Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
 
-### `/jp-mode` — Japanese Transcreation
+### JP Mode — Japanese Transcreation
 
 Enforces natural Japanese writing patterns for web pages, landing pages, proposals, marketing copy, and UI text. Prevents common LLM translation failures — writes like a Japanese copywriter, not a translation engine.
 
@@ -161,7 +175,7 @@ Triggers automatically on: "translate to Japanese", "Japanese version", "JP copy
 
 **Source:** [`skills/jp-mode/SKILL.md`](./skills/jp-mode/SKILL.md)
 
-### `/xray` — X/Twitter Content Intelligence
+### Xray — X/Twitter Content Intelligence
 
 Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
 
@@ -179,7 +193,7 @@ Includes setup interview, 8 lane presets, full-archive search, and cost tracking
 
 ---
 
-## Recommended pairings
+## Recommended Pairings
 
 **`architect` + `notebook`** — Architect writes to notebook format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top. They share the same storage format but work independently.
 
@@ -187,6 +201,10 @@ Includes setup interview, 8 lane presets, full-archive search, and cost tracking
 
 ---
 
+## Contributing
+
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## License
 
-MIT
+[MIT](LICENSE) © catcatcat
