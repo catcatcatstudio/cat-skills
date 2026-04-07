@@ -40,7 +40,8 @@ State lives on disk, not in conversation. Context compaction can't erase it.
 Reference files (read on demand, NOT every iteration):
 - `references/confidence-gate.md` — re-read when GATE decision is uncertain
 - `references/anti-thrashing.md` — re-read when a failure occurs or failure_log is non-empty
-- `references/elevate-lens.md` — re-read in THINK phase
+- `references/elevate-lens.md` — re-read in THINK phase (what to work on)
+- `references/prodev-standard.md` — re-read in THINK + ACT phases (how to execute)
 - `references/browser-verification.md` — re-read when doing visual/UI work
 
 ---
@@ -211,17 +212,21 @@ Spawn a **Plan or Explore subagent**. The subagent's verbose reasoning stays out
 **Critical: pass the subagent explicit context.** Subagents run in isolated context windows — they haven't read anything. The subagent prompt MUST include:
 
 1. **Inline state summary:** current_focus, project_goals, last_action (result + reflection), failure_log entries, up_next queue, momentum patterns (consecutive outcomes), verification_baseline
-2. **Files to read:** Tell the subagent to read `references/elevate-lens.md` and any project files relevant to the candidate action. Only include `references/confidence-gate.md` if the gate decision is genuinely uncertain, and `references/anti-thrashing.md` if the failure_log is non-empty.
+2. **Files to read:** Tell the subagent to read `references/elevate-lens.md` AND `references/prodev-standard.md`, plus any project files relevant to the candidate action. Only include `references/confidence-gate.md` if the gate decision is genuinely uncertain, and `references/anti-thrashing.md` if the failure_log is non-empty.
 3. **Lessons:** Either inline the full lessons.md content or tell it to read `_notebook/lessons.md`
 
 The subagent must:
 
 1. **Assess current state.** What's done vs. project goals? What's the gap?
 2. **Apply the expert lens.** Read `references/elevate-lens.md`. Ask: "What would a top practitioner do RIGHT NOW? Not the obvious TODO — the smartest move."
-3. **Check lessons.** Is the candidate action something that's failed before? If yes, find a different approach or escalate.
-4. **Research if needed.** Unfamiliar APIs, library choices, architecture patterns → research first. Use web search, context7, codebase exploration. Don't guess.
-5. **Decide ONE action.** Not a list. ONE thing, scoped to 5-8 minutes of execution.
-6. **State the verification plan.** What specific check confirms success? If you can't name one, it's not GREEN (see bootstrap exception for infra setup). **For visual/UI work:** specify browser verification per `references/browser-verification.md` — this is a valid GREEN check.
+3. **Apply the engineering standard.** Read `references/prodev-standard.md`. For the candidate action:
+   - **Layer check:** Is this solving the problem at the right layer? If not, redirect.
+   - **Blast radius:** Can you answer what calls this, what it calls, what breaks, what tests cover it? If not, the action is "read and understand the code first" — not "write code and hope."
+   - **Research protocol:** Does this action touch an external API/library? If yes, verify the version and call signatures are current before committing to the action. Bake the research into the action scope.
+4. **Check lessons.** Is the candidate action something that's failed before? If yes, find a different approach or escalate.
+5. **Research if needed.** Unfamiliar APIs, library choices, architecture patterns → research first. Use web search, context7, codebase exploration. Don't guess. Don't rely on training data for API signatures.
+6. **Decide ONE action.** Not a list. ONE thing, scoped to 5-8 minutes of execution.
+7. **State the verification plan.** What specific check confirms success? If you can't name one, it's not GREEN (see bootstrap exception for infra setup). **For visual/UI work:** specify browser verification per `references/browser-verification.md` — this is a valid GREEN check.
 
 Return to main context: the decided action, its confidence tier, and the verification plan.
 
@@ -243,14 +248,20 @@ Read `references/confidence-gate.md` for full criteria.
 
 ## Phase 4: ACT (focused execution)
 
-Execute the ONE decided action:
+Execute the ONE decided action. Re-read `references/prodev-standard.md` "During Execution" section if this is a code-writing iteration.
 
 1. **One thing only.** Notice something else? Note it for a future iteration.
-2. **Follow the verification plan.** Run the check you committed to in THINK. For browser verification, follow the full protocol in `references/browser-verification.md`.
-3. **Verification minimum bar.** Syntax checks alone (e.g. `node --check`) are NOT sufficient verification. At minimum: build/compile succeeds + the changed behavior actually works (run it, hit the endpoint, load the page). If no test suite exists, run the code and confirm the new behavior functions. If the work is visual, use browser verification.
-4. **If verification fails:** Don't retry immediately. Record failure. Check `references/anti-thrashing.md` two-strike rule. Attempt 2 on same task → escalate to RED.
-5. **If verification passes:** One atomic commit with all changes (code + state update). Never split an iteration across multiple commits.
-6. **Don't refactor what you just wrote.** Build forward. Polish is for a dedicated iteration.
+2. **Read before you write.** Understand the code you're modifying — the file, the callers, the data flow. Never assume structure, never guess at function signatures, never build on top of an unverified assumption. If you don't know, look. If you can't find it, ask (RED).
+3. **Use current-gen patterns.** Match the project's existing patterns and versions. If unsure whether an API/pattern is current, check the docs — don't rely on training data.
+4. **No stubs, no placeholders.** `// TODO`, hardcoded returns, and fake implementations are never acceptable in a GREEN iteration. Can't build the real thing? That's a RED — escalate, don't stub.
+5. **Boring is good.** Obvious, predictable, unremarkable code. If you're writing something clever, check whether the problem genuinely demands it or you're pattern-matching to training data.
+6. **Minimum necessary complexity.** Don't add error handling for impossible states, configurability nobody asked for, or abstractions for one-time operations. Three similar lines > a premature abstraction.
+7. **Follow the verification plan.** Run the check you committed to in THINK. For browser verification, follow the full protocol in `references/browser-verification.md`.
+8. **Verification minimum bar.** Syntax checks alone (e.g. `node --check`) are NOT sufficient verification. At minimum: build/compile succeeds + the changed behavior actually works (run it, hit the endpoint, load the page). If no test suite exists, run the code and confirm the new behavior functions. If the work is visual, use browser verification.
+9. **Self-review before committing.** Run the prodev self-review gate (see `references/prodev-standard.md`). Every answer must be "yes" or "not applicable." If any answer is "no" — fix it before committing. Don't record a GREEN that isn't one.
+10. **If verification fails:** Don't retry immediately. Record failure. Check `references/anti-thrashing.md` two-strike rule. Attempt 2 on same task → escalate to RED.
+11. **If verification passes AND self-review passes:** One atomic commit with all changes (code + state update). Never split an iteration across multiple commits.
+12. **Don't refactor what you just wrote.** Build forward. Polish is for a dedicated iteration.
 
 ---
 
@@ -293,6 +304,10 @@ If everything remaining is RED → `status: blocked`. Cron stays for one more it
 5. **Subagents for exploration, main context for implementation.**
 6. **When stuck, escalate — don't thrash.** Two failed attempts = RED.
 7. **Exactly one commit per iteration.** Code changes AND PROJECT_STATE.md updates go in the same commit. Never split an iteration across multiple commits — stage everything, commit once.
-8. **No placeholder implementations.** Can't build the real thing? Mark it RED.
+8. **No placeholder implementations.** Can't build the real thing? Mark it RED. `// TODO`, hardcoded returns, and stub functions are never GREEN.
 9. **Context is finite. Act like it.** Lean tool output. Subagents for verbose exploration. On routine GREEN iterations, read only PROJECT_STATE.md + lessons.md + _index.md. Re-read reference files only when uncertain or handling failures — not every iteration.
 10. **The project goals are sacred.** Don't add features that aren't in the goals.
+11. **Read before you write.** Understand the file, its callers, and the data flow before modifying anything. If you can't explain the blast radius of your change, you haven't read enough code yet.
+12. **Fix the system, not the symptom.** If a bug is possible, fix why it's possible — don't patch the instance. If pragmatism demands a temporary patch, say so explicitly in the commit and notebook. Never silently pass off a hack as a real fix.
+13. **Verify APIs against docs, not training data.** When touching external libraries or frameworks, check the version and look up the docs for THAT version. Training data skews old. Skip this only for language fundamentals you're certain about.
+14. **Self-review gates every commit.** The prodev self-review checklist runs before every commit. A GREEN that fails self-review is not a GREEN.

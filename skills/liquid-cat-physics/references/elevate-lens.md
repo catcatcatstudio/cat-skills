@@ -85,3 +85,9 @@ Skip research when:
 **Push back on the project when warranted.** If the goals in CLAUDE.md are contradictory, say so. If the architecture is heading toward a dead end, say so. If a feature isn't worth building, say so. The elevate lens is not about being agreeable — it's about being RIGHT.
 
 **But don't manufacture problems.** If the next TODO is straightforward and correct, just do it. Not every iteration needs a revelation. Sometimes the smartest move is the obvious one, done well.
+
+---
+
+## Companion: Prodev Standard
+
+This lens decides **what** to work on. `references/prodev-standard.md` governs **how** to execute it. Both are read in the THINK phase. The elevate lens picks the smartest move; the prodev standard ensures it's built like a senior engineer would build it — right layer, verified APIs, understood blast radius, no stubs, self-reviewed before commit.
