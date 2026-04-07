@@ -10,6 +10,12 @@
   },
   "plugins": [
     {
+      "name": "eat",
+      "source": "./skills/eat",
+      "description": "Extract knowledge and frameworks from any URL — YouTube, articles, podcasts, X threads",
+      "version": "2.0.0"
+    },
+    {
       "name": "notebook",
       "source": "./skills/notebook",
       "description": "Project notes system — prevents AI context loss and reasoning loops",
@@ -19,12 +25,6 @@
       "name": "architect",
       "source": "./skills/architect",
       "description": "Staged build methodology for software projects — spike, design, plan, build",
-      "version": "2.0.0"
-    },
-    {
-      "name": "eat",
-      "source": "./skills/eat",
-      "description": "Extract knowledge and frameworks from any URL — YouTube, articles, podcasts, X threads",
       "version": "2.0.0"
     },
     {

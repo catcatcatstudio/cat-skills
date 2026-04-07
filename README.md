@@ -31,9 +31,9 @@ Built by [catcatcat](https://catcatcat.ai).
 
 | Skill | Command | What it does |
 |-------|---------|-------------|
+| [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
 | [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
 | [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
-| [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
 | [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — best practices, pitfalls, architecture |
 | [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
@@ -46,6 +46,27 @@ Built by [catcatcat](https://catcatcat.ai).
 ---
 
 ## Skills
+
+### Eat — Knowledge Extraction
+
+Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
+
+Full pipeline: download → transcribe (Whisper/Groq) → frame extraction → visual assessment → knowledge synthesis.
+
+Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
+
+| Source | Method |
+|--------|--------|
+| YouTube | Subtitles → Groq → local Whisper |
+| Instagram / TikTok / X video | yt-dlp + cookies → Whisper → frame extraction |
+| Podcast / audio | yt-dlp → Groq / Whisper |
+| X/Twitter thread | X API v2 |
+| Web article | defuddle → WebFetch fallback |
+| Local file / PDF | Direct read |
+
+**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/eat/SKILL.md#setup--dependencies).
+
+**Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
 ### Notebook — Project Notes
 
@@ -72,27 +93,6 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 | 2+ | Write stages, build, verify, repeat |
 
 **Source:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
-
-### Eat — Knowledge Extraction
-
-Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
-
-Full pipeline: download → transcribe (Whisper/Groq) → frame extraction → visual assessment → knowledge synthesis.
-
-Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
-
-| Source | Method |
-|--------|--------|
-| YouTube | Subtitles → Groq → local Whisper |
-| Instagram / TikTok / X video | yt-dlp + cookies → Whisper → frame extraction |
-| Podcast / audio | yt-dlp → Groq / Whisper |
-| X/Twitter thread | X API v2 |
-| Web article | defuddle → WebFetch fallback |
-| Local file / PDF | Direct read |
-
-**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/eat/SKILL.md#setup--dependencies).
-
-**Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
 ### Recon — Pre-Build Intelligence
 

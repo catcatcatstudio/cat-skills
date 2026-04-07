@@ -30,9 +30,9 @@ AIコーディングエージェント向けのスキルパッケージです。
 
 | スキル | コマンド | 機能 |
 |-------|---------|------|
+| [Eat](#eat--ナレッジ抽出) | `/eat` | あらゆるURLからナレッジを抽出。YouTube、記事、ポッドキャスト、Xスレッド対応 |
 | [Notebook](#notebook--プロジェクトノート) | `/notebook` | プロジェクトノート。コンテキスト消失と推論ループを防止 |
 | [Architect](#architect--段階的ビルド) | `/architect` | 段階的ビルド。スパイク、設計、計画、実装のライフサイクル管理 |
-| [Eat](#eat--ナレッジ抽出) | `/eat` | あらゆるURLからナレッジを抽出。YouTube、記事、ポッドキャスト、Xスレッド対応 |
 | [Recon](#recon--事前調査) | `/recon` | ビルド前のリサーチ。ベストプラクティス、落とし穴、アーキテクチャ調査 |
 | [Xray](#xray--xtwitter-コンテンツインテリジェンス) | `/xray` | X/Twitter分析。スカウト、パルスチェック、トラッキング、ミラー、プロスペクト |
 | [Elevate](#elevate--エキスパート昇格) | `/elevate` | モデルを実行者からクリティカルなエキスパートアドバイザーに切り替え |
@@ -45,6 +45,27 @@ AIコーディングエージェント向けのスキルパッケージです。
 ---
 
 ## スキル詳細
+
+### Eat — ナレッジ抽出
+
+あらゆるURLやコンテンツから、転用可能なナレッジを抽出します。YouTube、Instagram、TikTok、Xの動画、ポッドキャスト、記事、Xスレッド、PDFに対応しています。
+
+パイプライン: ダウンロード → 文字起こし (Whisper/Groq) → フレーム抽出 → ビジュアル評価 → ナレッジ統合
+
+広告、フィラー、自己宣伝などのノイズを除去し、フレームワーク、メソッド、具体的な数値、実践者の本音といったシグナルを保持します。
+
+| ソース | 方法 |
+|--------|------|
+| YouTube | 字幕 → Groq → ローカルWhisper |
+| Instagram / TikTok / X動画 | yt-dlp + cookies → Whisper → フレーム抽出 |
+| ポッドキャスト / 音声 | yt-dlp → Groq / Whisper |
+| X/Twitterスレッド | X API v2 |
+| Web記事 | defuddle → WebFetchフォールバック |
+| ローカルファイル / PDF | 直接読み込み |
+
+**必須:** yt-dlp、ffmpeg **文字起こし:** whisper (ローカル) または GROQ_API_KEY **オプション:** defuddle、X_BEARER_TOKEN、SNS用ブラウザcookies。[セットアップ手順](./skills/eat/SKILL.md#setup--dependencies)を参照してください。
+
+**ソース:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
 ### Notebook — プロジェクトノート
 
@@ -71,27 +92,6 @@ AIコーディングエージェント向けのスキルパッケージです。
 | 2+ | ステージを書き、ビルド、検証、繰り返し |
 
 **ソース:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
-
-### Eat — ナレッジ抽出
-
-あらゆるURLやコンテンツから、転用可能なナレッジを抽出します。YouTube、Instagram、TikTok、Xの動画、ポッドキャスト、記事、Xスレッド、PDFに対応しています。
-
-パイプライン: ダウンロード → 文字起こし (Whisper/Groq) → フレーム抽出 → ビジュアル評価 → ナレッジ統合
-
-広告、フィラー、自己宣伝などのノイズを除去し、フレームワーク、メソッド、具体的な数値、実践者の本音といったシグナルを保持します。
-
-| ソース | 方法 |
-|--------|------|
-| YouTube | 字幕 → Groq → ローカルWhisper |
-| Instagram / TikTok / X動画 | yt-dlp + cookies → Whisper → フレーム抽出 |
-| ポッドキャスト / 音声 | yt-dlp → Groq / Whisper |
-| X/Twitterスレッド | X API v2 |
-| Web記事 | defuddle → WebFetchフォールバック |
-| ローカルファイル / PDF | 直接読み込み |
-
-**必須:** yt-dlp、ffmpeg **文字起こし:** whisper (ローカル) または GROQ_API_KEY **オプション:** defuddle、X_BEARER_TOKEN、SNS用ブラウザcookies。[セットアップ手順](./skills/eat/SKILL.md#setup--dependencies)を参照してください。
-
-**ソース:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
 ### Recon — 事前調査
 

@@ -6,9 +6,9 @@ AI agent skills by catcatcat. Each skill is a self-contained instruction set in 
 
 | Skill | Trigger | Description |
 |-------|---------|-------------|
+| eat | `/eat` | Knowledge extraction from URLs — YouTube, articles, podcasts, X threads |
 | notebook | `/notebook` | Project notes — decisions, failures, lessons, context recovery |
 | architect | `/architect` | Staged build methodology — spike, design, plan, build |
-| eat | `/eat` | Knowledge extraction from URLs — YouTube, articles, podcasts, X threads |
 | recon | `/recon` | Pre-build intelligence — best practices, pitfalls, architecture research |
 | xray | `/xray` | X/Twitter content intelligence — scout, pulse, track, mirror, prospect |
 | elevate | `/elevate` | Expert elevation — shifts model from executor to critical advisor |
