@@ -2,14 +2,13 @@
 name: prodev
 status: published
 description: >
-  Pro mode — forces Claude to operate like a senior engineer who maintains what they ship.
-  Prevents the common AI coding failures: bandaid fixes, stale API knowledge, stubs,
-  sycophantic agreement with bad approaches, and building on unverified assumptions.
-  Loads a full engineering field manual covering root cause discipline, layer awareness,
-  research-before-code protocol, current-generation patterns, blast radius thinking,
-  caller-first API design, and self-review. Use when starting a complex build, when Claude
-  is slipping into hacky patterns mid-conversation, or when the stakes are higher than usual.
-  Invoke with "/prodev". Do NOT trigger automatically — this is user-initiated only.
+  MUST invoke when user types "/prodev" or "prodev". This is a slash command — always use the
+  Skill tool to execute it, never skip or summarize. Pro mode — engineering standard enforcement.
+  Forces Claude to operate like a senior engineer who maintains what they ship. Prevents common
+  AI coding failures: bandaid fixes, stale API knowledge, stubs, sycophantic agreement with bad
+  approaches, and building on unverified assumptions. Loads a full field manual covering root
+  cause discipline, layer awareness, research protocol, current-gen patterns, blast radius
+  thinking, caller-first API design, and self-review.
 ---
 
 # /prodev — Engineering Standard
