@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-11-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AI agent skills for Claude Code, Cursor, Codex, and 40+ coding agents.
 
@@ -34,13 +34,14 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
 | [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
 | [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
-| [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
-| [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
-| [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
-| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with confidence gating |
-| [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
 | [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — best practices, pitfalls, architecture |
 | [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
+| [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
+| [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
+| [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
+| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with confidence gating |
+| [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
+| [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
 
 ---
 
@@ -93,17 +94,27 @@ Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, method
 
 **Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
 
-### Fortify — Testing Infrastructure
+### Recon — Pre-Build Intelligence
 
-Detects your stack, installs the complete testing ecosystem, audits code for untested critical paths, writes thorough tests weighted toward error paths, then runs them and verifies they catch real bugs through mutation testing.
+Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
+
+**Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
+
+### Xray — X/Twitter Content Intelligence
+
+Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
 
 | Command | What it does |
 |---------|-------------|
-| `/fortify setup` | Install testing infra only |
-| `/fortify check` | Audit coverage, find gaps |
-| `/fortify` | Full setup + write + verify |
+| `scout` | Reply opportunities scored by recency, engagement, and competition |
+| `pulse <lane>` | What's hot in a topic lane right now |
+| `track` | Top posts from accounts you study |
+| `mirror` | Your own accounts' performance |
+| `prospect` | Founders who just launched (client opportunities) |
 
-**Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
+Includes setup interview, 8 lane presets, full-archive search, and cost tracking.
+
+**Source:** [`skills/xray/`](./skills/xray/) · [README](./skills/xray/README.md)
 
 ### Elevate — Expert Elevation
 
@@ -112,6 +123,16 @@ Meta-cognitive skill that shifts the model from compliant executor to critical e
 Works across all domains: UI/UX, copywriting, architecture, code, strategy, branding.
 
 **Source:** [`skills/elevate/SKILL.md`](./skills/elevate/SKILL.md)
+
+### Prodev — Engineering Standard
+
+Forces Claude to operate like a senior engineer who maintains what they ship. A concrete shift in how the model evaluates every decision, every line, every assumption.
+
+Covers: root cause discipline, layer awareness, research protocol, current-gen patterns, blast radius thinking, caller-first API design, anti-sycophancy, and self-review.
+
+Not "try harder" — a full field manual that changes behavior on every subsequent interaction in the session.
+
+**Source:** [`skills/prodev/SKILL.md`](./skills/prodev/SKILL.md)
 
 ### Memento — Context Handoff
 
@@ -139,6 +160,18 @@ Includes a three-tier confidence gate (GREEN/YELLOW/RED), a two-strike anti-thra
 
 **Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
 
+### Fortify — Testing Infrastructure
+
+Detects your stack, installs the complete testing ecosystem, audits code for untested critical paths, writes thorough tests weighted toward error paths, then runs them and verifies they catch real bugs through mutation testing.
+
+| Command | What it does |
+|---------|-------------|
+| `/fortify setup` | Install testing infra only |
+| `/fortify check` | Audit coverage, find gaps |
+| `/fortify` | Full setup + write + verify |
+
+**Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
+
 ### No-Stubs — Stub Detection & Removal
 
 Scans a codebase for stub implementations, fake code, and dead wiring — functions that pretend to work (hardcoded returns, TODO placeholders, unconnected modules, auth that always passes). Triages by blast radius, then implements the real thing or cleanly removes the dead code.
@@ -150,28 +183,6 @@ Scans a codebase for stub implementations, fake code, and dead wiring — functi
 | `/no-stubs` | Full scan + fix |
 
 **Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
-
-### Recon — Pre-Build Intelligence
-
-Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
-
-**Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
-
-### Xray — X/Twitter Content Intelligence
-
-Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
-
-| Command | What it does |
-|---------|-------------|
-| `scout` | Reply opportunities scored by recency, engagement, and competition |
-| `pulse <lane>` | What's hot in a topic lane right now |
-| `track` | Top posts from accounts you study |
-| `mirror` | Your own accounts' performance |
-| `prospect` | Founders who just launched (client opportunities) |
-
-Includes setup interview, 8 lane presets, full-archive search, and cost tracking.
-
-**Source:** [`skills/xray/`](./skills/xray/) · [README](./skills/xray/README.md)
 
 ---
 
