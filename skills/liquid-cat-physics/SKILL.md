@@ -181,14 +181,24 @@ If `git status` shows uncommitted changes, check whether the last iteration comm
 
 ### Step 4: Checkpoint trigger
 If `iteration` is a multiple of `checkpoint_interval` (default 10): **pause the loop.**
-1. Output a structured checkpoint report:
+
+1. **Coverage gut-check.** Before reporting to the human, assess test coverage against what's been built since the last checkpoint:
+   - Run existing tests. Do they pass?
+   - Scan the code written in the last N iterations (check `### Completed`). For each significant piece of logic: is there a test that exercises it? Not line-coverage math — a judgment call: "if this broke, would a test catch it?"
+   - If there are meaningful gaps, add test-writing tasks to the top of `up_next` with GREEN confidence. These are first-class work, not afterthoughts.
+   - Include a one-line coverage assessment in the checkpoint report: "Tests cover the critical paths" or "Gaps: [list]. Queued test iterations for next cycle."
+
+   This is NOT a full `/fortify` invocation. No mutation testing, no infra setup. Just: "did I build 10 features with zero tests?" If yes, fix it before the human has to ask.
+
+2. Output a structured checkpoint report:
    - Completed items since last checkpoint
+   - Coverage assessment (from step above)
    - Current trajectory vs. project_goals — on track or drifting?
    - Any items that have been YELLOW for 3+ iterations without resolving
    - Momentum summary (see below)
    - Explicit ask: "Continue, adjust focus, or stop?"
-2. Set `status: checkpoint`, CronDelete, clear cron_id
-3. Exit. The human must invoke `/liquid-cat-physics` to resume.
+3. Set `status: checkpoint`, CronDelete, clear cron_id
+4. Exit. The human must invoke `/liquid-cat-physics` to resume.
 
 ### Step 5: Momentum detection
 Read the last 3-5 iterations from `### Momentum` section. Detect patterns:
