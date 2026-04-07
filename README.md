@@ -35,13 +35,11 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
 | [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
-| [Cleanse](#cleanse--config-optimization) | `/cleanse` | Optimize CLAUDE.md and agent config for signal-to-noise |
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 | [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with confidence gating |
 | [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
 | [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — best practices, pitfalls, architecture |
-| [JP Mode](#jp-mode--japanese-transcreation) | *(auto)* | Japanese transcreation — writes like a copywriter, not a translator |
 | [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
 
 ---
@@ -107,14 +105,6 @@ Detects your stack, installs the complete testing ecosystem, audits code for unt
 
 **Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
 
-### Cleanse — Config Optimization
-
-Analyzes and optimizes CLAUDE.md, memory files, and agent config. Every surviving line must earn its place by actually changing model behavior.
-
-Two approval gates: report, draft, apply.
-
-**Source:** [`skills/cleanse/SKILL.md`](./skills/cleanse/SKILL.md)
-
 ### Elevate — Expert Elevation
 
 Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor. Identifies the domain, adopts a top-tier practitioner's perspective, and produces ranked proposals to elevate whatever you're working on.
@@ -166,14 +156,6 @@ Scans a codebase for stub implementations, fake code, and dead wiring — functi
 Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
 
 **Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
-
-### JP Mode — Japanese Transcreation
-
-Enforces natural Japanese writing patterns for web pages, landing pages, proposals, marketing copy, and UI text. Prevents common LLM translation failures — writes like a Japanese copywriter, not a translation engine.
-
-Triggers automatically on: "translate to Japanese", "Japanese version", "JP copy", "localize to Japanese".
-
-**Source:** [`skills/jp-mode/SKILL.md`](./skills/jp-mode/SKILL.md)
 
 ### Xray — X/Twitter Content Intelligence
 

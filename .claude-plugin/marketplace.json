@@ -16,12 +16,6 @@
       "version": "2.0.0"
     },
     {
-      "name": "cleanse",
-      "source": "./skills/cleanse",
-      "description": "Analyze and optimize CLAUDE.md, memory files, and agent config for signal-to-noise",
-      "version": "2.0.0"
-    },
-    {
       "name": "elevate",
       "source": "./skills/elevate",
       "description": "Expert elevation — shifts the model from executor to critical advisor",
@@ -37,12 +31,6 @@
       "name": "fortify",
       "source": "./skills/fortify",
       "description": "Testing infrastructure, coverage, and verified test quality — detects stack, writes tests, runs mutation testing",
-      "version": "1.0.0"
-    },
-    {
-      "name": "jp-mode",
-      "source": "./skills/jp-mode",
-      "description": "Japanese transcreation — enforces natural writing patterns, prevents common LLM translation failures",
       "version": "1.0.0"
     },
     {
