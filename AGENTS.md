@@ -14,7 +14,7 @@ AI agent skills by catcatcat. Each skill is a self-contained instruction set in 
 | elevate | `/elevate` | Expert elevation — shifts model from executor to critical advisor |
 | prodev | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
 | memento | `/memento` | Context handoff for fresh sessions |
-| liquid-cat-physics | `/liquid-cat-physics` | Autonomous deep-work loop — decides, executes, persists, loops |
+| liquid-cat-physics | `/liquid-cat-physics` | Autonomous deep-work loop — expert lens + prodev standard, confidence gating, persists, loops |
 | fortify | `/fortify` | Testing infrastructure, coverage, and mutation testing |
 | no-stubs | `/no-stubs` | Scan codebase for stub implementations and dead wiring |
 

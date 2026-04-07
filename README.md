@@ -39,7 +39,7 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
 | [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
-| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with confidence gating |
+| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
 | [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
 
@@ -148,7 +148,7 @@ Saves unsaved session knowledge to notebook, then produces a compact orientation
 
 ### Liquid Cat Physics — Autonomous Deep-Work Loop
 
-Turns Claude into its own project manager. Reads project state, decides what to do through an expert lens, gates every action through a confidence check, executes one focused unit of work, persists everything, and loops every 10 minutes.
+Turns Claude into its own project manager. Reads project state, applies an expert lens to decide what to work on, enforces senior-engineer execution standards on every line of code, gates every action through a confidence check, and persists everything. Loops every 10 minutes.
 
 | Command | What it does |
 |---------|-------------|
@@ -156,7 +156,7 @@ Turns Claude into its own project manager. Reads project state, decides what to 
 | `/liquid-cat-physics status` | Show current state |
 | `/liquid-cat-physics stop` | Pause the loop |
 
-Includes a three-tier confidence gate (GREEN/YELLOW/RED), a two-strike anti-thrashing rule, automatic checkpoints, and an embedded expert lens. Enables memento auto by default.
+Two embedded lenses drive quality: the **elevate lens** picks the smartest next move (not just the next TODO), and the **prodev standard** ensures it's built right — correct layer, verified APIs, understood blast radius, no stubs, self-reviewed before every commit. Includes a three-tier confidence gate (GREEN/YELLOW/RED), two-strike anti-thrashing, automatic checkpoints with coverage assessment, and memento auto for context survival.
 
 **Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
 

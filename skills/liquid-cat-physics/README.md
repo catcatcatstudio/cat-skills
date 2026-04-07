@@ -8,7 +8,7 @@ Autonomous deep-work engine for Claude Code. One command to start, then walk awa
 
 AI coding agents are great at executing one task at a time. But real projects aren't one task — they're fifty tasks with dependencies, decisions, failures, and context that compounds. You end up being the loop: read the output, decide what's next, type the instruction, babysit the execution, repeat.
 
-Liquid Cat Physics turns Claude into its own project manager. It reads the project state, decides what to do next through an expert lens, gates every action through a confidence check, executes one focused unit of work, persists everything to disk, and loops. Every 10 minutes, automatically.
+Liquid Cat Physics turns Claude into its own project manager. It reads the project state, decides what to do next through an expert lens, enforces senior-engineer execution standards on every line of code, gates every action through a confidence check, executes one focused unit of work, persists everything to disk, and loops. Every 10 minutes, automatically.
 
 You come back to committed code, documented decisions, and a clear trail of what happened and why.
 
@@ -44,9 +44,9 @@ Pre-flight also enables [memento](../memento/) auto mode — so if the context w
 
 ```
 ORIENT  → Read PROJECT_STATE.md, git status, notebook, lessons
-THINK   → Subagent applies expert lens, decides ONE action
+THINK   → Subagent applies expert lens + engineering standard, decides ONE action
 GATE    → GREEN / YELLOW / RED confidence check
-ACT     → Execute the one thing, verify it works
+ACT     → Execute with prodev discipline, self-review before commit
 PERSIST → Update state, notebook, commit
 ```
 
@@ -84,6 +84,7 @@ Context compaction can't erase what's on disk. Session restarts can't erase it. 
 
 Every 10 iterations (configurable), LCP pauses and produces a checkpoint report:
 
+- **Coverage gut-check** — scans code written since the last checkpoint and assesses whether meaningful tests exist for it. Gaps get queued as first-class work for the next cycle.
 - What's been completed since the last checkpoint
 - Whether the trajectory still aligns with project goals
 - Any items that have been stuck for 3+ iterations
@@ -93,7 +94,11 @@ It then stops the loop and asks: **continue, adjust focus, or stop?** You decide
 
 Emergency checkpoints trigger automatically if 3+ consecutive tasks fail or if the same focus hasn't changed in 5 iterations. LCP knows when it's stuck.
 
-## The Expert Lens
+## Two Built-In Lenses
+
+LCP embeds two skills that shape every iteration:
+
+### Expert Lens (from /elevate)
 
 The THINK phase isn't just "pick the next TODO." A subagent adopts the mindset of a senior practitioner in whatever domain the project covers — full-stack engineer for web apps, systems engineer for APIs, creative technologist for generative art.
 
@@ -101,11 +106,20 @@ It asks: *"What would a top practitioner do right now — not the obvious next i
 
 Sometimes the smartest move is the obvious one. Sometimes it's "your test suite has no integration tests and everything passes but nothing works together — fix that before adding features." The lens catches drift early.
 
+### Engineering Standard (from /prodev)
+
+The expert lens decides *what* to work on. The prodev standard governs *how* it gets built.
+
+Every iteration enforces: layer discipline (solve problems where they belong), blast radius awareness (understand callers and data flow before touching code), research protocol (verify APIs against docs, not training data), current-gen patterns (not the 2-year-old approach with more blog posts), no stubs or placeholders, minimum necessary complexity, and a self-review gate before every commit.
+
+This is the difference between an autonomous agent that ships code and one that ships code a senior engineer would approve of.
+
 ## Pairs Well With
 
 - **[memento](../memento/)** — LCP enables memento auto during pre-flight. Together: LCP handles inter-session persistence (PROJECT_STATE.md, notebook), memento handles intra-session compaction survival (conversation trace). The loop runs perpetually without context loss at any boundary.
 - **[notebook](../notebook/)** — LCP writes to notebook format natively. Decisions, failures, constraints, and investigations get persisted as notebook entries.
 - **[elevate](../elevate/)** — the elevate lens is embedded directly into LCP's THINK phase. Every iteration gets expert-level critical thinking, not just task execution.
+- **[prodev](../prodev/)** — the engineering standard is embedded into LCP's THINK and ACT phases. Every iteration builds with senior-engineer discipline.
 
 ## License
 
