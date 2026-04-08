@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-11-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AI agent skills for Claude Code, Cursor, Codex, and 40+ coding agents.
 
@@ -38,6 +38,7 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
 | [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
+| [Adversary](#adversary--structured-dissent) | `/adversary` | Pressure-test decisions — steel-mans alternatives, produces a verdict |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 | [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
@@ -133,6 +134,21 @@ Covers: root cause discipline, layer awareness, research protocol, current-gen p
 Not "try harder" — a full field manual that changes behavior on every subsequent interaction in the session.
 
 **Source:** [`skills/prodev/SKILL.md`](./skills/prodev/SKILL.md)
+
+### Adversary — Structured Dissent
+
+Pressure-tests decisions through adversarial analysis. Auto-detects the domain (architecture, strategy, marketing, design), builds the strongest case FOR the current approach, then spawns an adversary subagent to steel-man a concrete alternative at full strength.
+
+Produces a decision brief with load-bearing assumptions, the strongest counter-argument, the single question that resolves the disagreement, and a mandatory verdict (Hold / Adjust / Reconsider / Uncertain). Short-circuits when there's no credible alternative — doesn't manufacture doubt.
+
+| Lens | Adversary focuses on |
+|------|---------------------|
+| Architecture | Simpler alternatives, scaling traps, over-engineering |
+| Strategy | Market assumptions, opportunity cost, timing risk |
+| Marketing | Who it doesn't land with, stronger positioning |
+| Design | Whether aesthetic serves function, edge cases |
+
+**Source:** [`skills/adversary/SKILL.md`](./skills/adversary/SKILL.md)
 
 ### Memento — Context Handoff
 

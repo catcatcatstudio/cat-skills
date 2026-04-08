@@ -3,7 +3,7 @@
 # cat-skills
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-11-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AIコーディングエージェント向けのスキルパッケージです。Claude Code、Cursor、Codex をはじめ、40以上のエージェントに対応しています。
 
@@ -37,6 +37,7 @@ AIコーディングエージェント向けのスキルパッケージです。
 | [Xray](#xray--xtwitter-コンテンツインテリジェンス) | `/xray` | X/Twitter分析。スカウト、パルスチェック、トラッキング、ミラー、プロスペクト |
 | [Elevate](#elevate--エキスパート昇格) | `/elevate` | モデルを実行者からクリティカルなエキスパートアドバイザーに切り替え |
 | [Prodev](#prodev--エンジニアリング基準) | `/prodev` | エンジニアリング基準の強制。オーナーシップ、影響範囲思考、反追従性 |
+| [Adversary](#adversary--構造化された反論) | `/adversary` | 意思決定を圧力テスト。代替案を本気で主張し、判定を下す |
 | [Memento](#memento--コンテキスト引き継ぎ) | `/memento` | セッション知識を保存し、新しいチャットへの引き継ぎブロックを生成 |
 | [Liquid Cat Physics](#liquid-cat-physics--自律ディープワークループ) | `/liquid-cat-physics` | エキスパートレンズとエンジニアリング基準を備えた自律ディープワークループ |
 | [Fortify](#fortify--テスト基盤) | `/fortify` | スタック検出、テスト導入、カバレッジ監査、ミューテーションテスト |
@@ -132,6 +133,21 @@ Claudeをシニアエンジニアとして動作させます。すべての判�
 「もっと頑張れ」ではなく、セッション内のすべてのインタラクションで挙動を変える具体的な基準です。
 
 **ソース:** [`skills/prodev/SKILL.md`](./skills/prodev/SKILL.md)
+
+### Adversary — 構造化された反論
+
+意思決定を敵対的分析で圧力テストするスキルです。ドメイン（アーキテクチャ、戦略、マーケティング、デザイン）を自動検出し、現在のアプローチを支持する最強の論拠を構築した上で、サブエージェントが具体的な代替案を本気で主張します。
+
+出力は「判定ブリーフ」。前提条件、最強の反論、争点を決定づける一つの問い、そして必須の判定（維持 / 調整 / 再検討 / 不確定）で構成されます。信頼できる代替案がなければショートサーキットし、疑念を捏造しません。
+
+| レンズ | 反論の焦点 |
+|--------|-----------|
+| アーキテクチャ | よりシンプルな代替案、スケーリングの罠、過剰設計 |
+| 戦略 | 市場の前提、機会費用、タイミングリスク |
+| マーケティング | 響かない層、より強いポジショニング |
+| デザイン | 審美性が機能に奉仕しているか、エッジケース |
+
+**ソース:** [`skills/adversary/SKILL.md`](./skills/adversary/SKILL.md)
 
 ### Memento — コンテキスト引き継ぎ
 
