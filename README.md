@@ -127,19 +127,34 @@ Includes setup interview, 8 lane presets, full-archive search, and cost tracking
 
 ### Elevate — Expert Elevation
 
-Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor. Identifies the domain, adopts a top-tier practitioner's perspective, and produces ranked proposals to elevate whatever you're working on.
+Shifts the model from compliant executor to critical expert advisor. Auto-detects the domain, adopts the mindset of a top-tier practitioner (not generic "senior engineer" — specific, like "someone who's built Figma, Linear, and Notion"), and produces ranked proposals.
 
-Works across all domains: UI/UX, copywriting, architecture, code, strategy, branding.
+| Step | What happens |
+|------|-------------|
+| Adopt lens | Identifies the domain, states the expert role |
+| Understand purpose | Why this work exists, not just what the task is |
+| Research if needed | Checks current best practices before recommending |
+| Ranked proposals | Up to 3, ranked by impact-to-effort. Each tagged Quality (polish) or Ambition (rethink). |
+
+Will push back if the work is already strong — proposing zero changes is a valid output. Works across all domains: UI/UX, code, copywriting, architecture, strategy, branding.
 
 **Source:** [`skills/elevate/SKILL.md`](./skills/elevate/SKILL.md)
 
 ### Prodev — Engineering Standard
 
-Forces Claude to operate like a senior engineer who maintains what they ship. A concrete shift in how the model evaluates every decision, every line, every assumption.
+Loads a full field manual that changes how the model evaluates every decision, every line, every assumption. Not "try harder" — a concrete behavioral shift for the rest of the session.
 
-Covers: root cause discipline, layer awareness, research protocol, current-gen patterns, blast radius thinking, caller-first API design, anti-sycophancy, and self-review.
+| Principle | What it prevents |
+|-----------|-----------------|
+| Ownership mentality | Writing code for the diff instead of the codebase 6 months from now |
+| Layer discipline | Fixing display problems in the data layer because that's the file you have open |
+| Research protocol | Using stale API knowledge from training data instead of checking current docs |
+| Current-gen patterns | Using the approach with more blog posts instead of the one senior engineers actually use |
+| Blast radius thinking | Changing code without knowing what calls it, what it calls, or what breaks |
+| Anti-sycophancy | Agreeing with bad approaches instead of pushing back with evidence |
+| Self-review gate | Committing without verifying the change actually works |
 
-Not "try harder" — a full field manual that changes behavior on every subsequent interaction in the session.
+Includes a self-review checklist that runs before every commit. If any answer is "no," the code doesn't ship.
 
 **Source:** [`skills/prodev/SKILL.md`](./skills/prodev/SKILL.md)
 
