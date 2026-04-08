@@ -41,9 +41,9 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Adversary](#adversary--structured-dissent) | `/adversary` | Pressure-test decisions — steel-mans alternatives, produces a verdict |
 | [Eye](#eye--design-judgment) | `/eye` | Design judgment with taste — from a single element to a full app review |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
-| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
 | [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
+| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
 
 ---
 
@@ -177,20 +177,6 @@ Saves unsaved session knowledge to notebook, then produces a compact orientation
 
 **Source:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
 
-### Liquid Cat Physics — Autonomous Deep-Work Loop
-
-Turns Claude into its own project manager. Reads project state, applies an expert lens to decide what to work on, enforces senior-engineer execution standards on every line of code, gates every action through a confidence check, and persists everything. Loops every 10 minutes.
-
-| Command | What it does |
-|---------|-------------|
-| `/liquid-cat-physics` | Start the loop (default 10m interval) |
-| `/liquid-cat-physics status` | Show current state |
-| `/liquid-cat-physics stop` | Pause the loop |
-
-Two embedded lenses drive quality: the **elevate lens** picks the smartest next move (not just the next TODO), and the **prodev standard** ensures it's built right — correct layer, verified APIs, understood blast radius, no stubs, self-reviewed before every commit. Includes a three-tier confidence gate (GREEN/YELLOW/RED), two-strike anti-thrashing, automatic checkpoints with coverage assessment, and memento auto for context survival.
-
-**Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
-
 ### Fortify — Testing Infrastructure
 
 Detects your stack, installs the complete testing ecosystem, audits code for untested critical paths, writes thorough tests weighted toward error paths, then runs them and verifies they catch real bugs through mutation testing.
@@ -214,6 +200,20 @@ Scans a codebase for stub implementations, fake code, and dead wiring — functi
 | `/no-stubs` | Full scan + fix |
 
 **Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
+
+### Liquid Cat Physics — Autonomous Deep-Work Loop
+
+Turns Claude into its own project manager. Reads project state, applies an expert lens to decide what to work on, enforces senior-engineer execution standards on every line of code, gates every action through a confidence check, and persists everything. Loops every 10 minutes.
+
+| Command | What it does |
+|---------|-------------|
+| `/liquid-cat-physics` | Start the loop (default 10m interval) |
+| `/liquid-cat-physics status` | Show current state |
+| `/liquid-cat-physics stop` | Pause the loop |
+
+Two embedded lenses drive quality: the **elevate lens** picks the smartest next move (not just the next TODO), and the **prodev standard** ensures it's built right — correct layer, verified APIs, understood blast radius, no stubs, self-reviewed before every commit. Includes a three-tier confidence gate (GREEN/YELLOW/RED), two-strike anti-thrashing, automatic checkpoints with coverage assessment, and memento auto for context survival.
+
+**Source:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
 
 ---
 

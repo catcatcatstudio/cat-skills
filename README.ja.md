@@ -40,9 +40,9 @@ AIコーディングエージェント向けのスキルパッケージです。
 | [Adversary](#adversary--構造化された反論) | `/adversary` | 意思決定を圧力テスト。代替案を本気で主張し、判定を下す |
 | [Eye](#eye--デザインジャッジメント) | `/eye` | テイストに基づくデザイン批評。単一要素からアプリ全体のレビューまで |
 | [Memento](#memento--コンテキスト引き継ぎ) | `/memento` | セッション知識を保存し、新しいチャットへの引き継ぎブロックを生成 |
-| [Liquid Cat Physics](#liquid-cat-physics--自律ディープワークループ) | `/liquid-cat-physics` | エキスパートレンズとエンジニアリング基準を備えた自律ディープワークループ |
 | [Fortify](#fortify--テスト基盤) | `/fortify` | スタック検出、テスト導入、カバレッジ監査、ミューテーションテスト |
 | [No-Stubs](#no-stubs--スタブ検出と除去) | `/no-stubs` | スタブ実装とデッドコードを検出して修正 |
+| [Liquid Cat Physics](#liquid-cat-physics--自律ディープワークループ) | `/liquid-cat-physics` | エキスパートレンズとエンジニアリング基準を備えた自律ディープワークループ |
 
 ---
 
@@ -176,20 +176,6 @@ LLMのデザイン判断における盲点を補正するナレッジベース�
 
 **ソース:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
 
-### Liquid Cat Physics — 自律ディープワークループ
-
-Claudeを自身のプロジェクトマネージャーにします。プロジェクト状態を読み取り、エキスパートの視点で次のアクションを判断し、シニアエンジニアの実行基準をすべてのコードに適用し、信頼度チェックを通過したものだけを実行して永続化します。10分ごとにループします。
-
-| コマンド | 機能 |
-|---------|------|
-| `/liquid-cat-physics` | ループを開始（デフォルト10分間隔） |
-| `/liquid-cat-physics status` | 現在の状態を表示 |
-| `/liquid-cat-physics stop` | ループを一時停止 |
-
-2つの組み込みレンズが品質を担保します。**エレベートレンズ**は次のTODOではなく最も賢い次の一手を選び、**prodev基準**がそれを正しく構築することを保証します。正しいレイヤーでの修正、APIの検証、影響範囲の把握、スタブ禁止、コミット前のセルフレビュー。3段階の信頼度ゲート（GREEN/YELLOW/RED）、2ストライクのアンチスラッシング、カバレッジ評価付き自動チェックポイント、コンテキスト生存のためのmemento autoを備えています。
-
-**ソース:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
-
 ### Fortify — テスト基盤
 
 スタックを自動検出し、テストエコシステム全体を導入します。未テストのクリティカルパスを監査し、エラーパスを重視したテストを作成、実行後にミューテーションテストでバグ検出力を検証します。
@@ -213,6 +199,20 @@ Claudeを自身のプロジェクトマネージャーにします。プロジ�
 | `/no-stubs` | フルスキャン + 修正 |
 
 **ソース:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
+
+### Liquid Cat Physics — 自律ディープワークループ
+
+Claudeを自身のプロジェクトマネージャーにします。プロジェクト状態を読み取り、エキスパートの視点で次のアクションを判断し、シニアエンジニアの実行基準をすべてのコードに適用し、信頼度チェックを通過したものだけを実行して永続化します。10分ごとにループします。
+
+| コマンド | 機能 |
+|---------|------|
+| `/liquid-cat-physics` | ループを開始（デフォルト10分間隔） |
+| `/liquid-cat-physics status` | 現在の状態を表示 |
+| `/liquid-cat-physics stop` | ループを一時停止 |
+
+2つの組み込みレンズが品質を担保します。**エレベートレンズ**は次のTODOではなく最も賢い次の一手を選び、**prodev基準**がそれを正しく構築することを保証します。正しいレイヤーでの修正、APIの検証、影響範囲の把握、スタブ禁止、コミット前のセルフレビュー。3段階の信頼度ゲート（GREEN/YELLOW/RED）、2ストライクのアンチスラッシング、カバレッジ評価付き自動チェックポイント、コンテキスト生存のためのmemento autoを備えています。
+
+**ソース:** [`skills/liquid-cat-physics/`](./skills/liquid-cat-physics/) · [README](./skills/liquid-cat-physics/README.md)
 
 ---
 
