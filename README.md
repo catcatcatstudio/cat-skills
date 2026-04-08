@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AI agent skills for Claude Code, Cursor, Codex, and 40+ coding agents.
 
@@ -39,6 +39,7 @@ Built by [catcatcat](https://catcatcat.ai).
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
 | [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
 | [Adversary](#adversary--structured-dissent) | `/adversary` | Pressure-test decisions — steel-mans alternatives, produces a verdict |
+| [Eye](#eye--design-judgment) | `/eye` | Design judgment with taste — from a single element to a full app review |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 | [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
@@ -149,6 +150,20 @@ Produces a decision brief with load-bearing assumptions, the strongest counter-a
 | Design | Whether aesthetic serves function, edge cases |
 
 **Source:** [`skills/adversary/SKILL.md`](./skills/adversary/SKILL.md)
+
+### Eye — Design Judgment
+
+Design critique through the lens of a design director with taste — not checklists, not scores, not rubrics. Scales from micro-reviews (a single element) to full design crits (an entire app).
+
+| Scope | What happens |
+|-------|-------------|
+| `/eye this button` | Micro — quick opinion in a few sentences |
+| `/eye the hero section` | Focused — intent, judgment on relevant dimensions, direction |
+| `/eye` | Full — gut read, dimensional judgment, AI slop check, persona stress test, prioritized findings |
+
+Includes a design knowledge base that calibrates LLM blind spots: confusing competence with quality, rule-following without context, AI aesthetic bias, describing instead of judging, spacing blindness, and confusing minimalism with emptiness.
+
+**Source:** [`skills/eye/`](./skills/eye/) · [README](./skills/eye/README.md)
 
 ### Memento — Context Handoff
 

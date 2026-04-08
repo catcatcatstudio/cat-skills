@@ -1,0 +1,13 @@
+{
+  "name": "eye",
+  "description": "Design judgment — taste-driven critique with opinionated direction",
+  "version": "0.1.0",
+  "author": {
+    "name": "catcatcat",
+    "url": "https://catcatcat.ai"
+  },
+  "homepage": "https://github.com/catcatcatstudio/cat-skills",
+  "repository": "https://github.com/catcatcatstudio/cat-skills",
+  "license": "MIT",
+  "keywords": ["design", "critique", "judgment", "taste", "review", "ux"]
+}

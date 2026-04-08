@@ -3,7 +3,7 @@
 # cat-skills
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AIコーディングエージェント向けのスキルパッケージです。Claude Code、Cursor、Codex をはじめ、40以上のエージェントに対応しています。
 
@@ -38,6 +38,7 @@ AIコーディングエージェント向けのスキルパッケージです。
 | [Elevate](#elevate--エキスパート昇格) | `/elevate` | モデルを実行者からクリティカルなエキスパートアドバイザーに切り替え |
 | [Prodev](#prodev--エンジニアリング基準) | `/prodev` | エンジニアリング基準の強制。オーナーシップ、影響範囲思考、反追従性 |
 | [Adversary](#adversary--構造化された反論) | `/adversary` | 意思決定を圧力テスト。代替案を本気で主張し、判定を下す |
+| [Eye](#eye--デザインジャッジメント) | `/eye` | テイストに基づくデザイン批評。単一要素からアプリ全体のレビューまで |
 | [Memento](#memento--コンテキスト引き継ぎ) | `/memento` | セッション知識を保存し、新しいチャットへの引き継ぎブロックを生成 |
 | [Liquid Cat Physics](#liquid-cat-physics--自律ディープワークループ) | `/liquid-cat-physics` | エキスパートレンズとエンジニアリング基準を備えた自律ディープワークループ |
 | [Fortify](#fortify--テスト基盤) | `/fortify` | スタック検出、テスト導入、カバレッジ監査、ミューテーションテスト |
@@ -148,6 +149,20 @@ Claudeをシニアエンジニアとして動作させます。すべての判�
 | デザイン | 審美性が機能に奉仕しているか、エッジケース |
 
 **ソース:** [`skills/adversary/SKILL.md`](./skills/adversary/SKILL.md)
+
+### Eye — デザインジャッジメント
+
+デザインディレクターの目でインターフェースを評価するスキルです。チェックリストやスコアではなく、テイストに基づいた判断と明確な方向性を提供します。単一の要素からアプリ全体まで、対象に応じてレビューの深さが自動的に変わります。
+
+| スコープ | 動作 |
+|---------|------|
+| `/eye このボタン` | マイクロ — 数行で端的な意見 |
+| `/eye ヒーローセクション` | フォーカス — 意図の確認、関連する観点での評価、方向性 |
+| `/eye` | フル — 第一印象、多角的評価、AIスロップチェック、ペルソナテスト、優先順位付きの問題リスト |
+
+LLMのデザイン判断における盲点を補正するナレッジベースを内蔵。能力と品質の混同、文脈を無視したルール適用、AIデザインへの偏り、描写と判断の混同、スペーシングの見落とし、ミニマリズムと空虚の混同を防ぎます。
+
+**ソース:** [`skills/eye/`](./skills/eye/) · [README](./skills/eye/README.md)
 
 ### Memento — コンテキスト引き継ぎ
 
