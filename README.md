@@ -98,7 +98,14 @@ Drives software projects through a structured lifecycle: spike, design, plan, bu
 
 ### Recon — Pre-Build Intelligence
 
-Surveys best-in-class examples, common pitfalls, architecture decisions, security concerns, and user expectations BEFORE you start building. The questions a senior engineer asks in week 1 before writing any code.
+Surveys the landscape before you write any code. Adopts an expert consultant mindset — not "I googled best practices" but "here are the 5 decisions that will make or break this project, ranked by how hard they are to fix later."
+
+| Mode | What happens |
+|------|-------------|
+| `/recon` | Full landscape survey — generates `_docs/` with summary, pitfalls, architecture notes, feature expectations, security concerns |
+| `/recon [specific question]` | Focused research on one area |
+
+Generates expert questions before searching, uses parallel research agents, prioritizes primary sources (engineering blogs, postmortems, issue trackers) over listicles. Outputs an opinionated summary with the top decisions, what surprised the expert, and the biggest unknown.
 
 **Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
 
