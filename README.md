@@ -20,17 +20,62 @@ This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, 
 
 ## Quick Start
 
+**Claude Code:**
 ```bash
 npx skills add catcatcatstudio/cat-skills
 ```
 
+**Cursor:**
+```bash
+cp -r .cursor/skills your-project/.cursor/
+```
+
+**Gemini CLI:**
+```bash
+cp -r .gemini/skills your-project/.gemini/
+```
+
+**Codex CLI:**
+```bash
+cp -r .codex/skills ~/.codex/
+```
+
+**OpenCode:**
+```bash
+cp -r .opencode/skills your-project/.opencode/
+```
+
+<details>
+<summary>More platforms — Kiro, Pi, Trae, Agents</summary>
+
+**Kiro:**
+```bash
+cp -r .kiro/skills your-project/.kiro/
+```
+
+**Pi:**
+```bash
+cp -r .pi/skills your-project/.pi/
+```
+
+**Trae (International):**
+```bash
+cp -r .trae/skills ~/.trae/skills/
+```
+
+**Trae (China):**
+```bash
+cp -r .trae-cn/skills ~/.trae-cn/skills/
+```
+
+**Agents (generic):**
+```bash
+cp -r .agents/skills your-project/.agents/
+```
+
+</details>
+
 Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
-
-**Or install individually:**
-
-```
-/install catcatcatstudio/cat-skills/eye
-```
 
 ## What's Inside
 
@@ -270,6 +315,12 @@ The skills work independently, but some are designed to work together:
 **`architect` + `notebook`** — Architect writes to notebook format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top.
 
 **`liquid-cat-physics`** — The orchestrator. Embeds elevate and prodev as reference lenses, uses notebook for persistence, memento for compaction survival. One command to start, then walk away.
+
+---
+
+## Supported Tools
+
+[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai) · [Rovo Dev](https://www.atlassian.com/software/rovo)
 
 ---
 

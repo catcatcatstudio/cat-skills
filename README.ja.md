@@ -19,17 +19,62 @@ AIエージェントと共に開発・デザインする人のための日常ツ
 
 ## クイックスタート
 
+**Claude Code:**
 ```bash
 npx skills add catcatcatstudio/cat-skills
 ```
 
+**Cursor:**
+```bash
+cp -r .cursor/skills your-project/.cursor/
+```
+
+**Gemini CLI:**
+```bash
+cp -r .gemini/skills your-project/.gemini/
+```
+
+**Codex CLI:**
+```bash
+cp -r .codex/skills ~/.codex/
+```
+
+**OpenCode:**
+```bash
+cp -r .opencode/skills your-project/.opencode/
+```
+
+<details>
+<summary>その他のプラットフォーム — Kiro、Pi、Trae、Agents</summary>
+
+**Kiro:**
+```bash
+cp -r .kiro/skills your-project/.kiro/
+```
+
+**Pi:**
+```bash
+cp -r .pi/skills your-project/.pi/
+```
+
+**Trae (海外版):**
+```bash
+cp -r .trae/skills ~/.trae/skills/
+```
+
+**Trae (中国版):**
+```bash
+cp -r .trae-cn/skills ~/.trae-cn/skills/
+```
+
+**Agents (汎用):**
+```bash
+cp -r .agents/skills your-project/.agents/
+```
+
+</details>
+
 コマンドを入力して使用: `/eat`、`/architect`、`/eye`、`/prodev` など。
-
-**個別にインストールする場合:**
-
-```
-/install catcatcatstudio/cat-skills/eye
-```
 
 ## 概要
 
@@ -269,6 +314,12 @@ Claudeを自身のプロジェクトマネージャーにします。プロジ�
 **`architect` + `notebook`** — Architectはnotebook形式でネイティブに書き込みます。Notebookはその上にプロアクティブな保存、コンテキスト回復、レッスントラッキングを追加します。
 
 **`liquid-cat-physics`** — オーケストレーター。ElevateとProdevをレファレンスレンズとして組み込み、Notebookで永続化し、Mementoでコンパクション生存を担保します。一つのコマンドで起動したら、あとは任せるだけ。
+
+---
+
+## 対応ツール
+
+[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai) · [Rovo Dev](https://www.atlassian.com/software/rovo)
 
 ---
 
