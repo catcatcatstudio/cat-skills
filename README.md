@@ -6,124 +6,70 @@ English | [日本語](README.ja.md)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
-AI agent skills for Claude Code, Cursor, Codex, and 40+ coding agents.
+The daily toolkit for developers and designers who build with AI agents.
 
-Skills are self-contained instruction sets that give AI agents specialized capabilities — knowledge extraction, staged builds, autonomous work loops, testing infrastructure, and more. Each skill works independently. No dependencies between them.
+## Why cat-skills?
 
-Built by [catcatcat](https://catcatcat.ai).
+Some skills sharpen the agent — **prodev**, **elevate**, and **eye** load concrete standards and expert lenses that fix how the model thinks, builds, and judges for the entire session.
+
+Some give you superpowers for building — **recon** gives you senior-engineer research instincts before you write a line of code, **architect** gives you a structured build methodology that doesn't lose the plot, and **liquid-cat-physics** takes all of it and runs the build autonomously while you're away.
+
+And some are just useful every day — **eat** turns any YouTube video, article, or podcast into usable knowledge in seconds, **notebook** keeps your project context alive across sessions, **xray** gives you social intelligence on X.
+
+This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 13 skills, each independent, each doing one thing well.
 
 ## Quick Start
 
-1. Install all skills:
-   ```bash
-   npx skills add catcatcatstudio/cat-skills
-   ```
-2. Use any skill by typing its command (e.g. `/notebook`, `/architect`, `/eat`)
+```bash
+npx skills add catcatcatstudio/cat-skills
+```
 
-**Or install individually via Claude Code plugin:**
+Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
+
+**Or install individually:**
 
 ```
-/plugin marketplace add catcatcatstudio/cat-skills
-/plugin install notebook@catcatcat
+/install catcatcatstudio/cat-skills/eye
 ```
 
 ## What's Inside
 
+### Think — judgment, standards, dissent
+
 | Skill | Command | What it does |
 |-------|---------|-------------|
-| [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
-| [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
-| [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
-| [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — best practices, pitfalls, architecture |
-| [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
 | [Elevate](#elevate--expert-elevation) | `/elevate` | Shift the model from executor to critical expert advisor |
-| [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard enforcement — ownership, blast radius, anti-sycophancy |
+| [Prodev](#prodev--engineering-standard) | `/prodev` | Engineering standard — ownership, blast radius, anti-sycophancy |
 | [Adversary](#adversary--structured-dissent) | `/adversary` | Pressure-test decisions — steel-mans alternatives, produces a verdict |
-| [Eye](#eye--design-judgment) | `/eye` | Design judgment with taste — from a single element to a full app review |
-| [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
+| [Eye](#eye--design-judgment) | `/eye` | Design judgment with taste — from a single element to a full app |
+
+### Build — plan, research, execute
+
+| Skill | Command | What it does |
+|-------|---------|-------------|
+| [Architect](#architect--staged-build) | `/architect` | Staged build lifecycle — spike, design, plan, build |
+| [Recon](#recon--pre-build-intelligence) | `/recon` | Pre-build research — pitfalls, architecture, expert questions |
+| [Eat](#eat--knowledge-extraction) | `/eat` | Extract knowledge from any URL — YouTube, articles, podcasts, X threads |
+| [Xray](#xray--xtwitter-content-intelligence) | `/xray` | X/Twitter intelligence — scout, pulse, track, mirror, prospect |
+
+### Ship — test, persist, maintain
+
+| Skill | Command | What it does |
+|-------|---------|-------------|
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
 | [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
-| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop with expert lens, engineering standard, and confidence gating |
+| [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
+| [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
+
+### Orchestrate
+
+| Skill | Command | What it does |
+|-------|---------|-------------|
+| [Liquid Cat Physics](#liquid-cat-physics--autonomous-deep-work-loop) | `/liquid-cat-physics` | Autonomous deep-work loop — expert lens, engineering standard, confidence gating |
 
 ---
 
 ## Skills
-
-### Eat — Knowledge Extraction
-
-Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
-
-Full pipeline: download → transcribe (Whisper/Groq) → frame extraction → visual assessment → knowledge synthesis.
-
-Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
-
-| Source | Method |
-|--------|--------|
-| YouTube | Subtitles → Groq → local Whisper |
-| Instagram / TikTok / X video | yt-dlp + cookies → Whisper → frame extraction |
-| Podcast / audio | yt-dlp → Groq / Whisper |
-| X/Twitter thread | X API v2 |
-| Web article | defuddle → WebFetch fallback |
-| Local file / PDF | Direct read |
-
-**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/eat/SKILL.md#setup--dependencies).
-
-**Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
-
-### Notebook — Project Notes
-
-Prevents context loss and reasoning loops. Maintains a trail of decisions, failures, and lessons learned.
-
-| Command | What it does |
-|---------|-------------|
-| `/notebook` | Initialize or show status |
-| `/notebook save` | Write a note immediately — infers type and content |
-| `/notebook recover` | Rebuild context from existing notes |
-| `/notebook migrate` | Convert messy notes into notebook format |
-
-**Source:** [`skills/notebook/SKILL.md`](./skills/notebook/SKILL.md)
-
-### Architect — Staged Build
-
-Drives software projects through a structured lifecycle: spike, design, plan, build. Prevents the #1 AI coding failure — losing context on a big plan and missing pieces.
-
-| Phase | What happens |
-|-------|-------------|
-| 0 | Technical spike — validate riskiest constraint |
-| 1 | Design notes — one per domain, no code |
-| 1.5 | Build order — dependency graph, stage sequence |
-| 2+ | Write stages, build, verify, repeat |
-
-**Source:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
-
-### Recon — Pre-Build Intelligence
-
-Surveys the landscape before you write any code. Adopts an expert consultant mindset — not "I googled best practices" but "here are the 5 decisions that will make or break this project, ranked by how hard they are to fix later."
-
-| Mode | What happens |
-|------|-------------|
-| `/recon` | Full landscape survey — generates `_docs/` with summary, pitfalls, architecture notes, feature expectations, security concerns |
-| `/recon [specific question]` | Focused research on one area |
-
-Generates expert questions before searching, uses parallel research agents, prioritizes primary sources (engineering blogs, postmortems, issue trackers) over listicles. Outputs an opinionated summary with the top decisions, what surprised the expert, and the biggest unknown.
-
-**Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
-
-### Xray — X/Twitter Content Intelligence
-
-Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
-
-| Command | What it does |
-|---------|-------------|
-| `scout` | Reply opportunities scored by recency, engagement, and competition |
-| `pulse <lane>` | What's hot in a topic lane right now |
-| `track` | Top posts from accounts you study |
-| `mirror` | Your own accounts' performance |
-| `prospect` | Founders who just launched (client opportunities) |
-
-Includes setup interview, 8 lane presets, full-archive search, and cost tracking.
-
-**Source:** [`skills/xray/`](./skills/xray/) · [README](./skills/xray/README.md)
 
 ### Elevate — Expert Elevation
 
@@ -187,17 +133,68 @@ Includes a design knowledge base that calibrates LLM blind spots: confusing comp
 
 **Source:** [`skills/eye/`](./skills/eye/) · [README](./skills/eye/README.md)
 
-### Memento — Context Handoff
+### Architect — Staged Build
 
-Saves unsaved session knowledge to notebook, then produces a compact orientation block for fresh chats. Also includes an auto-compaction safety net — hooks that preserve and re-inject conversation context when Claude Code's context window fills up.
+Drives software projects through a structured lifecycle: spike, design, plan, build. Prevents the #1 AI coding failure — losing context on a big plan and missing pieces.
+
+| Phase | What happens |
+|-------|-------------|
+| 0 | Technical spike — validate riskiest constraint |
+| 1 | Design notes — one per domain, no code |
+| 1.5 | Build order — dependency graph, stage sequence |
+| 2+ | Write stages, build, verify, repeat |
+
+**Source:** [`skills/architect/SKILL.md`](./skills/architect/SKILL.md)
+
+### Recon — Pre-Build Intelligence
+
+Surveys the landscape before you write any code. Adopts an expert consultant mindset — not "I googled best practices" but "here are the 5 decisions that will make or break this project, ranked by how hard they are to fix later."
+
+| Mode | What happens |
+|------|-------------|
+| `/recon` | Full landscape survey — generates `_docs/` with summary, pitfalls, architecture notes, feature expectations, security concerns |
+| `/recon [specific question]` | Focused research on one area |
+
+Generates expert questions before searching, uses parallel research agents, prioritizes primary sources (engineering blogs, postmortems, issue trackers) over listicles. Outputs an opinionated summary with the top decisions, what surprised the expert, and the biggest unknown.
+
+**Source:** [`skills/recon/SKILL.md`](./skills/recon/SKILL.md)
+
+### Eat — Knowledge Extraction
+
+Pulls transferable knowledge from any URL or content — YouTube, Instagram, TikTok, X videos, podcasts, articles, X threads, PDFs.
+
+Full pipeline: download → transcribe (Whisper/Groq) → frame extraction → visual assessment → knowledge synthesis.
+
+Strips noise (ads, filler, self-promotion). Preserves signal (frameworks, methods, specific numbers, practitioner honesty).
+
+| Source | Method |
+|--------|--------|
+| YouTube | Subtitles → Groq → local Whisper |
+| Instagram / TikTok / X video | yt-dlp + cookies → Whisper → frame extraction |
+| Podcast / audio | yt-dlp → Groq / Whisper |
+| X/Twitter thread | X API v2 |
+| Web article | defuddle → WebFetch fallback |
+| Local file / PDF | Direct read |
+
+**Requires:** yt-dlp, ffmpeg. **Transcription:** whisper (local) or GROQ_API_KEY. **Optional:** defuddle, X_BEARER_TOKEN, browser cookies for social platforms. See [setup instructions](./skills/eat/SKILL.md#setup--dependencies).
+
+**Source:** [`skills/eat/SKILL.md`](./skills/eat/SKILL.md)
+
+### Xray — X/Twitter Content Intelligence
+
+Graph-based X intelligence. Build a social graph of accounts you engage with, track, and study — then scout for reply opportunities, pulse-check topic lanes, track competitors, mirror your own performance, and prospect for clients.
 
 | Command | What it does |
 |---------|-------------|
-| `/memento` | Notebook triage + generate handoff |
-| `/memento auto on` | Enable auto-compaction safety net |
-| `/memento auto off` | Disable auto mode |
+| `scout` | Reply opportunities scored by recency, engagement, and competition |
+| `pulse <lane>` | What's hot in a topic lane right now |
+| `track` | Top posts from accounts you study |
+| `mirror` | Your own accounts' performance |
+| `prospect` | Founders who just launched (client opportunities) |
 
-**Source:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
+Includes setup interview, 8 lane presets, full-archive search, and cost tracking.
+
+**Source:** [`skills/xray/`](./skills/xray/) · [README](./skills/xray/README.md)
 
 ### Fortify — Testing Infrastructure
 
@@ -223,6 +220,31 @@ Scans a codebase for stub implementations, fake code, and dead wiring — functi
 
 **Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
 
+### Notebook — Project Notes
+
+Prevents context loss and reasoning loops. Maintains a trail of decisions, failures, and lessons learned.
+
+| Command | What it does |
+|---------|-------------|
+| `/notebook` | Initialize or show status |
+| `/notebook save` | Write a note immediately — infers type and content |
+| `/notebook recover` | Rebuild context from existing notes |
+| `/notebook migrate` | Convert messy notes into notebook format |
+
+**Source:** [`skills/notebook/SKILL.md`](./skills/notebook/SKILL.md)
+
+### Memento — Context Handoff
+
+Saves unsaved session knowledge to notebook, then produces a compact orientation block for fresh chats. Also includes an auto-compaction safety net — hooks that preserve and re-inject conversation context when Claude Code's context window fills up.
+
+| Command | What it does |
+|---------|-------------|
+| `/memento` | Notebook triage + generate handoff |
+| `/memento auto on` | Enable auto-compaction safety net |
+| `/memento auto off` | Disable auto mode |
+
+**Source:** [`skills/memento/`](./skills/memento/) · [README](./skills/memento/README.md)
+
 ### Liquid Cat Physics — Autonomous Deep-Work Loop
 
 Turns Claude into its own project manager. Reads project state, applies an expert lens to decide what to work on, enforces senior-engineer execution standards on every line of code, gates every action through a confidence check, and persists everything. Loops every 10 minutes.
@@ -239,11 +261,15 @@ Two embedded lenses drive quality: the **elevate lens** picks the smartest next 
 
 ---
 
-## Recommended Pairings
+## How They Compose
 
-**`architect` + `notebook`** — Architect writes to notebook format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top. They share the same storage format but work independently.
+The skills work independently, but some are designed to work together:
 
-**`liquid-cat-physics` + `memento`** — LCP handles persistence across sessions (PROJECT_STATE.md, notebook). Memento handles persistence across compactions (conversation trace). Together: a perpetual autonomous loop with no context loss at any boundary.
+**`elevate` + `prodev` + `eye`** — Three lenses for three concerns. Elevate decides what to work on. Prodev governs how to build it. Eye judges whether it looks right. Each sharpens a different axis.
+
+**`architect` + `notebook`** — Architect writes to notebook format natively. Notebook adds proactive saves, context recovery, and lesson tracking on top.
+
+**`liquid-cat-physics`** — The orchestrator. Embeds elevate and prodev as reference lenses, uses notebook for persistence, memento for compaction survival. One command to start, then walk away.
 
 ---
 
