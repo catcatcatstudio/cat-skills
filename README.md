@@ -18,62 +18,78 @@ And some are just useful every day — **eat** turns any YouTube video, article,
 
 This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 13 skills, each independent, each doing one thing well.
 
-## Quick Start
+## Installation
 
-**Claude Code:**
+### Claude Code
+
 ```bash
 npx skills add catcatcatstudio/cat-skills
 ```
 
-**Cursor:**
+### Cursor
+
 ```bash
-cp -r .cursor/skills your-project/.cursor/
+cp -r .cursor your-project/
 ```
 
-**Gemini CLI:**
+> **Note:** Cursor skills require setup:
+> 1. Switch to Nightly channel in Cursor Settings → Beta
+> 2. Enable Agent Skills in Cursor Settings → Rules
+>
+> [Learn more about Cursor skills](https://cursor.com/docs/context/skills)
+
+### Gemini CLI
+
 ```bash
-cp -r .gemini/skills your-project/.gemini/
+cp -r .gemini your-project/
 ```
 
-**Codex CLI:**
+> **Note:** Gemini CLI skills require setup:
+> 1. Install preview version: `npm i -g @google/gemini-cli@preview`
+> 2. Run `/settings` and enable "Skills"
+> 3. Run `/skills list` to verify installation
+>
+> [Learn more about Gemini CLI skills](https://geminicli.com/docs/cli/skills/)
+
+### Codex CLI
+
 ```bash
-cp -r .codex/skills ~/.codex/
+cp -r .codex/* ~/.codex/
 ```
 
-**OpenCode:**
+### OpenCode
+
 ```bash
-cp -r .opencode/skills your-project/.opencode/
+cp -r .opencode your-project/
 ```
 
-<details>
-<summary>More platforms — Kiro, Pi, Trae, Agents</summary>
+### Kiro
 
-**Kiro:**
 ```bash
-cp -r .kiro/skills your-project/.kiro/
+cp -r .kiro your-project/
 ```
 
-**Pi:**
+### Pi
+
 ```bash
-cp -r .pi/skills your-project/.pi/
+cp -r .pi your-project/
 ```
 
-**Trae (International):**
+### Trae
+
 ```bash
-cp -r .trae/skills ~/.trae/skills/
+# International
+cp -r .trae/skills/* ~/.trae/skills/
+
+# China
+cp -r .trae-cn/skills/* ~/.trae-cn/skills/
 ```
 
-**Trae (China):**
-```bash
-cp -r .trae-cn/skills ~/.trae-cn/skills/
-```
-
-**Agents (generic):**
-```bash
-cp -r .agents/skills your-project/.agents/
-```
-
-</details>
+> **Note:** Trae has two versions with different config directories:
+> - **International**: `~/.trae/skills/`
+> - **China**: `~/.trae-cn/skills/`
+>
+> After copying, restart Trae IDE to activate the skills.
 
 Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
 
@@ -320,7 +336,7 @@ The skills work independently, but some are designed to work together:
 
 ## Supported Tools
 
-[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai) · [Rovo Dev](https://www.atlassian.com/software/rovo)
+[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai)
 
 ---
 

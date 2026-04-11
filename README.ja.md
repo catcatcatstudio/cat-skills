@@ -17,62 +17,78 @@ AIエージェントと共に開発・デザインする人のための日常ツ
 
 これは[catcatcat](https://catcatcat.ai)が日々のデザインと開発で実際に使っているツールキット。13のスキル、それぞれ独立、それぞれが一つのことをうまくやる。
 
-## クイックスタート
+## インストール
 
-**Claude Code:**
+### Claude Code
+
 ```bash
 npx skills add catcatcatstudio/cat-skills
 ```
 
-**Cursor:**
+### Cursor
+
 ```bash
-cp -r .cursor/skills your-project/.cursor/
+cp -r .cursor your-project/
 ```
 
-**Gemini CLI:**
+> **注意:** Cursorのスキル機能にはセットアップが必要です：
+> 1. Cursor設定 → BetaでNightlyチャンネルに切り替え
+> 2. Cursor設定 → RulesでAgent Skillsを有効化
+>
+> [Cursorスキルの詳細](https://cursor.com/docs/context/skills)
+
+### Gemini CLI
+
 ```bash
-cp -r .gemini/skills your-project/.gemini/
+cp -r .gemini your-project/
 ```
 
-**Codex CLI:**
+> **注意:** Gemini CLIのスキル機能にはセットアップが必要です：
+> 1. プレビュー版をインストール: `npm i -g @google/gemini-cli@preview`
+> 2. `/settings` でスキルを有効化
+> 3. `/skills list` でインストールを確認
+>
+> [Gemini CLIスキルの詳細](https://geminicli.com/docs/cli/skills/)
+
+### Codex CLI
+
 ```bash
-cp -r .codex/skills ~/.codex/
+cp -r .codex/* ~/.codex/
 ```
 
-**OpenCode:**
+### OpenCode
+
 ```bash
-cp -r .opencode/skills your-project/.opencode/
+cp -r .opencode your-project/
 ```
 
-<details>
-<summary>その他のプラットフォーム — Kiro、Pi、Trae、Agents</summary>
+### Kiro
 
-**Kiro:**
 ```bash
-cp -r .kiro/skills your-project/.kiro/
+cp -r .kiro your-project/
 ```
 
-**Pi:**
+### Pi
+
 ```bash
-cp -r .pi/skills your-project/.pi/
+cp -r .pi your-project/
 ```
 
-**Trae (海外版):**
+### Trae
+
 ```bash
-cp -r .trae/skills ~/.trae/skills/
+# 海外版
+cp -r .trae/skills/* ~/.trae/skills/
+
+# 中国版
+cp -r .trae-cn/skills/* ~/.trae-cn/skills/
 ```
 
-**Trae (中国版):**
-```bash
-cp -r .trae-cn/skills ~/.trae-cn/skills/
-```
-
-**Agents (汎用):**
-```bash
-cp -r .agents/skills your-project/.agents/
-```
-
-</details>
+> **注意:** Traeには2つのバージョンがあり、設定ディレクトリが異なります：
+> - **海外版**: `~/.trae/skills/`
+> - **中国版**: `~/.trae-cn/skills/`
+>
+> コピー後、Trae IDEを再起動してスキルを有効化してください。
 
 コマンドを入力して使用: `/eat`、`/architect`、`/eye`、`/prodev` など。
 
@@ -319,7 +335,7 @@ Claudeを自身のプロジェクトマネージャーにします。プロジ�
 
 ## 対応ツール
 
-[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai) · [Rovo Dev](https://www.atlassian.com/software/rovo)
+[Claude Code](https://claude.ai/code) · [Cursor](https://cursor.com) · [Gemini CLI](https://github.com/google-gemini/gemini-cli) · [Codex CLI](https://github.com/openai/codex) · [OpenCode](https://opencode.ai) · [Kiro](https://kiro.dev) · [Pi](https://pi.dev) · [Trae](https://trae.ai)
 
 ---
 
