@@ -68,6 +68,12 @@
       "source": "./skills/fortify",
       "description": "Testing infrastructure, coverage, and verified test quality — detects stack, writes tests, runs mutation testing",
       "version": "1.0.0"
+    },
+    {
+      "name": "vet",
+      "source": "./skills/vet",
+      "description": "Thorough codebase investigation — maps architecture, finds every problem, plans fixes, executes collaboratively",
+      "version": "1.0.0"
     }
   ]
 }

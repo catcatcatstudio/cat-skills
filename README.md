@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 The daily toolkit for developers and designers who build with AI agents.
 
@@ -16,7 +16,7 @@ Some give you superpowers for building — **recon** gives you senior-engineer r
 
 And some are just useful every day — **eat** turns any YouTube video, article, or podcast into usable knowledge in seconds, **notebook** keeps your project context alive across sessions, **xray** gives you social intelligence on X.
 
-This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 12 skills, each independent, each doing one thing well.
+This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 13 skills, each independent, each doing one thing well.
 
 ## Installation
 
@@ -118,6 +118,7 @@ Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
 | Skill | Command | What it does |
 |-------|---------|-------------|
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
+| [Vet](#vet--codebase-investigation) | `/vet` | Thorough codebase investigation — find every problem, plan fixes, execute |
 | [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 
@@ -267,6 +268,22 @@ Detects your stack, installs the complete testing ecosystem, audits code for unt
 | `/fortify` | Full setup + write + verify |
 
 **Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
+
+### Vet — Codebase Investigation
+
+Opens a project, maps the architecture, investigates every layer for real problems — structural issues, logic bugs, security gaps, reliability holes, performance traps, stubs, AI slop, dead code — then builds a prioritized fix plan and executes collaboratively. Carries its own engineering standard (internalized from prodev) so it operates at senior-engineer judgment without needing a separate lens loaded.
+
+| Phase | What happens |
+|-------|-------------|
+| Map | Read project docs, manifests, structure. Build architecture mental model. |
+| Investigate | Two passes — survey across 6 categories, then deep-dive to verify every signal with evidence |
+| Report | Prioritized findings (P0-P3), each with file:line, code snippet, why it matters, concrete fix |
+| Plan | Group fixes into dependency-ordered batches, research where needed, get user alignment |
+| Execute | Fix batch by batch, verify each, check in on judgment calls |
+
+Six scan categories: **Structural** (architecture, coupling, god files, legacy paths), **Correctness** (logic bugs, stubs, edge cases, race conditions), **Security** (injection, auth gaps, data exposure), **Reliability** (error handling, defensive code, resource leaks), **Performance** (N+1, unbounded ops, hot paths), **Hygiene** (dead code, type drift, AI comment noise).
+
+**Source:** [`skills/vet/SKILL.md`](./skills/vet/SKILL.md)
 
 ### Notebook — Project Notes
 
