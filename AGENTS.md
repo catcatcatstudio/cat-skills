@@ -16,7 +16,6 @@ AI agent skills by catcatcat. Each skill is a self-contained instruction set in 
 | memento | `/memento` | Context handoff for fresh sessions |
 | liquid-cat-physics | `/liquid-cat-physics` | Autonomous deep-work loop — expert lens + prodev standard, confidence gating, persists, loops |
 | fortify | `/fortify` | Testing infrastructure, coverage, and mutation testing |
-| no-stubs | `/no-stubs` | Scan codebase for stub implementations and dead wiring |
 
 ## Reference Files
 

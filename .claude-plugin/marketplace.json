@@ -68,12 +68,6 @@
       "source": "./skills/fortify",
       "description": "Testing infrastructure, coverage, and verified test quality — detects stack, writes tests, runs mutation testing",
       "version": "1.0.0"
-    },
-    {
-      "name": "no-stubs",
-      "source": "./skills/no-stubs",
-      "description": "Scan codebase for stub implementations, fake code, and dead wiring — triage and fix",
-      "version": "1.0.0"
     }
   ]
 }

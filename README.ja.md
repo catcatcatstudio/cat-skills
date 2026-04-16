@@ -3,7 +3,7 @@
 # cat-skills
 
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 AIエージェントと共に開発・デザインする人のための日常ツールキット。
 
@@ -15,7 +15,7 @@ AIエージェントと共に開発・デザインする人のための日常ツ
 
 そして日常的に便利なスキルがある — **eat** はYouTube動画、記事、ポッドキャストを数秒で使えるナレッジに変換し、**notebook** はセッションをまたいでプロジェクトのコンテキストを維持し、**xray** はX上のソーシャルインテリジェンスを提供する。
 
-これは[catcatcat](https://catcatcat.ai)が日々のデザインと開発で実際に使っているツールキット。13のスキル、それぞれ独立、それぞれが一つのことをうまくやる。
+これは[catcatcat](https://catcatcat.ai)が日々のデザインと開発で実際に使っているツールキット。12のスキル、それぞれ独立、それぞれが一つのことをうまくやる。
 
 ## インストール
 
@@ -117,7 +117,6 @@ cp -r .trae-cn/skills/* ~/.trae-cn/skills/
 | スキル | コマンド | 機能 |
 |-------|---------|------|
 | [Fortify](#fortify--テスト基盤) | `/fortify` | スタック検出、テスト導入、カバレッジ監査、ミューテーションテスト |
-| [No-Stubs](#no-stubs--スタブ検出と除去) | `/no-stubs` | スタブ実装とデッドコードを検出して修正 |
 | [Notebook](#notebook--プロジェクトノート) | `/notebook` | プロジェクトノート。コンテキスト消失と推論ループを防止 |
 | [Memento](#memento--コンテキスト引き継ぎ) | `/memento` | セッション知識を保存し、新しいチャットへの引き継ぎブロックを生成 |
 
@@ -267,18 +266,6 @@ LLMのデザイン判断における盲点を補正するナレッジベース�
 | `/fortify` | フルセットアップ + テスト作成 + 検証 |
 
 **ソース:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
-
-### No-Stubs — スタブ検出と除去
-
-コードベースからスタブ実装、フェイクコード、デッドワイヤリングをスキャンします。ハードコードされた戻り値、TODOプレースホルダー、未接続のモジュール、常にパスする認証などを検出し、影響範囲でトリアージした上で、本物の実装に置き換えるかクリーンに削除します。
-
-| コマンド | 機能 |
-|---------|------|
-| `/no-stubs scan` | 検出とレポートのみ |
-| `/no-stubs fix` | 検出されたスタブをすべて修正 |
-| `/no-stubs` | フルスキャン + 修正 |
-
-**ソース:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
 
 ### Notebook — プロジェクトノート
 

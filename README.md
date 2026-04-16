@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-12-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 The daily toolkit for developers and designers who build with AI agents.
 
@@ -16,7 +16,7 @@ Some give you superpowers for building — **recon** gives you senior-engineer r
 
 And some are just useful every day — **eat** turns any YouTube video, article, or podcast into usable knowledge in seconds, **notebook** keeps your project context alive across sessions, **xray** gives you social intelligence on X.
 
-This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 13 skills, each independent, each doing one thing well.
+This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 12 skills, each independent, each doing one thing well.
 
 ## Installation
 
@@ -118,7 +118,6 @@ Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
 | Skill | Command | What it does |
 |-------|---------|-------------|
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
-| [No-Stubs](#no-stubs--stub-detection--removal) | `/no-stubs` | Scan for stub implementations and dead wiring, then fix |
 | [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 
@@ -268,18 +267,6 @@ Detects your stack, installs the complete testing ecosystem, audits code for unt
 | `/fortify` | Full setup + write + verify |
 
 **Source:** [`skills/fortify/SKILL.md`](./skills/fortify/SKILL.md)
-
-### No-Stubs — Stub Detection & Removal
-
-Scans a codebase for stub implementations, fake code, and dead wiring — functions that pretend to work (hardcoded returns, TODO placeholders, unconnected modules, auth that always passes). Triages by blast radius, then implements the real thing or cleanly removes the dead code.
-
-| Command | What it does |
-|---------|-------------|
-| `/no-stubs scan` | Detect and report only |
-| `/no-stubs fix` | Fix all found stubs |
-| `/no-stubs` | Full scan + fix |
-
-**Source:** [`skills/no-stubs/SKILL.md`](./skills/no-stubs/SKILL.md)
 
 ### Notebook — Project Notes
 
