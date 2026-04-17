@@ -1,8 +1,14 @@
 # Research Categories
 
-Adapt per project type. Not every category applies — a CLI tool doesn't need UX pattern research, a static site doesn't need scaling analysis. Pick what's relevant.
+Adapt per project type. Not every category applies — a CLI tool doesn't need UX pattern research, a static site doesn't need scaling analysis. Pick what's relevant to the project's **scope** (Phase 0 — scale, stakes, timeline).
 
-**Priority order by cost-of-being-wrong:** Categories 2 and 4 first (hardest to fix later), then 1 and 3 (adjustable), then 5 and 6 (supplementary).
+**Priority by scope, not hardcoded:**
+
+- **Prototype scope:** Best examples (1), Strategic edges (7), User expectations — table stakes only (3). Skip pitfalls-at-scale (2), security deep-dives (5), architecture-regret surveys (4), anti-patterns (6). Those are premature.
+- **Production scope:** Pitfalls (2), Architecture (4), Strategic edges (7), Best examples (1), User expectations (3). Balanced — trap and edge categories get equal research effort.
+- **Enterprise scope:** All categories including security (5) and anti-patterns (6).
+
+**Balance rule:** trap-oriented categories (2, 4, 5, 6) and upside-oriented categories (1, 3, 7) get equal research effort. No "pitfalls first" default — scope determines what applies, and traps and edges research in parallel.
 
 ---
 
@@ -96,3 +102,23 @@ Questions to research:
 - What third-party dependencies become regrets?
 
 Search framing: Look for "why we removed [feature]" posts, framework migration stories, and retrospectives from failed projects in this space.
+
+---
+
+## 7. Strategic Edges and Outlier Moves
+
+What could make this project a category outlier rather than a me-too. **Equal weight to pitfall research** — this is the offensive counterpart.
+
+Questions to research:
+- What do the top 1% in this category do differently? (Not just features — positioning, architecture, distribution, polish, pricing, community.)
+- What assumptions does the category still share that are ripe to break?
+- What capability just became cheap (new primitive, new model, new pattern, new API) that competitors haven't adopted?
+- What cross-pollination from adjacent domains hasn't been applied here yet?
+- Where is execution weak across the category (speed, polish, copy, onboarding, pricing, distribution, community, docs)?
+- What's the "V2 of this category" — what just became possible that wasn't a year ago?
+- What did category leaders ship first that seemed risky but paid off? (They took the shot others didn't — what was the shot?)
+- What's the boring part everyone does the same way, where differentiation is actually possible?
+
+Search framing: "how [leader] differentiated from [incumbents]", "what made [X] category-defining", "[category]'s unsolved problems", "[adjacent-domain] patterns applied to [target-domain]". Case studies of category leaders are gold — focus on how they positioned, what they built first, what they deferred, what they did that seemed unfashionable at the time.
+
+Scope note: edge research ambition should match project scope. Weekend prototype → the edges are "what makes this version noticeably better than existing quick tools." Production → category-outlier positioning. Enterprise → platform-level differentiation.
