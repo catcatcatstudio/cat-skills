@@ -2,15 +2,11 @@
 name: fortify
 status: published
 description: >
-  Testing infrastructure, test coverage, and verified test quality for any project. Detects
-  the stack, installs the complete testing ecosystem, audits code for untested critical paths,
-  writes thorough tests weighted toward error paths, then RUNS the tests and VERIFIES they
-  catch real bugs through mutation testing. Works on new and existing projects. Use when:
-  (1) user says "/fortify", (2) user wants to add testing to a project, (3) user says
-  "add tests", "set up testing", "I need tests", "test this", (4) user wants to audit
-  test coverage or find untested code, (5) user has tests that are broken or incomplete.
-  NOT for: improving prompt quality (that's eval optimization), reviewing build plans
-  (that's /architect), or running existing tests (just run them directly).
+  Testing infrastructure, coverage, and verified test quality for any project. Detects
+  stack, installs testing ecosystem, audits untested critical paths, writes thorough tests
+  weighted toward error paths, runs them, verifies via mutation testing. Use when user
+  says '/fortify', 'add tests', 'set up testing', 'I need tests', 'test this', or wants to
+  audit coverage. NOT for: running existing tests directly or improving prompt quality.
 user_invocable: true
 trigger: /fortify
 argument-hint: "[setup | check | full]"

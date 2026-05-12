@@ -2,18 +2,12 @@
 name: liquid-cat-physics
 status: published
 description: >
-  Autonomous deep-work agent loop for driving projects forward with strategic intelligence.
-  Each invocation performs one intelligent iteration: reads project state, assesses what's needed,
-  applies critical expert thinking, does research when uncertain, executes one focused unit of
-  work, and persists everything to notebook + PROJECT_STATE.md. Automatically sets up a /loop
-  cron on first run (default 10m). Includes a three-tier confidence gate (GREEN/YELLOW/RED) that
-  prevents the agent from acting when it should pause for human input.
-  Use ONLY when the user explicitly invokes the command: "/liquid-cat-physics" or "lcp".
-  Do NOT trigger on general phrases like "autonomous build", "deep work loop", or "drive this
-  project forward" — those are not invocations of this skill.
-  NOT for: one-off tasks, quick fixes, tasks without a project structure, or projects without
-  clear goals. If the task is small enough to build in one shot without planning, just build it
-  directly — don't force the methodology.
+  Autonomous deep-work agent loop for driving projects forward. Each invocation: reads
+  project state, applies critical expert thinking, executes one focused unit of work,
+  persists to notebook + PROJECT_STATE.md. Sets up /loop cron on first run (default 10m).
+  Three-tier confidence gate (GREEN/YELLOW/RED) blocks action when human input is needed.
+  Invoke ONLY via /liquid-cat-physics or 'lcp' — do NOT trigger on 'autonomous build' or
+  'deep work loop'.
 argument-hint: "[<interval>] [status | stop | reset]"
 ---
 

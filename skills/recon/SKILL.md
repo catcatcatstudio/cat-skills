@@ -2,19 +2,13 @@
 name: recon
 status: published
 description: >
-  Pre-build decision intelligence for any project. Produces a single opinionated decision brief —
-  the output a senior consultant would give in week 1 before scope, stack, or approach are locked.
-  Surfaces the traps that will cost you AND the edges that will make this an outlier — both
-  calibrated to the project's actual scope (prototype vs production vs enterprise). Not a
-  research report. A ranked decision brief.
-  Use when: (1) user says "/recon", "what should I watch out for building X", "research best
-  practices for X", "where's the edge building X", "what do good [X] projects do", "common mistakes
-  with X", (2) user is about to start a new project and hasn't done research yet, (3) user describes
-  a project idea and asks for advice before building, (4) user mentions a stack or category they
-  haven't worked with before, (5) mid-build when hitting an area of genuine uncertainty about the domain.
-  NOT for: debugging a specific bug (just debug it), researching a single library's API (just read docs),
-  extracting knowledge from a specific URL (that's /eat), post-build optimization (that's /fortify),
-  architecture planning (that's /architect).
+  Pre-build decision intelligence. Produces opinionated decision brief — the senior-
+  consultant week-1 output before scope, stack, or approach are locked. Surfaces traps and
+  edges, calibrated to project scope (prototype vs production vs enterprise). Use when
+  user says '/recon', 'what to watch out for building X', 'where's the edge', 'common
+  mistakes with X', starts a new project, or hits domain uncertainty mid-build. NOT for:
+  debugging, single-API research, URL extraction (/eat), or post-build optimization
+  (/fortify).
 ---
 
 # /recon — Pre-Build Decision Intelligence
