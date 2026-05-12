@@ -2,12 +2,10 @@
 name: adversary
 status: published
 description: >
-  Structured dissent skill. Takes a decision, plan, approach, or piece of work and pressure-tests it
-  through adversarial analysis — not generic critique, but a concrete alternative argued at full strength.
-  Articulates the case FOR the current approach, then spawns an adversary subagent to steel-man the
-  best alternative, then synthesizes a decision brief with a mandatory verdict.
-  Use ONLY when the user explicitly invokes "/adversary" — with or without additional context.
-  Do NOT trigger on phrases like "what do you think" or "any concerns" without the /adversary command.
+  Adversarial pressure-test of a decision, plan, or piece of work. Articulates the case
+  FOR the current approach, then spawns a subagent to steel-man the best alternative,
+  returns a synthesis with mandatory verdict. Invoke ONLY via /adversary — do NOT trigger
+  on 'what do you think' or 'any concerns'.
 argument-hint: "[decision, plan, approach, or strategy to pressure-test — or nothing to pull from context]"
 ---
 

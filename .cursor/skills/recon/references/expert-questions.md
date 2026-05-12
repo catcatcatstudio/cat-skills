@@ -2,6 +2,27 @@
 
 These are starting points. Adapt and extend based on the specific project. The goal is to generate questions a consultant who's built 10 of these would ask — not generic checklist items.
 
+Recon uses two balanced question banks: **trap questions** (downside — what breaks, what's irreversible) and **edge questions** (upside — where the outlier move is). The project-type templates below are mostly trap questions. The strategist block below applies universally as the edge bank.
+
+---
+
+## Strategist questions (all project types)
+
+Apply these alongside the project-type-specific trap questions below. The trap questions surface what breaks. These surface where the edge is. Equal weight.
+
+- What do the top 1% in this category do that the rest don't? (Not just features — approaches, architecture choices, positioning, distribution, polish.)
+- What assumption does everyone in this category still share that's ripe to break?
+- What capability just became cheap (new primitive, new model, new pattern, new API) that competitors haven't adopted yet?
+- What's the cross-pollination from an adjacent domain that nobody has applied here?
+- Where is everyone's execution weak across the category? (speed, polish, copy, onboarding, pricing, distribution, community, docs)
+- What's the "obvious" move in this category that's unfashionable or uncomfortable, so nobody makes it?
+- What was a category-defining move in an adjacent space in the last 2 years that hasn't crossed over yet?
+- What would the "V2 of this category" look like — and what just became possible that makes it feasible now?
+- What's the boring part everyone does the same way — where is there actually differentiation possible?
+- What did category leaders ship first that seemed risky but paid off? (They took the shot others didn't — what was the shot?)
+
+**Note:** filter these against the project's scope (Phase 0). Edge questions aimed at category-defining outcomes don't apply to a weekend prototype. Adapt ambition to scope.
+
 ---
 
 ## Web Application (SaaS, Dashboard, Tool)

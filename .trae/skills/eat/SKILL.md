@@ -2,12 +2,10 @@
 name: eat
 status: published
 description: >
-  Extract knowledge, frameworks, and methodologies from any URL or content.
-  Use when: (1) user says "/eat", "eat this", "eat from",
-  (2) user shares a URL or file and wants the key insights pulled out,
-  (3) user wants to learn from a video, article, or podcast without reading/watching the whole thing.
-  NOT for: summarization, news digests, or content that doesn't contain transferable knowledge.
-  Requires: yt-dlp (for YouTube/video/audio), whisper or GROQ_API_KEY (for transcription), ffmpeg (for frame/audio extraction). Optional: X_BEARER_TOKEN (X/Twitter threads), defuddle (cleaner article extraction), browser cookies (Instagram/TikTok/X video access).
+  Extract knowledge, frameworks, and methodologies from a URL, file, video, article, or
+  podcast. Use when user says '/eat', 'eat this', 'eat from', shares a URL/file for
+  insights, or wants to learn from a video/article without reading the whole thing. NOT
+  for summarization or news digests. Requires yt-dlp, whisper or GROQ_API_KEY, ffmpeg.
 user_invocable: true
 trigger: /eat
 arguments:
@@ -86,20 +84,55 @@ yt-dlp handles most audio URLs natively. Use Groq transcription (requires GROQ_A
 
 ---
 
-**X/Twitter thread** (x.com or twitter.com):
+**X/Twitter** (x.com or twitter.com):
 
-X blocks all unauthenticated access. Requires X_BEARER_TOKEN in environment.
-X API uses pay-per-use credits — each call costs credits from your balance.
+**The X API bearer token costs money per call. Do not use it unless free methods fail.** Free methods cover ~95% of X content. Try them in order:
 
-Run `scripts/fetch_twitter.sh <url>` — fetches the thread via X API v2, filters to author tweets, outputs in chronological order.
+### DEFAULT: Free methods (no auth, no cost)
 
-If X_BEARER_TOKEN is not set: ask the user to paste the thread text directly.
-"X requires a paid API for access. Paste the thread text and I'll extract from that."
+**Step 1 — Syndication API for any tweet URL.** Unauthenticated, free, returns full tweet JSON.
 
-If the thread is older than 7 days (search returns empty): ask the user to paste the thread text.
-"This thread is older than 7 days — X's search API can't reach it. Paste the thread text and I'll extract from that."
+```bash
+# Extract tweet ID — the last numeric segment of the URL
+curl -s "https://cdn.syndication.twimg.com/tweet-result?id=<TWEET_ID>&token=a"
+```
 
-Reconstruct thread as sequential blockquotes before extracting.
+Read from the JSON:
+- `text` — tweet body
+- `entities.urls[].expanded_url` — any linked URLs (article URLs, external links)
+- `article` block (present iff the tweet IS or LINKS an X Article) — has `rest_id`, `title`, `preview_text`
+
+If the tweet is just a short post or link-share, you're done. Extract from `text` + follow the linked URL with the appropriate method (defuddle for articles, /eat recursively for X Articles, etc).
+
+**Step 2 — Browser for X Article bodies.** Syndication gives article metadata only, not the body. yt-dlp 404s. defuddle 404s. Curl returns JS shell. The only working path is the browser tool:
+
+```
+tabs_context_mcp (createIfEmpty:true) →
+navigate to https://x.com/i/article/<ARTICLE_ID> →
+wait ~3s for React hydration (setTimeout 3000 inside javascript_tool) →
+javascript_tool: document.body.innerText
+```
+
+`javascript_tool` truncates around ~12K chars per result. For long articles, get the length first then slice in chunks:
+```js
+document.body.innerText.length            // get total length
+document.body.innerText.slice(0, 11000)
+document.body.innerText.slice(11000, 22000)
+// ...
+```
+
+Strip X chrome from each chunk: "To view keyboard shortcuts…", author handle line, follow button, reply/repost/like counts.
+
+**Step 3 — Browser for multi-tweet threads** (when syndication only gives the root and you need replies). Navigate the browser to the tweet URL, wait for hydration, then JS-extract the thread DOM. Same chunking pattern as articles.
+
+### LAST RESORT: Paid X API v2 (costs credits)
+
+Only if free methods fail (rare — usually a private/protected account or a deleted tweet that's still cached elsewhere). `scripts/fetch_twitter.sh` uses the paid API. Requires `X_BEARER_TOKEN` in the parent shell env — the `secret-guard.sh` hook blocks sourcing `~/.env.keys` from a Bash subshell, so this only works if the token is already exported. Also limited to threads < 7 days old (search API window).
+
+**Before falling back to the API, tell the user you're about to spend credits and confirm.**
+
+### LAST LAST RESORT
+Ask the user to paste the thread text. Reconstruct as sequential blockquotes before extracting.
 
 ---
 

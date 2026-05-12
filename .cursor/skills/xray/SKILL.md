@@ -2,16 +2,12 @@
 name: xray
 status: published
 description: >
-  X/Twitter content intelligence with a social graph. Scout for reply
-  opportunities, pulse-check topic lanes, track competitors, mirror your own
-  accounts, prospect for clients. Graph-first design — builds around the
-  accounts and topics YOU care about, not generic search.
-  Use when: (1) user says "xray", "x research", "search x", "what's happening on x",
-  "scout", "pulse", "track", "mirror", "prospect", "/xray",
-  (2) user needs real-time X discourse on a topic,
-  (3) user wants engagement opportunities or content ideas,
-  (4) user wants competitive intel on tracked accounts.
-  NOT for: posting tweets, account management, or analytics dashboards.
+  X/Twitter content intelligence with a social graph. Scout reply opportunities, pulse-
+  check topic lanes, track competitors, mirror your accounts, prospect clients. Graph-
+  first — built around accounts and topics YOU care about, not generic search. Use when
+  user says 'xray', 'x research', 'search x', 'scout', 'pulse', 'track', 'mirror',
+  'prospect', '/xray', or needs real-time X discourse / engagement opportunities. NOT for:
+  posting tweets or analytics dashboards.
 user_invocable: true
 trigger: /xray
 argument-hint: "[scout|pulse <lane>|track|mirror|prospect|search <query>|setup]"
@@ -182,10 +178,15 @@ Options:
 ### thread / profile / tweet
 
 ```bash
-bun run xray.ts thread <tweet_id>        # Full conversation
-bun run xray.ts profile <username>       # Recent posts + bio
-bun run xray.ts tweet <tweet_id>         # Single tweet
+bun run xray.ts tweet <tweet_id_or_url>           # Single tweet (FREE via syndication)
+bun run xray.ts thread <tweet_id_or_url>          # Root only, FREE
+bun run xray.ts thread <tweet_id_or_url> --replies  # Fetch replies (paid API)
+bun run xray.ts profile <username>                # Recent posts + bio (paid API)
 ```
+
+**`tweet` and `thread` default to the free path.** They hit `cdn.syndication.twimg.com` first — no auth, no cost, accepts a tweet URL or bare ID. Only fall back to the paid X API if syndication 404s (deleted/protected tweets), or you pass `--paid` to force it. `thread --replies` still costs API credits because reply fan-out requires `conversation_id` search, which syndication can't do.
+
+`profile` still uses the paid API — there's no free way to list a user's recent posts.
 
 ## Deep Research Loop
 

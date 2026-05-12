@@ -2,12 +2,11 @@
 name: elevate
 status: published
 description: >
-  Meta-cognitive skill that shifts the model from compliant executor to critical expert advisor.
-  Identifies the domain, adopts top-tier expert perspective, understands the PURPOSE behind the work,
-  and produces ranked proposals to elevate the current task, project, or output.
-  Use ONLY when the user explicitly invokes "/elevate" — with or without additional context.
-  Do NOT trigger on phrases like "make this better" or "what am I missing" without the /elevate command.
-  Works across all domains: UI/UX design, copywriting, architecture, project planning, code, strategy, branding, etc.
+  Shifts the model from compliant executor to critical expert advisor. Identifies the
+  domain, adopts top-tier expert perspective, understands the PURPOSE, returns ranked
+  proposals to elevate the work. Works across UI/UX, copy, architecture, planning, code,
+  strategy, branding. Invoke ONLY via /elevate — do NOT trigger on 'make this better' or
+  'what am I missing'.
 ---
 
 # /elevate — Expert Elevation Skill

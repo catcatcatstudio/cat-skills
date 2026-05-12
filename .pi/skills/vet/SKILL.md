@@ -2,18 +2,13 @@
 name: vet
 status: published
 description: >
-  Thorough codebase investigation that finds real problems and fixes them. Opens a project,
-  maps the architecture, scans every layer for issues (structural, correctness, security,
-  reliability, performance, hygiene), produces a prioritized report with evidence, builds
-  a fix plan, and executes collaboratively with the user. Not a linter — a senior engineer
-  doing a full review with the authority to fix what they find. Use when: (1) user says
-  "/vet", "vet this project", "check this codebase", (2) user opens a project for the
-  first time and wants to understand its health, (3) user inherits code and wants to know
-  what's wrong, (4) user wants a thorough review before shipping, (5) user says "find all
-  the problems", "what's broken", "audit this code", (6) user wants to clean up AI-generated
-  code, find stubs, remove slop. NOT for: UI/design review (that's /eye), writing tests
-  from scratch (that's /fortify), pre-build research (that's /recon), applying an engineering
-  lens to ongoing work (that's /prodev).
+  Thorough codebase investigation that finds and fixes real problems. Maps architecture,
+  scans every layer (structural, correctness, security, reliability, performance,
+  hygiene), prioritized report with evidence, fix plan, executes collaboratively. A senior
+  engineer doing a full review with authority to fix. Use when user says '/vet', 'vet this
+  project', 'check this codebase', 'find all the problems', 'what's broken', 'audit this
+  code', or wants to clean up AI-generated code. NOT for: UI review (/eye), test writing
+  (/fortify), pre-build research (/recon).
 user_invocable: true
 trigger: /vet
 argument-hint: "[path or scope]"

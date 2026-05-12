@@ -2,13 +2,10 @@
 name: prodev
 status: published
 description: >
-  MUST invoke when user types "/prodev" or "prodev". This is a slash command — always use the
-  Skill tool to execute it, never skip or summarize. Pro mode — engineering standard enforcement.
-  Forces Claude to operate like a senior engineer who maintains what they ship. Prevents common
-  AI coding failures: bandaid fixes, stale API knowledge, stubs, sycophantic agreement with bad
-  approaches, and building on unverified assumptions. Loads a full field manual covering root
-  cause discipline, layer awareness, research protocol, current-gen patterns, blast radius
-  thinking, caller-first API design, and self-review.
+  Pro mode — engineering standard enforcement. Forces senior-engineer behavior: root-cause
+  discipline, layer awareness, current-gen API verification, blast-radius thinking,
+  caller-first API design, no stubs, no sycophantic agreement, no unverified assumptions.
+  Invoke via /prodev or 'prodev' — always run via Skill tool, never skip or summarize.
 ---
 
 # /prodev — Engineering Standard

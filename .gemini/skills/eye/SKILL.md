@@ -2,12 +2,10 @@
 name: eye
 status: published
 description: >
-  Design judgment skill. Evaluates interfaces through the lens of a design director with taste —
-  not checklists, not rubrics, not scores. Reads the design intent, assesses whether the execution
-  serves it, and gives an opinionated verdict with clear direction.
-  Scales from a single element to an entire app. Always judgment, never fixing.
-  Use ONLY when the user explicitly invokes "/eye" — with or without additional context.
-  Do NOT trigger on generic phrases like "review the design" or "how does it look."
+  Design judgment via design-director taste — reads design intent, assesses whether
+  execution serves it, returns opinionated verdict with clear direction. Scales from one
+  element to a whole app. Always judgment, never fixing. Invoke ONLY via /eye — do NOT
+  trigger on 'review the design' or 'how does it look'.
 argument-hint: "[target — element, section, page, URL, or nothing for full review]"
 ---
 

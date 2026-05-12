@@ -2,11 +2,11 @@
 name: memento
 status: published
 description: >
-  Context handoff for fresh sessions. Saves unsaved session knowledge to notebook,
-  then produces a short orientation block to paste into a new chat. Use when:
-  user says "/memento", "hand off context", "prepare for fresh chat", "save and brief",
-  or before clearing context. NOT for: recovering context (use /notebook recover),
-  saving a single note (use /notebook save), or replacing notebook.
+  Context handoff for fresh sessions. Saves unsaved session knowledge to notebook, then
+  produces a short orientation block to paste into a new chat. Use when user says
+  '/memento', 'hand off context', 'prepare for fresh chat', 'save and brief', or before
+  clearing context. NOT for: recovering context (use /notebook recover) or saving a single
+  note.
 user_invocable: true
 trigger: /memento
 argument-hint: "[auto [on|off]]"

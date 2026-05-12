@@ -2,15 +2,11 @@
 name: architect
 status: published
 description: >
-  Staged build methodology for architecting and building software projects. Drives the full
-  lifecycle: technical spike, design notes, build planning, and stage-by-stage execution with
-  professional-grade testing. Use when: (1) user says "/architect", "architect this",
-  "new project", "start a project", "build this from scratch", (2) user wants to plan and
-  build a software project from scratch using a structured methodology, (3) user wants to
-  resume an in-progress project that uses the staged build methodology, (4) user references
-  the build methodology or staged build process. NOT for: quick scripts, one-off fixes, or
-  tasks that don't warrant a full project structure. If the task is small enough to build
-  in one shot without planning, just build it directly — don't force the methodology.
+  Staged build methodology for software projects: technical spike → design notes → build
+  plan → stage-by-stage execution with professional-grade testing. Use when user says
+  '/architect', 'new project', 'start a project', 'build this from scratch', wants to
+  plan/build with structured methodology, or resumes an in-progress staged build. NOT for:
+  quick scripts or one-off fixes.
 ---
 
 # Staged Build Methodology

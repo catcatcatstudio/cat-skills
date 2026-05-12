@@ -30,6 +30,7 @@ import { join } from "path";
 import * as api from "./lib/api";
 import * as cache from "./lib/cache";
 import * as fmt from "./lib/format";
+import * as syndication from "./lib/syndication";
 
 const SKILL_DIR = import.meta.dir;
 const CONFIG_PATH = join(SKILL_DIR, "config.json");
@@ -814,13 +815,39 @@ async function cmdSearch() {
 // ============================================================
 
 async function cmdThread() {
-  const tweetId = args[1];
-  if (!tweetId) {
-    console.error("Usage: xray thread <tweet_id>");
+  const rawId = args[1];
+  if (!rawId) {
+    console.error("Usage: xray thread <tweet_id_or_url> [--paid] [--pages N]");
     process.exit(1);
   }
 
+  const tweetId = syndication.extractTweetId(rawId) || rawId;
+  const forcePaid = getFlag("paid");
+  const wantReplies = getFlag("replies");
   const pages = Math.min(parseInt(getOpt("pages") || "2"), 5);
+
+  // Try free path for the root first (unless --paid is set)
+  if (!forcePaid) {
+    const root = await syndication.getTweet(tweetId);
+    if (root) {
+      console.log(`Root tweet (free, syndication API):\n`);
+      console.log(fmt.formatTweet(root, undefined, { full: true }));
+      console.log();
+
+      if (!wantReplies) {
+        console.log(
+          `(Showing root only. Replies require the paid X API — re-run with --replies to fetch them, or --paid for a full thread fetch.)`
+        );
+        return;
+      }
+      console.log(`Fetching replies via paid X API (~$${(pages * 0.05).toFixed(2)})...\n`);
+    } else {
+      console.log(
+        `(Free syndication API didn't return this tweet — falling back to paid X API.)\n`
+      );
+    }
+  }
+
   const tweets = await api.thread(tweetId, { pages });
 
   if (tweets.length === 0) {
@@ -859,21 +886,40 @@ async function cmdProfile() {
 }
 
 async function cmdTweet() {
-  const tweetId = args[1];
-  if (!tweetId) {
-    console.error("Usage: xray tweet <tweet_id>");
+  const rawId = args[1];
+  if (!rawId) {
+    console.error("Usage: xray tweet <tweet_id_or_url> [--paid] [--json]");
     process.exit(1);
   }
 
-  const tweet = await api.getTweet(tweetId);
+  const tweetId = syndication.extractTweetId(rawId) || rawId;
+  const forcePaid = getFlag("paid");
+  const asJson = getFlag("json");
+
+  let tweet = forcePaid ? null : await syndication.getTweet(tweetId);
+  let source: "syndication" | "paid" = "syndication";
+
+  if (!tweet) {
+    if (!forcePaid) {
+      console.error(
+        `(Free syndication API didn't return this tweet — falling back to paid X API.)`
+      );
+    }
+    tweet = await api.getTweet(tweetId);
+    source = "paid";
+  }
+
   if (!tweet) {
     console.log("Tweet not found.");
     return;
   }
 
-  if (getFlag("json")) {
+  if (asJson) {
     console.log(JSON.stringify(tweet, null, 2));
   } else {
+    console.error(
+      source === "syndication" ? "(free, syndication API)" : "(paid X API)"
+    );
     console.log(fmt.formatTweet(tweet, undefined, { full: true }));
   }
 }

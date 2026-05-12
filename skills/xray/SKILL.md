@@ -178,10 +178,15 @@ Options:
 ### thread / profile / tweet
 
 ```bash
-bun run xray.ts thread <tweet_id>        # Full conversation
-bun run xray.ts profile <username>       # Recent posts + bio
-bun run xray.ts tweet <tweet_id>         # Single tweet
+bun run xray.ts tweet <tweet_id_or_url>           # Single tweet (FREE via syndication)
+bun run xray.ts thread <tweet_id_or_url>          # Root only, FREE
+bun run xray.ts thread <tweet_id_or_url> --replies  # Fetch replies (paid API)
+bun run xray.ts profile <username>                # Recent posts + bio (paid API)
 ```
+
+**`tweet` and `thread` default to the free path.** They hit `cdn.syndication.twimg.com` first — no auth, no cost, accepts a tweet URL or bare ID. Only fall back to the paid X API if syndication 404s (deleted/protected tweets), or you pass `--paid` to force it. `thread --replies` still costs API credits because reply fan-out requires `conversation_id` search, which syndication can't do.
+
+`profile` still uses the paid API — there's no free way to list a user's recent posts.
 
 ## Deep Research Loop
 
