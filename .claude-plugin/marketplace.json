@@ -74,6 +74,24 @@
       "source": "./skills/vet",
       "description": "Thorough codebase investigation — maps architecture, finds every problem, plans fixes, executes collaboratively",
       "version": "1.0.0"
+    },
+    {
+      "name": "scorched-earth",
+      "source": "./skills/scorched-earth",
+      "description": "Obsessively thorough analysis — audit a codebase, extract a reference, or research a topic with certainty nothing was missed",
+      "version": "1.0.0"
+    },
+    {
+      "name": "adversary",
+      "source": "./skills/adversary",
+      "description": "Adversarial pressure-test — argues the case for, steel-mans the best alternative, returns a verdict",
+      "version": "1.0.0"
+    },
+    {
+      "name": "eye",
+      "source": "./skills/eye",
+      "description": "Design judgment with director's taste — reads intent, judges whether execution serves it, gives direction",
+      "version": "1.0.0"
     }
   ]
 }

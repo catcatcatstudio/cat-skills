@@ -44,47 +44,69 @@ The index and lessons files are designed to be fast to scan — a future agent c
 
 ---
 
-## /notebook — Init & Status
+## Scope: which notebook?
 
-### If _notebook/ doesn't exist (new project):
+Projects nest. A parent repo can contain sub-projects; a monorepo contains packages; a studio contains builds. Each can have its own `_notebook/`. Before saving, decide where the note belongs.
 
-1. Locate project root — walk up from cwd looking for: `PROJECT_STATE.md`, `CLAUDE.md`, `.git/`, `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod`
-2. If no project root found: tell the user "No project root detected — create a project first."
-3. Create:
+**Rule: save the note in the smallest notebook whose scope contains the insight.**
+
+- Note about the sub-project only (its bug, its API, its decision) → sub-project's `_notebook/`
+- Note about shared infra, parent architecture, cross-cutting constraints, or anything that affects siblings → parent's `_notebook/`
+- When unsure, prefer the narrower scope — notes are easier to promote up later than to demote down
+
+**How to locate candidates:** walking up from cwd, collect every directory with a project marker (`PROJECT_STATE.md`, `CLAUDE.md`, `.git/`, `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod`). The nearest is the default. If higher candidates exist and the note's scope clearly belongs to one of them, save there instead.
+
+If the chosen parent notebook doesn't exist yet, initialize it first (see [Initializing _notebook/](#initializing-_notebook)) before writing.
+
+---
+
+## Initializing _notebook/
+
+Shared procedure used by both `/notebook` init and `/notebook save` (when no notebook exists at the chosen scope).
+
+1. Create the directory and three files:
    ```
    _notebook/
    ├── README.md
    ├── _index.md
    └── lessons.md
    ```
-4. Initialize `README.md`:
+2. `README.md`:
    ```markdown
    # Project Notebook
 
    This directory contains project memory for AI agents.
    Read `_index.md` first for full project context, then `lessons.md` for known pitfalls.
    ```
-5. Initialize `_index.md`:
+3. `_index.md`:
    ```markdown
    # Notes Index
 
    Project trail — read this first on context recovery.
    ```
-6. Initialize `lessons.md`:
+4. `lessons.md`:
    ```markdown
    # Lessons
 
    What not to do. Read this every session.
    ```
-7. **Gitignore based on repo visibility:**
-   - Detect visibility: run `gh repo view --json visibility -q '.visibility'` from the project root
-   - If `PUBLIC` → add `_notebook/` to `.gitignore`
-   - If `PRIVATE` or `INTERNAL` → do NOT gitignore (notes are safe to track)
-   - If the command fails (no remote, no `gh` CLI, not a GitHub repo) → **gitignore** (safe default — assume public until proven private)
-8. Confirm:
+5. **Gitignore based on repo visibility:** run `gh repo view --json visibility -q '.visibility'` from the project root.
+   - `PUBLIC` → add `_notebook/` to `.gitignore`
+   - `PRIVATE` or `INTERNAL` → do not gitignore (notes are safe to track)
+   - Command fails (no remote, no `gh`, not a GitHub repo) → gitignore (safe default — assume public until proven private)
+
+---
+
+## /notebook — Init & Status
+
+### If _notebook/ doesn't exist (new project):
+
+1. Locate project root (see [Scope](#scope-which-notebook) for nested-project handling). If no project root found, tell the user "No project root detected — create a project first."
+2. Run [Initializing _notebook/](#initializing-_notebook) at the chosen root.
+3. Confirm:
    - If gitignored: `Notebook initialized at {project_root}/_notebook/ — gitignored (public repo).`
    - If tracked: `Notebook initialized at {project_root}/_notebook/ — tracked in git (private repo).`
-9. **Retroactive save** — scan the current conversation for any decisions, failures, constraints, or learnings that have already occurred. Save each one as a note immediately. If the notebook is being initialized mid-session, there is almost certainly unsaved context. Do not wait to be asked.
+4. **Retroactive save** — scan the current conversation for any decisions, failures, constraints, or learnings that have already occurred. Save each one as a note immediately. If the notebook is being initialized mid-session, there is almost certainly unsaved context. Do not wait to be asked.
 
 ### If _notebook/ already exists (status):
 
@@ -100,39 +122,15 @@ The index and lessons files are designed to be fast to scan — a future agent c
 
 **Never prompt. Never ask questions. Just write.**
 
-### Step 1: Locate Project Root
+### Step 1: Locate Project Root & Choose Scope
 
-Walk up from cwd: `PROJECT_STATE.md` → `CLAUDE.md` → `.git/` → `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod`
+Find candidate project roots walking up from cwd (see [Scope](#scope-which-notebook)). Pick the notebook scope that matches the note: nearest root by default, parent only if the note's scope clearly belongs higher.
 
 No root found → "No project root detected. Run `/notebook` from within a project first."
 
 ### Step 2: Ensure Infrastructure
 
-If `_notebook/` doesn't exist, create it with `README.md`, `_index.md`, and `lessons.md` silently.
-
-Initialize `README.md`:
-```markdown
-# Project Notebook
-
-This directory contains project memory for AI agents.
-Read `_index.md` first for full project context, then `lessons.md` for known pitfalls.
-```
-
-Initialize `_index.md`:
-```markdown
-# Notes Index
-
-Project trail — read this first on context recovery.
-```
-
-Initialize `lessons.md`:
-```markdown
-# Lessons
-
-What not to do. Read this every session.
-```
-
-**Gitignore based on repo visibility:** run `gh repo view --json visibility -q '.visibility'` from the project root. If `PUBLIC` or the command fails → add `_notebook/` to `.gitignore`. If `PRIVATE` or `INTERNAL` → skip gitignore.
+If `_notebook/` doesn't exist at the chosen scope, run [Initializing _notebook/](#initializing-_notebook) silently.
 
 ### Step 3: Next Note Number
 
@@ -226,15 +224,7 @@ Format — pure signal, no metadata:
 
 The full note has context and details. The lesson is the takeaway — one line a model can scan in a second.
 
-**For type `resolved`:** write the note as usual, then find the matching lesson in `lessons.md` and strike it:
-
-```
-- ~~Prisma doesn't work with edge runtime~~ *(resolved: fixed in Prisma 6.0 — see 0047)*
-```
-
-How to match: use the content of the `/notebook save resolved:` argument to find the most relevant lesson line. Match on key terms (library names, error descriptions, the constraint being resolved). If multiple lessons could match, resolve the best one and state which lesson was resolved in the confirmation output. If no match at all, write the note but warn: `Note saved but no matching lesson found to resolve.`
-
-Strikethrough preserves history — a model sees what *used to be* a problem and knows to skip it. The note reference lets anyone find the resolution details.
+**For type `resolved`:** write the note as usual, then strike the matching lesson. See [Resolving Lessons](#resolving-lessons) for matching rules and format.
 
 ### Step 9: Update PROJECT_STATE.md (conditional)
 
@@ -267,7 +257,7 @@ Nothing else.
 
 Convert existing messy notes into notebook format. One-time onboarding for projects with pre-existing notes.
 
-1. Ensure `_notebook/` infrastructure exists (same as save Step 2 — create `README.md`, `_index.md`, `lessons.md`, apply visibility-based gitignore logic)
+1. Ensure `_notebook/` infrastructure exists at the chosen scope (see [Initializing _notebook/](#initializing-_notebook))
 2. Scan the target folder (cwd or specified path) for markdown and text files
 3. Read each file
 4. Classify each: decision, learning, constraint, failure, investigation, or pivot
@@ -288,13 +278,16 @@ To mark a lesson as resolved use: `/notebook save resolved: <exact phrase or les
 
 **Matching rules:**
 - Prefer exact phrase match from lessons.md
+- Otherwise match on key terms (library names, error descriptions, the constraint being resolved)
 - If multiple lessons could match, resolve the best one and state which lesson was resolved in the output
 - If no match at all, write the note but warn: `Note saved but no matching lesson found to resolve.`
 
-Mark resolved lessons with strikethrough in `lessons.md`:
+**Strike the lesson** in `lessons.md` and reference the note that resolved it:
 ```markdown
-~~Lesson text here~~ *(resolved: [date or brief reason])*
+~~Prisma doesn't work with edge runtime~~ *(resolved: fixed in Prisma 6.0 — see 0047)*
 ```
+
+Strikethrough preserves history — a future model sees what *used to be* a problem and knows to skip it. The note reference lets anyone find the resolution details.
 
 **Archiving:** When `lessons.md` exceeds 50 resolved (struck-through) entries, move all resolved lessons to `lessons-archive-YYYY-MM.md` and remove them from the active file. Keep only open lessons in the active file.
 

@@ -4,7 +4,7 @@ English | [日本語](README.ja.md)
 
 [![Stars](https://img.shields.io/github/stars/catcatcatstudio/cat-skills)](https://github.com/catcatcatstudio/cat-skills/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Skills](https://img.shields.io/badge/skills-13-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
+[![Skills](https://img.shields.io/badge/skills-14-8B5CF6)](https://skills.sh/catcatcatstudio/cat-skills)
 
 The daily toolkit for developers and designers who build with AI agents.
 
@@ -16,7 +16,7 @@ Some give you superpowers for building — **recon** gives you senior-engineer r
 
 And some are just useful every day — **eat** turns any YouTube video, article, or podcast into usable knowledge in seconds, **notebook** keeps your project context alive across sessions, **xray** gives you social intelligence on X.
 
-This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 13 skills, each independent, each doing one thing well.
+This is what [catcatcat](https://catcatcat.ai) uses every day to design, build, and ship. 14 skills, each independent, each doing one thing well.
 
 ## Installation
 
@@ -119,6 +119,7 @@ Then type any command: `/eat`, `/architect`, `/eye`, `/prodev`, etc.
 |-------|---------|-------------|
 | [Fortify](#fortify--testing-infrastructure) | `/fortify` | Detect stack, install tests, audit coverage, mutation testing |
 | [Vet](#vet--codebase-investigation) | `/vet` | Thorough codebase investigation — find every problem, plan fixes, execute |
+| [Scorched Earth](#scorched-earth--exhaustive-analysis) | `/scorched-earth` | Obsessive thoroughness — audit code, extract a reference, or research a topic, leaving nothing missed |
 | [Notebook](#notebook--project-notes) | `/notebook` | Project notes — prevents context loss and reasoning loops |
 | [Memento](#memento--context-handoff) | `/memento` | Save session knowledge, produce handoff for fresh chats |
 
@@ -284,6 +285,22 @@ Opens a project, maps the architecture, investigates every layer for real proble
 Six scan categories: **Structural** (architecture, coupling, god files, legacy paths), **Correctness** (logic bugs, stubs, edge cases, race conditions), **Security** (injection, auth gaps, data exposure), **Reliability** (error handling, defensive code, resource leaks), **Performance** (N+1, unbounded ops, hot paths), **Hygiene** (dead code, type drift, AI comment noise).
 
 **Source:** [`skills/vet/SKILL.md`](./skills/vet/SKILL.md)
+
+### Scorched Earth — Exhaustive Analysis
+
+When surface-level isn't enough and the cost of missing something is higher than the cost of being slow. Scorched Earth is obsessive thoroughness with a paper trail — every file, every function, every claim examined, verified, and logged. It's deliberately too thorough: it will take a while, and it will surface things you didn't ask about. That's the point.
+
+Three modes, picked from what you point it at:
+
+| Mode | What it does |
+|------|-------------|
+| Build | Sweep an entire codebase — every issue, every layer, no sampling. Where `/vet` finds and fixes the *real* problems, scorched build aims for *completeness*. |
+| Intake | Extract everything from a URL or reference — full structure, every claim, every detail, nothing summarized away. |
+| Research | Exhaustive investigation of a topic — chase every thread to the end, cross-check sources, log what's known and what's still open. |
+
+Pairs naturally with [Vet](#vet--codebase-investigation): reach for Vet when you want problems found and fixed with judgment; reach for Scorched Earth when certainty that *nothing was missed* matters more than speed.
+
+**Source:** [`skills/scorched-earth/SKILL.md`](./skills/scorched-earth/SKILL.md)
 
 ### Notebook — Project Notes
 
