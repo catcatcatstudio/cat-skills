@@ -74,11 +74,11 @@ cat-skills follows [Semantic Versioning](https://semver.org) (`vMAJOR.MINOR.PATC
 | **MINOR** | A new skill is added, or an existing skill gains significant new capability |
 | **PATCH** | Bug fixes, doc/copy changes, platform-folder rebuilds |
 
-The version of record lives in `.claude-plugin/marketplace.json` (`metadata.version`). To cut a release:
+The version of record lives in `.claude-plugin/marketplace.json` (`metadata.version`). `main` is protected — all changes land via PR — so a release is cut like this:
 
-1. Bump `metadata.version` in `marketplace.json` to match the new tag
-2. Commit the bump
-3. Tag it: `git tag v2.1.0 && git push --tags`
+1. In a PR, bump `metadata.version` in `marketplace.json` to the new version (rebuild platform folders too if a skill changed)
+2. Merge the PR once CI passes
+3. From the updated `main`, tag it: `git tag v2.1.0 && git push --tags` (tags aren't branch-protected)
 4. Cut the GitHub Release: `gh release create v2.1.0 --notes "..."`
 
 Release notes are written by hand. `.github/release.yml` will auto-categorize entries (New Skills, Features, Bug Fixes, …) when contributions come through labeled PRs — label skill-adding PRs `new-skill` so they land in the right section.

@@ -74,11 +74,11 @@ cat-skills は [セマンティックバージョニング](https://semver.org/l
 | **MINOR** | 新しいスキルの追加、または既存スキルへの大きな機能追加 |
 | **PATCH** | バグ修正、ドキュメント・文言の変更、プラットフォームフォルダの再ビルド |
 
-バージョンの正本は `.claude-plugin/marketplace.json` の `metadata.version` です。リリースの手順:
+バージョンの正本は `.claude-plugin/marketplace.json` の `metadata.version` です。`main` は保護されており、すべての変更はPR経由で入ります。リリースの手順:
 
-1. `marketplace.json` の `metadata.version` を新しいタグに合わせて更新
-2. その変更をコミット
-3. タグを付ける: `git tag v2.1.0 && git push --tags`
+1. PR内で `marketplace.json` の `metadata.version` を新しいバージョンに更新（スキルを変更した場合はプラットフォームフォルダも再ビルド）
+2. CIが通ったらPRをマージ
+3. 更新された `main` でタグを付ける: `git tag v2.1.0 && git push --tags`（タグはブランチ保護の対象外）
 4. GitHub リリースを作成: `gh release create v2.1.0 --notes "..."`
 
 リリースノートは手書きです。ラベル付きのPR経由でコントリビュートされた場合、`.github/release.yml` が項目を自動分類します（New Skills、Features、Bug Fixes など）。スキルを追加するPRには `new-skill` ラベルを付けてください。
