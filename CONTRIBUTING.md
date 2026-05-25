@@ -64,6 +64,25 @@ Skills are markdown instruction sets, not code. The quality bar is:
 - **No stubs.** Every workflow described must be complete and actionable.
 - **Test it.** Run the skill in at least one agent before submitting.
 
+## Versioning & Releases
+
+cat-skills follows [Semantic Versioning](https://semver.org) (`vMAJOR.MINOR.PATCH`), bumped manually — no release bot. The repo isn't published to a package registry, so version numbers are a human signal, not an automated contract.
+
+| Bump | When |
+|------|------|
+| **MAJOR** | A skill is removed or renamed, or the marketplace structure changes in a way existing installs must adapt to |
+| **MINOR** | A new skill is added, or an existing skill gains significant new capability |
+| **PATCH** | Bug fixes, doc/copy changes, platform-folder rebuilds |
+
+The version of record lives in `.claude-plugin/marketplace.json` (`metadata.version`). To cut a release:
+
+1. Bump `metadata.version` in `marketplace.json` to match the new tag
+2. Commit the bump
+3. Tag it: `git tag v2.1.0 && git push --tags`
+4. Cut the GitHub Release: `gh release create v2.1.0 --notes "..."`
+
+Release notes are written by hand. `.github/release.yml` will auto-categorize entries (New Skills, Features, Bug Fixes, …) when contributions come through labeled PRs — label skill-adding PRs `new-skill` so they land in the right section.
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).
