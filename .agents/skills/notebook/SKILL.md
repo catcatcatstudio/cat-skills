@@ -60,6 +60,30 @@ If the chosen parent notebook doesn't exist yet, initialize it first (see [Initi
 
 ---
 
+## Author Identity
+
+Notebooks are shared. Every note records who wrote it, so a future session can tell whose context it's reading and who to ask.
+
+**Resolving the handle** — first match wins, resolve once per session and reuse:
+
+1. `git config user.email` → take the local-part (before `@`) → `jon@studio.dev` becomes `jon`
+2. No email configured → `git config user.name` → first whitespace-separated token
+3. Neither available → `unknown`
+
+**Run these from the project root you chose in Step 1, not from cwd.** Git identity is frequently path-scoped — an `includeIf "gitdir:..."` rule in `~/.gitconfig` assigns different identities to different directory trees, and many people set no global identity at all so that a misconfigured repo fails loudly instead of committing under the wrong name. A `git config` call made outside the repo silently misses those rules and returns the wrong handle or nothing.
+
+Slugify the result: lowercase, non-alphanumeric characters to `-`. Write it as `@handle` in prose and index lines, bare `handle` in filenames.
+
+Never fall back to `$USER`, `whoami`, or the hostname. Those are machine identity, not project identity, and they leak local usernames into notes that may be committed.
+
+**Never prompt for identity.** If resolution lands on `unknown`, write the note anyway and stamp it `@unknown` — a note that exists beats a note that blocked on a question.
+
+**Always stamp, including solo projects.** An unstamped line is ambiguous forever — it could mean "solo" or "identity unresolved" — and the moment a solo project gains a second person, its whole history becomes unattributable. Stamping costs a few characters.
+
+Notes written before this convention stay as they are. Notes are append-only; don't rename or backfill existing files.
+
+---
+
 ## Initializing _notebook/
 
 Shared procedure used by both `/notebook` init and `/notebook save` (when no notebook exists at the chosen scope).
@@ -83,6 +107,8 @@ Shared procedure used by both `/notebook` init and `/notebook save` (when no not
    # Notes Index
 
    Project trail — read this first on context recovery.
+
+   Format: `- NNNN @author type: summary` — ⚑ marks notes every session must read.
    ```
 4. `lessons.md`:
    ```markdown
@@ -112,7 +138,7 @@ Shared procedure used by both `/notebook` init and `/notebook save` (when no not
 
 1. Read `_index.md`
 2. Read `lessons.md`
-3. Report: number of notes, number of lessons, last note date, count of ⚑-flagged notes
+3. Report: number of notes, number of lessons, last note date, count of ⚑-flagged notes, and — when the index holds more than one handle — the note count per author
 4. Show the last 5 index entries
 5. **Visibility check:** if `_notebook/` is gitignored but repo is private (or vice versa), mention it once — e.g. `_notebook/ is gitignored but this is a private repo — you can remove it from .gitignore to track notes in git.` Don't modify `.gitignore` automatically for existing projects.
 
@@ -135,6 +161,10 @@ If `_notebook/` doesn't exist at the chosen scope, run [Initializing _notebook/]
 ### Step 3: Next Note Number
 
 Read `_index.md`, find highest note number, increment. Start at `0001` if empty.
+
+**Duplicate numbers are legal and expected.** Two people working on separate branches will both take the next number — the author handle in the filename keeps the files distinct, so both survive a merge and neither `_index.md` line collides. The number means "roughly when," the handle means "who."
+
+Never renumber to remove a duplicate. Numbers are referenced by other notes and by resolved lessons; renumbering silently breaks those links. When numbers repeat, cite them as `0047-jon` to disambiguate.
 
 ### Step 4: Infer Content
 
@@ -161,14 +191,16 @@ Default: `learning`.
 
 ### Step 6: Write the Note
 
-File: `_notebook/NNNN-type-short-title.md`
+File: `_notebook/NNNN-handle-type-short-title.md`
+
+The author handle sits between the number and the type (see [Author Identity](#author-identity)) — `0047-jon-constraint-rls-cross-schema.md`.
 
 **Quick format (default):**
 
 ```markdown
 # NNNN: Short Descriptive Title
 
-**Type:** type | **Date:** YYYY-MM-DD
+**Type:** type | **Date:** YYYY-MM-DD | **By:** @handle
 
 Content. 1-5 lines. Be specific — library names, error messages, version numbers.
 What happened, what it means going forward.
@@ -179,7 +211,7 @@ What happened, what it means going forward.
 ```markdown
 # NNNN: Short Descriptive Title
 
-**Type:** decision | **Date:** YYYY-MM-DD
+**Type:** decision | **Date:** YYYY-MM-DD | **By:** @handle
 **Status:** accepted
 
 ## Context
@@ -205,13 +237,15 @@ Threshold: meaningful alternatives considered AND hard to reverse → full forma
 Append a **rich one-line summary** to `_index.md`:
 
 ```
-- NNNN type: Detailed one-liner useful standalone
+- NNNN @handle type: Detailed one-liner useful standalone
 ```
 
 ⚑ flag for critical constraints, breaking discoveries, architectural decisions:
 ```
-- NNNN ⚑ constraint: Critical thing every session must know
+- NNNN @handle ⚑ constraint: Critical thing every session must know
 ```
+
+The handle holds a fixed position — always after the number, always before the ⚑ and type. Attribution is scanned as a column, so it must not drift to a ragged offset. Keeping it fixed also makes `grep '@ocean' _index.md` return exactly that person's trail.
 
 ### Step 8: Update Lessons (conditional)
 
@@ -234,7 +268,7 @@ Only if the note materially changes project state (blocking constraint, architec
 
 Single line confirmation:
 ```
-Saved: _notebook/NNNN-type-short-title.md
+Saved: _notebook/NNNN-handle-type-short-title.md
 ```
 
 Nothing else.
@@ -249,7 +283,8 @@ Nothing else.
 4. Open the last 3 notes in `_notebook/`
 5. Read `PROJECT_STATE.md` if it exists
 6. Summarize: what the project is, key decisions, active constraints, known pitfalls, current state
-7. Ask: "What's changed since this was last updated?"
+7. If the index carries more than one author handle, add one line naming who has been working here and who wrote the most recent notes — it tells the user whose context they're missing and who to ask
+8. Ask: "What's changed since this was last updated?"
 
 ---
 
@@ -261,14 +296,31 @@ Convert existing messy notes into notebook format. One-time onboarding for proje
 2. Scan the target folder (cwd or specified path) for markdown and text files
 3. Read each file
 4. Classify each: decision, learning, constraint, failure, investigation, or pivot
-5. Write each as a properly numbered notebook note in `_notebook/`
-6. Build `_index.md` from scratch with rich one-line summaries
-7. Extract lessons from anything that looks like a failure, constraint, or learning → populate `lessons.md`
-8. Leave originals untouched. User deletes them when satisfied.
+5. Attribute each — see [Migrated authorship](#migrated-authorship) below
+6. Write each as a properly numbered notebook note in `_notebook/`
+7. Build `_index.md` from scratch with rich one-line summaries
+8. Extract lessons from anything that looks like a failure, constraint, or learning → populate `lessons.md`
+9. Leave originals untouched. User deletes them when satisfied.
 
 If `_notebook/` already has notes, continue numbering from the highest existing. Migrate never overwrites existing notes.
 
-After migration, report: how many files found, how many converted, how many lessons extracted. Show the generated index.
+After migration, report: how many files found, how many converted, how many lessons extracted, and how many landed as `@unknown`. Show the generated index.
+
+### Migrated authorship
+
+**Never stamp yourself as the author of migrated notes.** Migration is a bulk mechanical action over someone else's thinking, and the stamp is permanent — a wrong one is worse than no attribution, because it reads as fact to every future session.
+
+Determine the author per source file, first match wins:
+
+1. An explicit byline in the file itself (`by: ocean`, a signature, an author field)
+2. `git log --format='%ae' -- <source-file>` → most frequent email → local-part. Pre-existing notes are usually tracked, unlike `_notebook/` itself, so this often works
+3. Otherwise `unknown`
+
+Add a provenance line to the body of every migrated note so the thin attribution is visible rather than implied:
+
+```markdown
+*Migrated from `docs/scratch/auth-notes.md` on YYYY-MM-DD.*
+```
 
 ---
 
@@ -282,12 +334,14 @@ To mark a lesson as resolved use: `/notebook save resolved: <exact phrase or les
 - If multiple lessons could match, resolve the best one and state which lesson was resolved in the output
 - If no match at all, write the note but warn: `Note saved but no matching lesson found to resolve.`
 
-**Strike the lesson** in `lessons.md` and reference the note that resolved it:
+**Strike the lesson** in `lessons.md` and reference the note that resolved it, by number *and* author handle:
 ```markdown
-~~Prisma doesn't work with edge runtime~~ *(resolved: fixed in Prisma 6.0 — see 0047)*
+~~Prisma doesn't work with edge runtime~~ *(resolved: fixed in Prisma 6.0 — see 0047-jon)*
 ```
 
-Strikethrough preserves history — a future model sees what *used to be* a problem and knows to skip it. The note reference lets anyone find the resolution details.
+Strikethrough preserves history — a future model sees what *used to be* a problem and knows to skip it. The note reference lets anyone find the resolution details, and the handle survives the case where two branches both produced an `0047`.
+
+**Lessons themselves stay unstamped.** They are one line of pure signal read every session; author metadata on the takeaway invites blame-reading and buys nothing the resolving note reference doesn't already give you.
 
 **Archiving:** When `lessons.md` exceeds 50 resolved (struck-through) entries, move all resolved lessons to `lessons-archive-YYYY-MM.md` and remove them from the active file. Keep only open lessons in the active file.
 
@@ -322,4 +376,5 @@ On any new session or `/notebook recover`, read in this order:
 7. **⚑ sparingly.** Only for things every future session must read.
 8. **Notes are append-only.** New moment = new note. Update existing only to mark superseded.
 9. **Lessons are distilled.** One line, pure signal. If you need context, open the note.
-10. **Check your notes when stuck.** Before attempting a workaround or debugging an unexpected failure, read `_notebook/lessons.md` first. The answer may already be there. This is the reflex that prevents loops.
+10. **Every note is stamped.** Author handle in the filename, the `**By:**` field, and the index line — always, solo projects included. Resolve it from git, never prompt for it, never guess.
+11. **Check your notes when stuck.** Before attempting a workaround or debugging an unexpected failure, read `_notebook/lessons.md` first. The answer may already be there. This is the reflex that prevents loops.
