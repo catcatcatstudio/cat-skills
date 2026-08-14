@@ -162,9 +162,11 @@ If `_notebook/` doesn't exist at the chosen scope, run [Initializing _notebook/]
 
 Read `_index.md`, find highest note number, increment. Start at `0001` if empty.
 
-**Duplicate numbers are legal and expected.** Two people working on separate branches will both take the next number — the author handle in the filename keeps the files distinct, so both survive a merge and neither `_index.md` line collides. The number means "roughly when," the handle means "who."
+**Duplicate numbers are legal and expected.** Two people working on separate branches will both take the next number — the author handle in the filename keeps the files distinct, so both note files survive a merge instead of colliding on one path. The number means "roughly when," the handle means "who."
 
 Never renumber to remove a duplicate. Numbers are referenced by other notes and by resolved lessons; renumbering silently breaks those links. When numbers repeat, cite them as `0047-jon` to disambiguate.
+
+**`_index.md` and `lessons.md` still conflict, and that's expected.** The handle de-conflicts note files only. Both are append-at-the-end files, so parallel saves land on the same line and git can't order them. Resolve by keeping every line from both sides, sorted by note number; for equal numbers, order by handle alphabetically. Never drop a line to make the conflict go away — the note file it points to still exists, and an index missing an entry is worse than an index in a slightly odd order.
 
 ### Step 4: Infer Content
 
