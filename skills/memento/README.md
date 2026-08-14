@@ -33,7 +33,7 @@ Or as a Claude Code plugin:
 /memento
 ```
 
-That's it. Memento scans the current conversation for unsaved decisions, learnings, and constraints. Saves each one to your project notebook. Then generates a 10-20 line orientation block — present-tense, actionable, honest — that gives a blank session enough context to continue.
+That's it. Memento scans the current conversation for unsaved decisions, learnings, and constraints. Saves each one to your project notebook. Then generates a 10-20 line orientation block — a baton pass, not a recap: the intent behind uncommitted work, dead ends not to retry, decisions waiting on you, and the next step. What happened lives in the notebook; the block carries only what changes what the next session does.
 
 Copy the block. Start a new chat. Paste it. You're back.
 
