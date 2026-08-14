@@ -74,25 +74,34 @@ Read available context to ground the orientation:
 - `git diff --stat` and `git status` for uncommitted work
 - Your own knowledge of what's happening in this conversation
 
-Then produce a short orientation block. This should be:
+Then produce a short orientation block. This is a **baton pass, not a recap** — it briefs the next session on the work that remains, not the work that's done. The record of what happened is the notebook's job, and Phase 1 just put it there.
+
+The selection test for every line: **would deleting it change what the next session does?** If not, it doesn't go in.
+
+The block should be:
 - **Short** — 10-20 lines. The next chat has a full context window; don't waste it on briefing.
-- **Present-tense** — describe what IS, not what happened.
-- **Actionable** — end with what to do next.
+- **Forward-facing** — done work gets one positioning clause in the opening line, then appears only where it's a dependency or constraint on the remaining work.
+- **Actionable** — end with the goal and the next step.
 - **Honest** — if something is uncertain or incomplete, say so.
 
-Format:
+Format — bracketed sections that are empty are omitted, never padded:
 
 ```
 ---
 
-We're working on [what] in [location].
+We're working on [what] in [location], currently at [position in the work].
 
-[2-4 sentences: current state — what's built, what works, what's in progress.
-Include the current approach/strategy if it's non-obvious.]
+[Working tree dirty? Say what the diff is FOR and its state — half-finished,
+done-but-unverified, or discard-worthy. The next session sees the file list in
+`git status`; the intent behind it is the part only you can hand over.]
 
-[1-2 sentences: any uncommitted work or in-flight changes the next session should know about.]
+[Dead ends: approaches tried and abandoned this session that a fresh agent would
+plausibly retry. One line each: "Don't retry X — fails because Y (note NNNN)."]
 
-Next: [the literal next step]
+[Decisions waiting on the user. If the session ended blocked on one, lead with it.]
+
+Next: [the goal, then the immediate step toward it — enough intent that the next
+session can re-derive the plan if the literal step turns out moot.]
 
 For full context: read `_notebook/_index.md` and `_notebook/lessons.md`, or run `/notebook recover`.
 
@@ -158,7 +167,7 @@ Add `.memento-handoff` to your global gitignore (`~/.gitignore_global`) — it's
 ## Rules
 
 1. **Notebook save is the real work.** The orientation block is a nice-to-have. Even if the user never pastes it, the notebook saves ensure nothing is lost.
-2. **Don't duplicate notebook content in the orientation.** The next session can /notebook recover. The orientation just bridges the gap between "blank chat" and "recovered context" — it's the 30-second version.
+2. **The orientation is a baton pass, not a recap.** The notebook holds what happened; the orientation holds only what changes what the next session does. Don't duplicate notebook content — the next session can /notebook recover.
 3. **Don't repeat CLAUDE.md.** Project conventions load automatically. Don't waste orientation space on them.
 4. **Be concrete.** File paths, function names, error messages > vague descriptions.
-5. **If there's uncommitted work, say so.** The next session needs to know what's in the working tree.
+5. **For uncommitted work, hand over the intent, not the inventory.** `git status` already shows the files. What it can't show is what the diff is trying to do and whether it can be trusted — that's the part the handoff carries.
