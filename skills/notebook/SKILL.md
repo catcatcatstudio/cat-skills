@@ -37,7 +37,7 @@ The index and lessons files are designed to be fast to scan — a future agent c
 | Command | Action |
 |---------|--------|
 | `/notebook` | Init (new project) or status (existing) |
-| `/notebook save` | Write a note immediately — never prompts, just writes |
+| `/notebook save` | Sweep the WHOLE conversation and write every unsaved insight, each as its own note — never prompts, just writes |
 | `/notebook save resolved: <desc>` | Save a note and resolve the matching lesson |
 | `/notebook recover` | Read index + lessons + flagged notes, summarize state |
 | `/notebook migrate [path]` | Convert messy notes into notebook format |
@@ -166,12 +166,19 @@ Read `_index.md`, find highest note number, increment. Start at `0001` if empty.
 
 Never renumber to remove a duplicate. Numbers are referenced by other notes and by resolved lessons; renumbering silently breaks those links. When numbers repeat, cite them as `0047-jon` to disambiguate.
 
-### Step 4: Infer Content
+### Step 4: Infer Content — ALWAYS a full-conversation sweep
 
-Priority order:
+**A save is never just one note.** Every `/notebook save` scans the ENTIRE conversation so
+far for every decision, failure, constraint, pivot, and learning not yet in the notebook,
+and writes EACH ONE as its own note. Check `_index.md` for what is already recorded; save
+everything relevant that isn't.
+
+Priority order for the sweep's focus:
 1. **Explicit argument** — `/notebook save constraint: RLS can't do cross-schema joins`
-2. **Conversation context** — if bare `/notebook save`, synthesize from recent exchanges
-3. **Both** — user hint + contextual expansion
+   writes that note FIRST, then still sweeps the rest of the chat for unsaved insights
+2. **Bare `/notebook save`** — pure sweep: the whole chat, every unsaved insight
+3. Never skip an insight because it feels minor — accidents, wrong turns, and corrections
+   are exactly what future sessions need
 
 ### Step 5: Classify Type
 
@@ -266,9 +273,10 @@ Only if the note materially changes project state (blocking constraint, architec
 
 ### Output
 
-Single line confirmation:
+One confirmation line per note saved:
 ```
 Saved: _notebook/NNNN-handle-type-short-title.md
+Saved: _notebook/NNNN-handle-type-other-title.md
 ```
 
 Nothing else.
@@ -372,7 +380,9 @@ On any new session or `/notebook recover`, read in this order:
 3. **Rich index entries.** The index alone should be sufficient for context recovery.
 4. **Be specific.** Library names, error messages, versions > vague descriptions.
 5. **Failures are gold.** "Tried X, failed because Y" prevents loops. Always save these.
-6. **One note per save.** Don't batch multiple insights.
+6. **One insight per note; every insight per save.** A save sweeps the whole conversation
+   and writes every unsaved insight as its own file — it is never just one note. Granular
+   files keep lessons greppable; the sweep keeps the record complete (Ocean, 26 Aug 2026).
 7. **⚑ sparingly.** Only for things every future session must read.
 8. **Notes are append-only.** New moment = new note. Update existing only to mark superseded.
 9. **Lessons are distilled.** One line, pure signal. If you need context, open the note.
