@@ -37,28 +37,74 @@ The index and lessons files are designed to be fast to scan — a future agent c
 | Command | Action |
 |---------|--------|
 | `/notebook` | Init (new project) or status (existing) |
-| `/notebook save` | Write a note immediately — never prompts, just writes |
+| `/notebook save` | Sweep the WHOLE conversation and write every unsaved insight, each as its own note — never prompts, just writes |
 | `/notebook save resolved: <desc>` | Save a note and resolve the matching lesson |
-| `/notebook recover` | Read index + lessons + flagged notes, summarize state |
+| `/notebook recover` | Read index + lessons + flagged notes, summarize state — up the whole chain |
 | `/notebook migrate [path]` | Convert messy notes into notebook format |
+| `/notebook split <dir>` | Give a sub-project its own notebook and move its notes there — proposes, you confirm |
 
 ---
 
-## Scope: which notebook?
+## Scope: the notebook tree
 
-Projects nest. A parent repo can contain sub-projects; a monorepo contains packages; a studio contains builds. Each can have its own `_notebook/`. Before saving, decide where the note belongs.
+Projects nest. An engagement repo holds sub-projects; a monorepo holds packages; a studio holds
+builds. Each level *can* have its own `_notebook/`, and the right ones *should* — when building
+is genuinely happening inside a sub-project, its trail belongs with it, not diluted into the
+parent's. But a notebook in every folder with a `package.json` is noise. So: notebooks form a
+**tree**, and a directory **earns** a node by a test, never by a marker alone.
 
-**Rule: save the note in the smallest notebook whose scope contains the insight.**
+### Discovery — find the chain, not one root
 
-- Note about the sub-project only (its bug, its API, its decision) → sub-project's `_notebook/`
-- Note about shared infra, parent architecture, cross-cutting constraints, or anything that affects siblings → parent's `_notebook/`
-- When unsure, prefer the narrower scope — notes are easier to promote up later than to demote down
+Walking up from cwd, collect every directory with a project marker (`_notebook/`,
+`PROJECT_STATE.md`, `CLAUDE.md`, `.git/`, `package.json` / `Cargo.toml` / `pyproject.toml` /
+`go.mod`). That ordered list is the **chain** — e.g. `gradient-lab → ego → catcatcat`. Status
+prints it. Every save names the notebook it wrote to, in one line.
 
-**How to locate candidates:** walking up from cwd, collect every directory with a project marker (`PROJECT_STATE.md`, `CLAUDE.md`, `.git/`, `package.json` / `Cargo.toml` / `pyproject.toml` / `go.mod`). The nearest is the default. If higher candidates exist and the note's scope clearly belongs to one of them, save there instead.
+### Hard negatives — never a notebook here
 
-If the chosen parent notebook doesn't exist yet, initialize it first (see [Initializing _notebook/](#initializing-_notebook)) before writing.
+Checked before anything else:
+- a **nested foreign git repo** — a `.git/` below the current root whose remote is not the
+  user's own identity (a client's repo checked out inside an engagement). Nothing of ours goes in
+  there, not even a marker; its notes belong to the parent.
+- `node_modules/`, vendored or generated code, build output.
+- any directory holding a `.no-notebook` file (the explicit opt-out, for places we do own).
 
----
+### The earning test — when a candidate gets its own notebook
+
+A marker makes a directory a *candidate*. It becomes a notebook when it passes ONE of:
+
+1. **Own build loop.** It has its own dev server / run command / tests and its own source tree —
+   building happens *separately* here. A `docs/` or `scripts/` folder does not pass. This is the
+   only test that may create a notebook **without asking**: when it is unambiguous, the first
+   save inside the sub-project initializes its notebook and says so in the output.
+2. **Accumulation.** The nearest existing parent notebook already holds **≥ 8 notes about this
+   directory** — its path or name in the filename or body. That is the objective sign the split
+   is overdue. This test never creates anything by itself; it **recommends** `/notebook split`
+   (see below), unprompted, every time it fires.
+3. **The user says so** — `/notebook` run inside the directory, or `/notebook split <dir>`.
+
+A candidate that passes none writes to the nearest existing notebook up the chain.
+
+### Placement — which notebook a note goes in
+
+**Save the note in the smallest notebook whose scope contains the insight**, where "contains"
+is concrete:
+- about code, behaviour, or the working process *under that directory* → that notebook
+- about shared infra, the parent's architecture, people, the engagement, or anything a sibling
+  would need → the parent
+- when unsure, prefer the narrower scope — notes promote up more easily than they demote down
+
+⚑ **A parent notebook existing is never a reason to write there.** The habit that breaks the
+tree is "the parent's notebook is right there, so I'll use it." If the sub-project passes the
+earning test and has no notebook yet, initialize it in the same save (see
+[Initializing _notebook/](#initializing-_notebook)) — and say so.
+
+### Numbering across the tree
+
+Each notebook keeps its own sequence. A notebook **born from a parent that already holds its
+notes continues the parent's numbering** (the parent is at 0265 → the child starts at 0266), so
+notes moved across keep their numbers and the trail still reads as one timeline. A notebook born
+empty starts at 0001. Cross-notebook references carry the notebook's name: `ego 0260`.
 
 ## Author Identity
 
@@ -140,7 +186,12 @@ Shared procedure used by both `/notebook` init and `/notebook save` (when no not
 2. Read `lessons.md`
 3. Report: number of notes, number of lessons, last note date, count of ⚑-flagged notes, and — when the index holds more than one handle — the note count per author
 4. Show the last 5 index entries
-5. **Visibility check:** if `_notebook/` is gitignored but repo is private (or vice versa), mention it once — e.g. `_notebook/ is gitignored but this is a private repo — you can remove it from .gitignore to track notes in git.` Don't modify `.gitignore` automatically for existing projects.
+5. **Print the chain** (`gradient-lab → ego → catcatcat`, marking which levels have a notebook)
+   and **run the accumulation test** over this notebook's sub-directories: any candidate with
+   ≥ 8 notes about it gets a one-line recommendation — *"14 notes here are about
+   `experiments/gradient-lab` — run `/notebook split experiments/gradient-lab`?"* The user never
+   has to notice the drift themselves; only the move waits for a yes.
+6. **Visibility check:** if `_notebook/` is gitignored but repo is private (or vice versa), mention it once — e.g. `_notebook/ is gitignored but this is a private repo — you can remove it from .gitignore to track notes in git.` Don't modify `.gitignore` automatically for existing projects.
 
 ---
 
@@ -150,7 +201,11 @@ Shared procedure used by both `/notebook` init and `/notebook save` (when no not
 
 ### Step 1: Locate Project Root & Choose Scope
 
-Find candidate project roots walking up from cwd (see [Scope](#scope-which-notebook)). Pick the notebook scope that matches the note: nearest root by default, parent only if the note's scope clearly belongs higher.
+Build the chain walking up from cwd (see [Scope: the notebook tree](#scope-the-notebook-tree)).
+Apply the hard negatives, then the earning test to the nearest candidate: if it passes the
+own-build-loop test and has no notebook, this save initializes one there. Then place the note by
+the placement rule — narrowest scope that contains the insight. If the note lands in a parent and
+the accumulation test fires for a sub-directory, append the split recommendation to the output.
 
 No root found → "No project root detected. Run `/notebook` from within a project first."
 
@@ -166,12 +221,19 @@ Read `_index.md`, find highest note number, increment. Start at `0001` if empty.
 
 Never renumber to remove a duplicate. Numbers are referenced by other notes and by resolved lessons; renumbering silently breaks those links. When numbers repeat, cite them as `0047-jon` to disambiguate.
 
-### Step 4: Infer Content
+### Step 4: Infer Content — ALWAYS a full-conversation sweep
 
-Priority order:
+**A save is never just one note.** Every `/notebook save` scans the ENTIRE conversation so
+far for every decision, failure, constraint, pivot, and learning not yet in the notebook,
+and writes EACH ONE as its own note. Check `_index.md` for what is already recorded; save
+everything relevant that isn't.
+
+Priority order for the sweep's focus:
 1. **Explicit argument** — `/notebook save constraint: RLS can't do cross-schema joins`
-2. **Conversation context** — if bare `/notebook save`, synthesize from recent exchanges
-3. **Both** — user hint + contextual expansion
+   writes that note FIRST, then still sweeps the rest of the chat for unsaved insights
+2. **Bare `/notebook save`** — pure sweep: the whole chat, every unsaved insight
+3. Never skip an insight because it feels minor — accidents, wrong turns, and corrections
+   are exactly what future sessions need
 
 ### Step 5: Classify Type
 
@@ -266,12 +328,14 @@ Only if the note materially changes project state (blocking constraint, architec
 
 ### Output
 
-Single line confirmation:
+One confirmation line per note saved, with the notebook's path so the scope is visible:
 ```
-Saved: _notebook/NNNN-handle-type-short-title.md
+Saved: experiments/gradient-lab/_notebook/NNNN-handle-type-short-title.md
+Saved: experiments/gradient-lab/_notebook/NNNN-handle-type-other-title.md
 ```
 
-Nothing else.
+Plus, only when it applies: one line saying a notebook was initialized, or one split
+recommendation. Nothing else.
 
 ---
 
@@ -282,9 +346,12 @@ Nothing else.
 3. Open all ⚑-flagged notes in `_notebook/`
 4. Open the last 3 notes in `_notebook/`
 5. Read `PROJECT_STATE.md` if it exists
-6. Summarize: what the project is, key decisions, active constraints, known pitfalls, current state
-7. If the index carries more than one author handle, add one line naming who has been working here and who wrote the most recent notes — it tells the user whose context they're missing and who to ask
-8. Ask: "What's changed since this was last updated?"
+6. **Read up the chain:** for the parent notebook, its `lessons.md` and its ⚑ notes in full; for
+   anything above that, the index only. Work inside a sub-project is still bound by the parent's
+   rules (people, gates, identity walls) and those live one level up.
+7. Summarize: what the project is, key decisions, active constraints, known pitfalls, current state
+8. If the index carries more than one author handle, add one line naming who has been working here and who wrote the most recent notes — it tells the user whose context they're missing and who to ask
+9. Ask: "What's changed since this was last updated?"
 
 ---
 
@@ -323,6 +390,28 @@ Add a provenance line to the body of every migrated note so the thin attribution
 ```
 
 ---
+
+## /notebook split <dir>
+
+Give a sub-project its own notebook and move its notes out of the parent. **Deliberate, never
+automatic** — the recommendation is automatic (status and saves fire it unprompted when the
+accumulation test passes); the move waits for a yes, because moving notes is the one step that
+is hard to undo cleanly.
+
+1. Confirm `<dir>` is under the current notebook's root and passes the hard negatives.
+2. Initialize `_notebook/` in `<dir>` (see [Initializing _notebook/](#initializing-_notebook)),
+   **continuing the parent's numbering** (see Numbering across the tree).
+3. Propose the move: list every parent note whose filename or body names `<dir>`'s path or
+   name, one line each — number, title, and the line that matched. Also list near-misses
+   (matched only by a common word) separately so the user can pull them in. **Stop and wait for
+   the user's yes / edits.** Never move on inference alone.
+4. Move the confirmed notes — numbers, filenames, contents untouched. Engagement-scoped notes in
+   the same number range stay.
+5. Carry lessons as **copies**: every parent lesson whose subject is the sub-project goes into
+   the child's `lessons.md` under a dated "carried from …" comment; the parent keeps its copy.
+6. Rebuild both indexes (the parent's by its own script if it has one). Write the child's README
+   to say where the notes came from; add the child to the parent's README.
+7. Report: how many moved, how many stayed, how many lessons carried, and the child's path.
 
 ## Resolving Lessons
 
@@ -372,9 +461,13 @@ On any new session or `/notebook recover`, read in this order:
 3. **Rich index entries.** The index alone should be sufficient for context recovery.
 4. **Be specific.** Library names, error messages, versions > vague descriptions.
 5. **Failures are gold.** "Tried X, failed because Y" prevents loops. Always save these.
-6. **One note per save.** Don't batch multiple insights.
+6. **One insight per note; every insight per save.** A save sweeps the whole conversation
+   and writes every unsaved insight as its own file — it is never just one note. Granular
+   files keep lessons greppable; the sweep keeps the record complete (Ocean, 26 Aug 2026).
 7. **⚑ sparingly.** Only for things every future session must read.
 8. **Notes are append-only.** New moment = new note. Update existing only to mark superseded.
 9. **Lessons are distilled.** One line, pure signal. If you need context, open the note.
 10. **Every note is stamped.** Author handle in the filename, the `**By:**` field, and the index line — always, solo projects included. Resolve it from git, never prompt for it, never guess.
 11. **Check your notes when stuck.** Before attempting a workaround or debugging an unexpected failure, read `_notebook/lessons.md` first. The answer may already be there. This is the reflex that prevents loops.
+12. **A parent notebook existing is never a reason to write there.** Place by the tree: the narrowest scope that contains the insight, initializing a sub-project's notebook when it earns one. The failure this prevents: sixty lab notes in an engagement's trail (ego, 27 Aug 2026).
+13. **Recommend splits unprompted; move only on a yes.** The accumulation test fires by itself; `/notebook split` proposes the exact list and waits.
